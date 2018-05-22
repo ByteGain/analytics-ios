@@ -6,7 +6,11 @@
 //#define SEGMENT_API_BASE [NSURL URLWithString:@"https://api-segment-io-5fsaj1xnikhp.runscope.net/v1"]
 //#define SEGMENT_CDN_BASE [NSURL URLWithString:@"https://cdn-segment-com-5fsaj1xnikhp.runscope.net/v1"]
 //#define MOBILE_SERVICE_BASE [NSURL URLWithString:@"https://mobile--service-segment-com-5fsaj1xnikhp.runscope.net/v1"]
-#define SEGMENT_API_BASE [NSURL URLWithString:@"https://api.segment.io/v1"]
+#if BG_DEBUG
+#  define SEGMENT_API_BASE [NSURL URLWithString:@"http://localhost:5001/v1"]
+#else
+#  define SEGMENT_API_BASE [NSURL URLWithString:@"https://js.bytegain.com/v1"]
+#endif
 #define SEGMENT_CDN_BASE [NSURL URLWithString:@"https://cdn-settings.segment.com/v1"]
 #define MOBILE_SERVICE_BASE [NSURL URLWithString:@"https://mobile-service.segment.com/v1"]
 

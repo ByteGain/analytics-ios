@@ -21,7 +21,12 @@
 {
     // https://segment.com/segment-mobile/sources/ios_manual_example/overview
     // Use your own writekey people :)
-    [SEGAnalytics setupWithConfiguration:[SEGAnalyticsConfiguration configurationWithWriteKey:@"St5WbSrxW5bzxn2NGwPDVzS9PBPYctOl"]];
+#if BG_DEBUG
+    [SEGAnalytics setupWithConfiguration:[SEGAnalyticsConfiguration configurationWithWriteKey:@"x7sPb4mmoHBesEwwJIa2XPOAGuSuALwk"]]; // bgjstest apiKey
+#else
+#error "Insert your API_KEY below and delete this line"
+    [SEGAnalytics setupWithConfiguration:[SEGAnalyticsConfiguration configurationWithWriteKey:@"YOUR API_KEY GOES HERE"]];
+#endif
     [[SEGAnalytics sharedAnalytics] track:@"Manual Example Launched"];
     [[SEGAnalytics sharedAnalytics] flush];
     return YES;

@@ -21,6 +21,7 @@
 #import "SEGPayload.h"
 #import "SEGIdentifyPayload.h"
 #import "SEGTrackPayload.h"
+#import "SEGAttemptGoalPayload.h"
 #import "SEGGroupPayload.h"
 #import "SEGScreenPayload.h"
 #import "SEGAliasPayload.h"

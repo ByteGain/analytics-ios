@@ -1,6 +1,7 @@
 #import <Foundation/Foundation.h>
 #import "SEGIdentifyPayload.h"
 #import "SEGTrackPayload.h"
+#import "SEGAttemptGoalPayload.h"
 #import "SEGScreenPayload.h"
 #import "SEGAliasPayload.h"
 #import "SEGIdentifyPayload.h"

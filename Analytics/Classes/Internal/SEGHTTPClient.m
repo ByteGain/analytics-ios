@@ -62,7 +62,7 @@
 }
 
 
-- (NSURLSessionUploadTask *)upload:(NSDictionary *)batch forWriteKey:(NSString *)writeKey completionHandler:(void (^)(BOOL retry))completionHandler
+- (NSURLSessionUploadTask *)upload:(NSDictionary *)batch forWriteKey:(NSString *)writeKey completionHandler:(void (^)(BOOL retry, NSURLResponse * _Nullable response))completionHandler
 {
     //    batch = SEGCoerceDictionary(batch);
     NSURLSession *session = [self sessionForWriteKey:writeKey];
@@ -86,7 +86,7 @@
     }
     if (error || exception) {
         SEGLog(@"Error serializing JSON for batch upload %@", error);
-        completionHandler(NO); // Don't retry this batch.
+        completionHandler(NO, nil); // Don't retry this batch.
         return nil;
     }
     NSData *gzippedPayload = [payload seg_gzippedData];
@@ -94,32 +94,32 @@
     NSURLSessionUploadTask *task = [session uploadTaskWithRequest:request fromData:gzippedPayload completionHandler:^(NSData *_Nullable data, NSURLResponse *_Nullable response, NSError *_Nullable error) {
         if (error) {
             SEGLog(@"Error uploading request %@.", error);
-            completionHandler(YES);
+            completionHandler(YES, nil);
             return;
         }
 
         NSInteger code = ((NSHTTPURLResponse *)response).statusCode;
         if (code < 300) {
             // 2xx response codes.
-            completionHandler(NO);
+            completionHandler(NO, response);
             return;
         }
         if (code < 400) {
             // 3xx response codes.
             SEGLog(@"Server responded with unexpected HTTP code %d.", code);
-            completionHandler(YES);
+            completionHandler(YES, nil);
             return;
         }
         if (code < 500) {
             // 4xx response codes.
             SEGLog(@"Server rejected payload with HTTP code %d.", code);
-            completionHandler(NO);
+            completionHandler(NO, nil);
             return;
         }
 
         // 5xx response codes.
         SEGLog(@"Server error with HTTP code %d.", code);
-        completionHandler(YES);
+        completionHandler(YES, nil);
     }];
     [task resume];
     return task;

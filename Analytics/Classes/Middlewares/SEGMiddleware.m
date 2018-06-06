@@ -40,6 +40,7 @@
 
 - (void)run:(SEGContext *_Nonnull)context callback:(RunMiddlewaresCallback _Nullable)callback
 {
+    NSLog(@"SEGMiddleware...");
     [self runMiddlewares:self.middlewares context:context callback:callback];
 }
 

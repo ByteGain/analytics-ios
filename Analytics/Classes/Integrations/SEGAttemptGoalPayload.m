@@ -7,12 +7,20 @@
                    properties:(NSDictionary *)properties
                       context:(NSDictionary *)context
                  integrations:(NSDictionary *)integrations
+              successCallback:(SEGAttemptGoalSuccessCallback)successCallback
+              failureCallback:(SEGAttemptGoalFailureCallback _Nullable)failureCallback
 {
     if (self = [super initWithContext:context integrations:integrations]) {
         _event = [event copy];
         _properties = [properties copy];
+        _successCallback = [successCallback copy];
+        _failureCallback = [failureCallback copy];
     }
     return self;
+}
+
++ (instancetype)cast:(id)object {
+    return [object isKindOfClass:self] ? object : nil;
 }
 
 @end

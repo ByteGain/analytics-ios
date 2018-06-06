@@ -44,7 +44,7 @@ typedef NS_ENUM(NSInteger, SEGEventType) {
 
     // Goals
     SEGEventTypeAttemptGoal,
-    SEGEventTypeReportGoalResult,
+    // (ReportGoalResult is encoded as a Track event)
 };
 
 @class SEGAnalytics;

@@ -258,11 +258,14 @@ NSString *const SEGBuildKeyV2 = @"SEGBuildKeyV2";
     failureCallback:(SEGGoalFailureCallback)failureCallback
             options:(NSDictionary * _Nullable)options
 {
-    [self run:SEGEventTypeAttempt payload:
+    NSLog(@"SEGAnalytics attemptGoal");
+    [self run:SEGEventTypeAttemptGoal payload:
                                       [[SEGAttemptGoalPayload alloc] initWithEvent:goalName
-                                                                        properties:@{"intervention":goalName}
+                                                                        properties:@{}
                                                                            context:SEGCoerceDictionary([options objectForKey:@"context"])
-                                                                      integrations:[options objectForKey:@"integrations"]]];
+                                                                      integrations:[options objectForKey:@"integrations"]
+                                                                   successCallback:[successCallback copy]
+                                                                   failureCallback:[failureCallback copy]]];
 }
 
 - (void)attemptGoal:(NSString *)goalName successCallback:(SEGGoalSuccessCallback)successCallback failureCallback:(SEGGoalFailureCallback)failureCallback

@@ -34,6 +34,10 @@ NS_ASSUME_NONNULL_BEGIN
 // @see https://segment.com/docs/spec/screen/
 - (void)screen:(SEGScreenPayload *)payload;
 
+// AttemptGoal will be called when the user calls:
+// 1. [[SEGAnalytics sharedInstance] attemptGoal:...]
+- (void)attemptGoal:(SEGAttemptGoalPayload *)payload;
+
 // Group will be called when the user calls either of the following:
 // 1. [[SEGAnalytics sharedInstance] group:someGroupId];
 // 2. [[SEGAnalytics sharedInstance] group:someGroupId traits:];

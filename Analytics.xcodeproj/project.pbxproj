@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		3481C14AEC76E5A8DA64DA59 /* Pods_AnalyticsTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89033CBF22319674E6CE7E61 /* Pods_AnalyticsTests.framework */; };
-		3AC1BDC420BF31070091B6DD /* SEGAttemptGoalPayload.h in Headers */ = {isa = PBXBuildFile; fileRef = 3AC1BDC220BF31070091B6DD /* SEGAttemptGoalPayload.h */; };
+		3AC1BDC420BF31070091B6DD /* SEGAttemptGoalPayload.h in Headers */ = {isa = PBXBuildFile; fileRef = 3AC1BDC220BF31070091B6DD /* SEGAttemptGoalPayload.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3AC1BDC520BF31070091B6DD /* SEGAttemptGoalPayload.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AC1BDC320BF31070091B6DD /* SEGAttemptGoalPayload.m */; };
 		6E265C791FB1178C0030E08E /* IntegrationsManagerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E265C781FB1178C0030E08E /* IntegrationsManagerTest.swift */; };
 		6EEC1C712017EA370089C478 /* EndToEndTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EEC1C702017EA370089C478 /* EndToEndTests.swift */; };

@@ -62,7 +62,7 @@
 }
 
 
-- (NSURLSessionUploadTask *)upload:(NSDictionary *)batch forWriteKey:(NSString *)writeKey completionHandler:(void (^)(BOOL retry, NSData * _Nullable data, NSURLResponse * _Nullable response))completionHandler
+- (NSURLSessionUploadTask *)upload:(NSDictionary *)batch forWriteKey:(NSString *)writeKey completionHandler:(void (^)(BOOL retry, JSON_DICT _Nullable response))completionHandler
 {
     //    batch = SEGCoerceDictionary(batch);
     NSURLSession *session = [self sessionForWriteKey:writeKey];
@@ -86,7 +86,7 @@
     }
     if (error || exception) {
         SEGLog(@"Error serializing JSON for batch upload %@", error);
-        completionHandler(NO, nil, nil); // Don't retry this batch.
+        completionHandler(NO, nil); // Don't retry this batch.
         return nil;
     }
     NSData *gzippedPayload = [payload seg_gzippedData];
@@ -96,12 +96,12 @@
                                                 completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError *_Nullable error) {
         if (error) {
             SEGLog(@"Error uploading request %@.", error);
-            completionHandler(YES, nil, nil);
+            completionHandler(YES, nil);
             return;
         }
         if (response == nil) {
             SEGLog(@"upload response for /v1/batch is nil");
-            completionHandler(NO, nil, nil);
+            completionHandler(NO, nil);
             return;
         }
 
@@ -109,25 +109,33 @@
         NSLog(@"upload got response code %d", (int) code);
         if (code < 300) {
             // 2xx response codes.
-            completionHandler(NO, data, response);
+
+            NSError *jsonError = nil;
+            id responseJson = [NSJSONSerialization JSONObjectWithData:data options:0 error:&jsonError];
+            if (jsonError != nil) {
+                SEGLog(@"Error deserializing response body %@.", jsonError);
+                completionHandler(NO, nil);
+                return;
+            }
+            completionHandler(NO, responseJson);
             return;
         }
         if (code < 400) {
             // 3xx response codes.
             SEGLog(@"Server responded with unexpected HTTP code %d.", code);
-            completionHandler(YES, nil, nil);
+            completionHandler(YES, nil);
             return;
         }
         if (code < 500) {
             // 4xx response codes.
             SEGLog(@"Server rejected payload with HTTP code %d.", code);
-            completionHandler(NO, nil, nil);
+            completionHandler(NO, nil);
             return;
         }
 
         // 5xx response codes.
         SEGLog(@"Server error with HTTP code %d.", code);
-        completionHandler(YES, nil, nil);
+        completionHandler(YES, nil);
     }];
     [task resume];
     return task;

@@ -191,7 +191,11 @@ static NSString *const kSEGAnonymousIdFilename = @"segment.anonymousId";
 
 #pragma mark - attemptGoal
 
-- (void)attemptGoal:(NSString *)event properties:(NSDictionary *)properties options:(NSDictionary *)options
+- (void)attemptGoal:(NSString *)event
+         properties:(NSDictionary *)properties
+            options:(NSDictionary *)options
+    successCallback:(SEGAttemptGoalSuccessCallback) successCallback
+    failureCallback:(SEGAttemptGoalFailureCallback _Nullable) failureCallback
 {
     NSCAssert1(event.length > 0, @"event (%@) must not be empty.", event);
     
@@ -199,8 +203,8 @@ static NSString *const kSEGAnonymousIdFilename = @"segment.anonymousId";
                                                                        properties:SEGCoerceDictionary(properties)
                                                                           context:SEGCoerceDictionary([options objectForKey:@"context"])
                                                                      integrations:[options objectForKey:@"integrations"]
-                                                                  successCallback:[options objectForKey:@"successCallback"]
-                                                                  failureCallback:[options objectForKey:@"failureCallback"]];
+                                                                  successCallback:successCallback
+                                                                  failureCallback:failureCallback];
 
     [self callIntegrationsWithSelector:NSSelectorFromString(@"attemptGoal:")
                              arguments:@[ payload ]
@@ -627,7 +631,8 @@ static NSString *const kSEGAnonymousIdFilename = @"segment.anonymousId";
             break;
         case SEGEventTypeAttemptGoal: {
             SEGAttemptGoalPayload *p = (SEGAttemptGoalPayload *)context.payload;
-            [self attemptGoal:p.event properties:p.properties options:p.options];
+            NSLog(@"SEGEventTypeAttemptGoal payload options %@", [p.options description]);
+            [self attemptGoal:p.event properties:p.properties options:p.options successCallback:p.successCallback failureCallback:p.failureCallback];
             break;
         }
     }

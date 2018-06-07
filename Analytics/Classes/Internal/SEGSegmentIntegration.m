@@ -366,7 +366,7 @@ static CTTelephonyNetworkInfo *_telephonyNetworkInfo;
 
 - (void)attemptGoal:(SEGAttemptGoalPayload *)payload
 {
-    NSString *key = [NSString stringWithFormat:@"%lld", self.nextResponseId];
+    NSString *key = [NSString stringWithFormat:@"r%lld", self.nextResponseId];
     self.nextResponseId += 1;
     [self.responsePayloads setObject:payload forKey:key];
     NSMutableDictionary *dictionary = [NSMutableDictionary dictionary];
@@ -565,7 +565,7 @@ static CTTelephonyNetworkInfo *_telephonyNetworkInfo;
     SEGLog(@"Flushing batch %@.", payload);
 
     self.batchRequest = [self.httpClient upload:payload forWriteKey:self.configuration.writeKey
-                              completionHandler:^(BOOL retry, NSData * _Nullable data, NSURLResponse * _Nullable response) {
+                              completionHandler:^(BOOL retry, JSON_DICT _Nullable data) {
         [self dispatchBackground:^{
             if (retry) {
                 [self notifyForName:SEGSegmentRequestDidFailNotification userInfo:batch];
@@ -585,20 +585,23 @@ static CTTelephonyNetworkInfo *_telephonyNetworkInfo;
     [self notifyForName:SEGSegmentDidSendRequestNotification userInfo:batch];
 }
 
-- (void)deliverResponses:(NSArray *)batch data:(NSData * _Nullable)data
+- (void)deliverResponses:(NSArray *)batch data:(JSON_DICT _Nullable)data
 {
     // Parse the responses
     NSDictionary *jsonResponse = nil;
     if (data != nil) {
-        jsonResponse = (NSDictionary *) [NSKeyedUnarchiver unarchiveObjectWithData:data];
-        jsonResponse = [jsonResponse objectForKey:@"responses"];
+        jsonResponse = [data objectForKey:@"responses"];
     }
-    
+
     // Deliver a response to each payload in batch that is expecting one.
     for (NSDictionary *payload in batch) {
         NSString *key = [payload objectForKey:kResponseIdKey];
+        if (key == nil) {
+            continue;
+        }
         SEGAttemptGoalPayload *attemptPayload = [SEGAttemptGoalPayload cast:[self.responsePayloads objectForKey:key]];
         if (attemptPayload == nil) {
+            NSLog(@"no attempt payload");
             continue;
         }
         NSDictionary *responseData = [jsonResponse objectForKey:key];

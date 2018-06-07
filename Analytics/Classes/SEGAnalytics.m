@@ -258,7 +258,6 @@ NSString *const SEGBuildKeyV2 = @"SEGBuildKeyV2";
     failureCallback:(SEGGoalFailureCallback)failureCallback
             options:(NSDictionary * _Nullable)options
 {
-    NSLog(@"SEGAnalytics attemptGoal");
     [self run:SEGEventTypeAttemptGoal payload:
                                       [[SEGAttemptGoalPayload alloc] initWithEvent:goalName
                                                                         properties:@{}

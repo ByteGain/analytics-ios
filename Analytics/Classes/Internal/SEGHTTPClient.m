@@ -106,7 +106,6 @@
         }
 
         NSInteger code = ((NSHTTPURLResponse *)response).statusCode;
-        NSLog(@"upload got response code %d", (int) code);
         if (code < 300) {
             // 2xx response codes.
 

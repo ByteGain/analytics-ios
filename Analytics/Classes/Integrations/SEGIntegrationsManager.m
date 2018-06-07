@@ -631,7 +631,6 @@ static NSString *const kSEGAnonymousIdFilename = @"segment.anonymousId";
             break;
         case SEGEventTypeAttemptGoal: {
             SEGAttemptGoalPayload *p = (SEGAttemptGoalPayload *)context.payload;
-            NSLog(@"SEGEventTypeAttemptGoal payload options %@", [p.options description]);
             [self attemptGoal:p.event properties:p.properties options:p.options successCallback:p.successCallback failureCallback:p.failureCallback];
             break;
         }

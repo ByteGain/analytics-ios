@@ -36,9 +36,9 @@
 //    [[SEGAnalytics sharedAnalytics] track:@"Manual Example Fire Event dup"];
 //    [[SEGAnalytics sharedAnalytics] flush];
     [[SEGAnalytics sharedAnalytics] attemptGoal:@"multi" successCallback:^(NSString * _Nullable variant){
-        NSLog(@"retargeting success callback");
+        NSLog(@"multi success callback variant %@", variant);
     } failureCallback:^{
-        NSLog(@"retargeting failure callback");
+        NSLog(@"multi failure callback");
     }];
     NSLog(@"Hi MTV!");
 }

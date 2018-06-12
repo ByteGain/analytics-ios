@@ -117,7 +117,7 @@ typedef void(^SEGGoalFailureCallback)(void);
  * @method
  *
  * @abstract
- * Query if the application should attempt to acheive a particular goal, e.g., email collection.
+ * Query if the application should attempt to achieve a particular goal, e.g., email collection.
  *
  * @param goalName   The name of the goal.
  *

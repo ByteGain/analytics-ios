@@ -28,6 +28,8 @@ NSString *const kSEGUserIdFilename = @"segmentio.userId";
 NSString *const kSEGQueueFilename = @"segmentio.queue.plist";
 NSString *const kSEGTraitsFilename = @"segmentio.traits.plist";
 
+NSString *const kResponseIdKey = @"responseId";
+
 static NSString *GetDeviceModel()
 {
     size_t size;
@@ -69,9 +71,10 @@ static BOOL GetAdTrackingEnabled()
 @property (nonatomic, strong) SEGHTTPClient *httpClient;
 @property (nonatomic, strong) id<SEGStorage> storage;
 @property (nonatomic, strong) NSURLSessionDataTask *attributionRequest;
+@property (nonatomic, strong) NSMutableDictionary *responsePayloads;  // accessed only by main thread.  Maps response call ID to SEGPayload (has callbacks)
+@property (nonatomic, assign) long long nextResponseId;  // accessed only by main thread.  generates keys for calls with responses
 
 @end
-
 
 @implementation SEGSegmentIntegration
 
@@ -90,6 +93,8 @@ static BOOL GetAdTrackingEnabled()
         self.serialQueue = seg_dispatch_queue_create_specific("io.segment.analytics.segmentio", DISPATCH_QUEUE_SERIAL);
         self.backgroundTaskQueue = seg_dispatch_queue_create_specific("io.segment.analytics.backgroundTask", DISPATCH_QUEUE_SERIAL);
         self.flushTaskID = UIBackgroundTaskInvalid;
+        self.responsePayloads = [NSMutableDictionary dictionary];
+        self.nextResponseId = 1;
 
 #if !TARGET_OS_TV
         // Check for previous queue/track data in NSUserDefaults and remove if present
@@ -359,6 +364,19 @@ static CTTelephonyNetworkInfo *_telephonyNetworkInfo;
     [self enqueueAction:@"screen" dictionary:dictionary context:payload.context integrations:payload.integrations];
 }
 
+- (void)attemptGoal:(SEGAttemptGoalPayload *)payload
+{
+    NSString *key = [NSString stringWithFormat:@"r%lld", self.nextResponseId];
+    self.nextResponseId += 1;
+    [self.responsePayloads setObject:payload forKey:key];
+    NSMutableDictionary *dictionary = [NSMutableDictionary dictionary];
+    [dictionary setValue:payload.event forKey:@"intervention"];
+    [dictionary setValue:payload.properties forKey:@"properties"];
+    [dictionary setValue:key forKey:kResponseIdKey];
+    [self enqueueAction:@"intervention" dictionary:dictionary context:payload.context integrations:payload.integrations];
+    [self flush];  // get a response promptly
+}
+
 - (void)group:(SEGGroupPayload *)payload
 {
     NSMutableDictionary *dictionary = [NSMutableDictionary dictionary];
@@ -546,7 +564,8 @@ static CTTelephonyNetworkInfo *_telephonyNetworkInfo;
     SEGLog(@"%@ Flushing %lu of %lu queued API calls.", self, (unsigned long)batch.count, (unsigned long)self.queue.count);
     SEGLog(@"Flushing batch %@.", payload);
 
-    self.batchRequest = [self.httpClient upload:payload forWriteKey:self.configuration.writeKey completionHandler:^(BOOL retry) {
+    self.batchRequest = [self.httpClient upload:payload forWriteKey:self.configuration.writeKey
+                              completionHandler:^(BOOL retry, JSON_DICT _Nullable data) {
         [self dispatchBackground:^{
             if (retry) {
                 [self notifyForName:SEGSegmentRequestDidFailNotification userInfo:batch];
@@ -554,7 +573,7 @@ static CTTelephonyNetworkInfo *_telephonyNetworkInfo;
                 [self endBackgroundTask];
                 return;
             }
-
+            [self deliverResponses:batch data:data];
             [self.queue removeObjectsInArray:batch];
             [self persistQueue];
             [self notifyForName:SEGSegmentRequestDidSucceedNotification userInfo:batch];
@@ -564,6 +583,41 @@ static CTTelephonyNetworkInfo *_telephonyNetworkInfo;
     }];
 
     [self notifyForName:SEGSegmentDidSendRequestNotification userInfo:batch];
+}
+
+- (void)deliverResponses:(NSArray *)batch data:(JSON_DICT _Nullable)data
+{
+    // Parse the responses
+    NSDictionary *jsonResponse = nil;
+    if (data != nil) {
+        jsonResponse = [data objectForKey:@"responses"];
+    }
+
+    // Deliver a response to each payload in batch that is expecting one.
+    for (NSDictionary *payload in batch) {
+        NSString *key = [payload objectForKey:kResponseIdKey];
+        if (key == nil) {
+            continue;
+        }
+        SEGAttemptGoalPayload *attemptPayload = [SEGAttemptGoalPayload cast:[self.responsePayloads objectForKey:key]];
+        if (attemptPayload == nil) {
+            NSLog(@"no attempt payload");
+            continue;
+        }
+        NSDictionary *responseData = [jsonResponse objectForKey:key];
+        if (responseData != nil && [[responseData objectForKey:@"intervene"] boolValue]) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                attemptPayload.successCallback([responseData objectForKey:@"variant"]);
+            });
+        } else if (attemptPayload.failureCallback != nil) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                attemptPayload.failureCallback();
+            });
+        }
+        
+        // Clean up responsePayloads
+        [self.responsePayloads removeObjectForKey:key];
+    }
 }
 
 - (void)applicationDidEnterBackground

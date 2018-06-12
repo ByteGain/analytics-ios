@@ -251,6 +251,32 @@ NSString *const SEGBuildKeyV2 = @"SEGBuildKeyV2";
                                                                integrations:[options objectForKey:@"integrations"]]];
 }
 
+#pragma mark - AttemptGoal
+
+- (void)attemptGoal:(NSString *)goalName
+    successCallback:(SEGGoalSuccessCallback)successCallback
+    failureCallback:(SEGGoalFailureCallback)failureCallback
+            options:(NSDictionary * _Nullable)options
+{
+    [self run:SEGEventTypeAttemptGoal payload:
+                                      [[SEGAttemptGoalPayload alloc] initWithEvent:goalName
+                                                                        properties:@{}
+                                                                           context:SEGCoerceDictionary([options objectForKey:@"context"])
+                                                                      integrations:[options objectForKey:@"integrations"]
+                                                                   successCallback:[successCallback copy]
+                                                                   failureCallback:[failureCallback copy]]];
+}
+
+- (void)attemptGoal:(NSString *)goalName successCallback:(SEGGoalSuccessCallback)successCallback failureCallback:(SEGGoalFailureCallback)failureCallback
+{
+    [self attemptGoal:goalName successCallback:successCallback failureCallback:failureCallback options:nil];
+}
+
+- (void)attemptGoal:(NSString *)goalName successCallback:(SEGGoalSuccessCallback)successCallback
+{
+    [self attemptGoal:goalName successCallback:successCallback failureCallback:^{} options:nil];
+}
+
 #pragma mark - Group
 
 - (void)group:(NSString *)groupId

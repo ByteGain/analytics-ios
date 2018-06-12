@@ -42,6 +42,9 @@ typedef NS_ENUM(NSInteger, SEGEventType) {
     SEGEventTypeContinueUserActivity,
     SEGEventTypeOpenURL,
 
+    // Goals
+    SEGEventTypeAttemptGoal,
+    // (ReportGoalResult is encoded as a Track event)
 };
 
 @class SEGAnalytics;

@@ -33,7 +33,14 @@
 - (IBAction)fireEvent:(id)sender
 {
     [[SEGAnalytics sharedAnalytics] track:@"Manual Example Fire Event"];
-    [[SEGAnalytics sharedAnalytics] flush];
+//    [[SEGAnalytics sharedAnalytics] track:@"Manual Example Fire Event dup"];
+//    [[SEGAnalytics sharedAnalytics] flush];
+    [[SEGAnalytics sharedAnalytics] attemptGoal:@"multi" successCallback:^(NSString * _Nullable variant){
+        NSLog(@"multi success callback variant %@", variant);
+    } failureCallback:^{
+        NSLog(@"multi failure callback");
+    }];
+    NSLog(@"Hi MTV!");
 }
 
 @end

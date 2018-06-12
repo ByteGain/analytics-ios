@@ -21,6 +21,7 @@
 #import "SEGPayload.h"
 #import "SEGIdentifyPayload.h"
 #import "SEGTrackPayload.h"
+#import "SEGAttemptGoalPayload.h"
 #import "SEGGroupPayload.h"
 #import "SEGScreenPayload.h"
 #import "SEGAliasPayload.h"
@@ -176,13 +177,36 @@ static NSString *const kSEGAnonymousIdFilename = @"segment.anonymousId";
 - (void)track:(NSString *)event properties:(NSDictionary *)properties options:(NSDictionary *)options
 {
     NSCAssert1(event.length > 0, @"event (%@) must not be empty.", event);
-
+    
     SEGTrackPayload *payload = [[SEGTrackPayload alloc] initWithEvent:event
                                                            properties:SEGCoerceDictionary(properties)
                                                               context:SEGCoerceDictionary([options objectForKey:@"context"])
                                                          integrations:[options objectForKey:@"integrations"]];
-
+    
     [self callIntegrationsWithSelector:NSSelectorFromString(@"track:")
+                             arguments:@[ payload ]
+                               options:options
+                                  sync:false];
+}
+
+#pragma mark - attemptGoal
+
+- (void)attemptGoal:(NSString *)event
+         properties:(NSDictionary *)properties
+            options:(NSDictionary *)options
+    successCallback:(SEGAttemptGoalSuccessCallback) successCallback
+    failureCallback:(SEGAttemptGoalFailureCallback _Nullable) failureCallback
+{
+    NSCAssert1(event.length > 0, @"event (%@) must not be empty.", event);
+    
+    SEGAttemptGoalPayload *payload = [[SEGAttemptGoalPayload alloc] initWithEvent:event
+                                                                       properties:SEGCoerceDictionary(properties)
+                                                                          context:SEGCoerceDictionary([options objectForKey:@"context"])
+                                                                     integrations:[options objectForKey:@"integrations"]
+                                                                  successCallback:successCallback
+                                                                  failureCallback:failureCallback];
+
+    [self callIntegrationsWithSelector:NSSelectorFromString(@"attemptGoal:")
                              arguments:@[ payload ]
                                options:options
                                   sync:false];
@@ -605,6 +629,11 @@ static NSString *const kSEGAnonymousIdFilename = @"segment.anonymousId";
             NSAssert(NO, @"Received context with undefined event type %@", context);
             NSLog(@"[ERROR]: Received context with undefined event type %@", context);
             break;
+        case SEGEventTypeAttemptGoal: {
+            SEGAttemptGoalPayload *p = (SEGAttemptGoalPayload *)context.payload;
+            [self attemptGoal:p.event properties:p.properties options:p.options successCallback:p.successCallback failureCallback:p.failureCallback];
+            break;
+        }
     }
     next(context);
 }

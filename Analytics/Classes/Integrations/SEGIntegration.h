@@ -1,6 +1,7 @@
 #import <Foundation/Foundation.h>
 #import "SEGIdentifyPayload.h"
 #import "SEGTrackPayload.h"
+#import "SEGAttemptGoalPayload.h"
 #import "SEGScreenPayload.h"
 #import "SEGAliasPayload.h"
 #import "SEGIdentifyPayload.h"
@@ -32,6 +33,10 @@ NS_ASSUME_NONNULL_BEGIN
 // 3. [[SEGAnalytics sharedInstance] screen:someEvent properties:someProperties options:someOptions];
 // @see https://segment.com/docs/spec/screen/
 - (void)screen:(SEGScreenPayload *)payload;
+
+// AttemptGoal will be called when the user calls:
+// 1. [[SEGAnalytics sharedInstance] attemptGoal:...]
+- (void)attemptGoal:(SEGAttemptGoalPayload *)payload;
 
 // Group will be called when the user calls either of the following:
 // 1. [[SEGAnalytics sharedInstance] group:someGroupId];

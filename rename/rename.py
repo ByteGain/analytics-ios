@@ -6,7 +6,7 @@ from os.path import dirname, join, abspath, splitext
 
 
 def replace(dirpath, old_word, new_word, filetypes, changelog_path):
-    changelog = open(changelog_path, "w")
+    changelog = open(changelog_path, "a")
     dirdata = walk(dirpath)
 
     for (top_dir, subdirs, file_names) in dirdata.__iter__():
@@ -18,17 +18,10 @@ def replace(dirpath, old_word, new_word, filetypes, changelog_path):
                 f = open(filepath, "r")
                 lines = []
                 for line in f:
-                    if old_word in line:
-                        line_words = []
-                        for word in line.split(" "):  # type: str
-                            if __valid_word(word, old_word, filetypes):
-                                line_words.append(word.replace(old_word, new_word))
-                            else:
-                                line_words.append(word)
-
-                        lines.append(" ".join(line_words))
+                    if old_word in line and not line.startswith("#import"):
+                        lines.append(line.replace(old_word, new_word))
                         changelog.write("\tReplaced: " + line)
-                        changelog.write("\tWith: " + " ".join(line_words))
+                        changelog.write("\tWith: " + line.replace(old_word, new_word))
                     else:
                         lines.append(line)
 
@@ -48,6 +41,9 @@ def __valid_word(word, old_word, filetypes):
 
 
 # do
+replace(dirname(abspath(".")), "SEGMENT", "BYTEGAIN", [".h", ".m"], abspath("./changelog.txt"))
 replace(dirname(abspath(".")), "SEG", "ByteGain", [".h", ".m"], abspath("./changelog.txt"))
 # Undo
+# replace(dirname(abspath(".")), "BYTEGAIN", "SEGMENT", [".h", ".m"], abspath("./changelog.txt"))
 # replace(dirname(abspath(".")), "ByteGain", "SEG", [".h", ".m"], abspath("./changelog.txt"))
+

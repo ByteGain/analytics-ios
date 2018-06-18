@@ -10,18 +10,18 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, readonly, nullable) NSDictionary *properties;
 
-typedef void(^SEGAttemptGoalSuccessCallback)(NSString * _Nullable);
-typedef void(^SEGAttemptGoalFailureCallback)(void);
+typedef void(^SEGAttemptGoalYesCallback)(NSString * _Nullable);
+typedef void(^SEGAttemptGoalNoCallback)(void);
 
-@property (nonatomic, readonly) SEGAttemptGoalSuccessCallback successCallback;
-@property (nonatomic, readonly, nullable) SEGAttemptGoalFailureCallback failureCallback;
+@property (nonatomic, readonly) SEGAttemptGoalYesCallback yesCallback;
+@property (nonatomic, readonly, nullable) SEGAttemptGoalNoCallback noCallback;
 
 - (instancetype)initWithEvent:(NSString *)event
                    properties:(NSDictionary *_Nullable)properties
                       context:(NSDictionary *)context
                  integrations:(NSDictionary *)integrations
-              successCallback:(SEGAttemptGoalSuccessCallback) successCallback
-              failureCallback:(SEGAttemptGoalFailureCallback _Nullable) failureCallback;
+              yesCallback:(SEGAttemptGoalYesCallback) successCallback
+              noCallback:(SEGAttemptGoalNoCallback _Nullable) failureCallback;
 
 // Returns object or nil if object is not a SEGAttemptPayload.
 + (instancetype _Nullable)cast:(id)object;

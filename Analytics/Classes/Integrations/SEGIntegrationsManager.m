@@ -194,8 +194,8 @@ static NSString *const kSEGAnonymousIdFilename = @"segment.anonymousId";
 - (void)attemptGoal:(NSString *)event
          properties:(NSDictionary *)properties
             options:(NSDictionary *)options
-    successCallback:(SEGAttemptGoalSuccessCallback) successCallback
-    failureCallback:(SEGAttemptGoalFailureCallback _Nullable) failureCallback
+    yesCallback:(SEGAttemptGoalYesCallback) yesCallback
+    noCallback:(SEGAttemptGoalNoCallback _Nullable) noCallback
 {
     NSCAssert1(event.length > 0, @"event (%@) must not be empty.", event);
     
@@ -203,8 +203,8 @@ static NSString *const kSEGAnonymousIdFilename = @"segment.anonymousId";
                                                                        properties:SEGCoerceDictionary(properties)
                                                                           context:SEGCoerceDictionary([options objectForKey:@"context"])
                                                                      integrations:[options objectForKey:@"integrations"]
-                                                                  successCallback:successCallback
-                                                                  failureCallback:failureCallback];
+                                                                  yesCallback:yesCallback
+                                                                  noCallback:noCallback];
 
     [self callIntegrationsWithSelector:NSSelectorFromString(@"attemptGoal:")
                              arguments:@[ payload ]
@@ -631,7 +631,7 @@ static NSString *const kSEGAnonymousIdFilename = @"segment.anonymousId";
             break;
         case SEGEventTypeAttemptGoal: {
             SEGAttemptGoalPayload *p = (SEGAttemptGoalPayload *)context.payload;
-            [self attemptGoal:p.event properties:p.properties options:p.options successCallback:p.successCallback failureCallback:p.failureCallback];
+            [self attemptGoal:p.event properties:p.properties options:p.options yesCallback:p.yesCallback noCallback:p.noCallback];
             break;
         }
     }

@@ -606,12 +606,20 @@ static CTTelephonyNetworkInfo *_telephonyNetworkInfo;
         }
         NSDictionary *responseData = [jsonResponse objectForKey:key];
         if (responseData != nil && [[responseData objectForKey:@"intervene"] boolValue]) {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                attemptPayload.successCallback([responseData objectForKey:@"variant"]);
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)([responseData objectForKey:@"delaySecs"])),
+                           dispatch_get_main_queue(), ^{
+                NSString *variant = [responseData objectForKey:@"variant"];
+                NSDictionary *trackProperties = @{@"intervention": @"attempt",
+                                                  @"attemptId": [responseData objectForKey:@"attemptId"],
+                                                  @"delaySecs": [responseData objectForKey:@"delaySecs"],
+                                                  @"variant": variant,
+                                                  };
+                [[SEGAnalytics sharedAnalytics] track:attemptPayload.event properties:trackProperties];
+                attemptPayload.yesCallback(variant);
             });
-        } else if (attemptPayload.failureCallback != nil) {
+        } else if (attemptPayload.noCallback != nil) {
             dispatch_async(dispatch_get_main_queue(), ^{
-                attemptPayload.failureCallback();
+                attemptPayload.noCallback();
             });
         }
         

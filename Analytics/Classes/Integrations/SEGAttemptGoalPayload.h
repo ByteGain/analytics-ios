@@ -24,7 +24,7 @@ typedef void(^SEGAttemptGoalFailureCallback)(void);
               failureCallback:(SEGAttemptGoalFailureCallback _Nullable) failureCallback;
 
 // Returns object or nil if object is not a SEGAttemptPayload.
-+ (instancetype)cast:(id)object;
++ (instancetype _Nullable)cast:(id)object;
 
 @end
 

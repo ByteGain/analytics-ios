@@ -19,7 +19,7 @@
     return self;
 }
 
-+ (instancetype)cast:(id)object {
++ (instancetype _Nullable)cast:(id)object {
     return [object isKindOfClass:self] ? object : nil;
 }
 

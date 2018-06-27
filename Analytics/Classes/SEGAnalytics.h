@@ -136,19 +136,13 @@ dontMakeAttemptCallback:(SEGGoalDontMakeAttemptCallback)noCallback
 - (void)attemptGoal:(NSString *)goalName makeAttemptCallback:(SEGGoalMakeAttemptCallback)makeAttemptCallback dontMakeAttemptCallback:(SEGGoalDontMakeAttemptCallback)dontMakeAttemptCallback;
 - (void)attemptGoal:(NSString *)goalName makeAttemptCallback:(SEGGoalMakeAttemptCallback)makeAttemptCallback;
 
-typedef NS_ENUM(NSInteger, SEGGoalResult) {
-    SEGGoalResultUndefined,     // Not used
-    SEGGoalResultSuccess,       // Success following a prior attemptGoal
-    SEGGoalResultFailure,       // Failure following a prior attemptGoal
-    SEGGoalResultUnsolictedSuccess,  // Accomplishing goal without issuing a prior attemptGoal
-};
-
 /*!
  * @method
  *
  * @abstract
  * Report whether an attempted goal was successful or not.
  */
+- (void)reportGoalResult:(NSString*)goalName result:(SEGGoalResult)result options:(SERIALIZABLE_DICT _Nullable)options;
 - (void)reportGoalResult:(NSString*)goalName result:(SEGGoalResult)result;
 
 /*!

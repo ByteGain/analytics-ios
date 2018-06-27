@@ -73,6 +73,7 @@ static BOOL GetAdTrackingEnabled()
 @property (nonatomic, strong) NSURLSessionDataTask *attributionRequest;
 @property (nonatomic, strong) NSMutableDictionary *responsePayloads;  // accessed only by main thread.  Maps response call ID to SEGPayload (has callbacks)
 @property (nonatomic, assign) long long nextResponseId;  // accessed only by main thread.  generates keys for calls with responses
+@property (nonatomic, strong) NSMutableDictionary *goalNameToTrackProperties;  // accessed only by background thread
 
 @end
 
@@ -95,6 +96,7 @@ static BOOL GetAdTrackingEnabled()
         self.flushTaskID = UIBackgroundTaskInvalid;
         self.responsePayloads = [NSMutableDictionary dictionary];
         self.nextResponseId = 1;
+        self.goalNameToTrackProperties = [[NSMutableDictionary alloc] init];
 
 #if !TARGET_OS_TV
         // Check for previous queue/track data in NSUserDefaults and remove if present
@@ -377,6 +379,27 @@ static CTTelephonyNetworkInfo *_telephonyNetworkInfo;
     [self flush];  // get a response promptly
 }
 
+- (void)reportGoalResult:(SEGReportGoalResultPayload *)payload
+{
+    NSString *result = payload.result == SEGGoalResultFailure ? @"failure" : @"success";
+    NSDictionary *trackProperties = [[NSMutableDictionary alloc]
+                                     initWithObjectsAndKeys:@"result", @"intervention",
+                                     result, @"result", nil];
+    NSDictionary *attemptProperties = [self.goalNameToTrackProperties objectForKey:payload.event];
+    if (attemptProperties) {
+        if (payload.result != SEGGoalResultUnsolictedSuccess) {
+            [trackProperties setValue:[attemptProperties objectForKey:@"attemptId"] forKey:@"attemptId"];
+            if ([attemptProperties objectForKey:@"variant"]) {
+                [trackProperties setValue:[attemptProperties objectForKey:@"variant"] forKey:@"variant"];
+            }
+        }
+        [self.goalNameToTrackProperties removeObjectForKey:payload.event];
+    }
+    NSMutableDictionary *dictionary = [[NSMutableDictionary alloc] initWithObjectsAndKeys:payload.event, @"event",
+                                       trackProperties, @"properties", nil];
+    [self enqueueAction:@"track" dictionary:dictionary context:payload.context integrations:payload.integrations];
+}
+
 - (void)group:(SEGGroupPayload *)payload
 {
     NSMutableDictionary *dictionary = [NSMutableDictionary dictionary];
@@ -604,22 +627,52 @@ static CTTelephonyNetworkInfo *_telephonyNetworkInfo;
             NSLog(@"no attempt payload");
             continue;
         }
+        if (attemptPayload.event == nil) {
+            NSLog(@"attemptPayload.event is nil");
+            continue;
+        }
         NSDictionary *responseData = [jsonResponse objectForKey:key];
         if (responseData != nil && [[responseData objectForKey:@"intervene"] boolValue]) {
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)([responseData objectForKey:@"delaySecs"])),
-                           dispatch_get_main_queue(), ^{
+            dispatch_block_t finish = ^{
                 NSString *variant = [responseData objectForKey:@"variant"];
                 NSDictionary *trackProperties = @{@"intervention": @"attempt",
-                                                  @"attemptId": [responseData objectForKey:@"attemptId"],
-                                                  @"delaySecs": [responseData objectForKey:@"delaySecs"],
+                                                  @"attemptId": [responseData valueForKey:@"attemptId"],
+                                                  @"delaySecs": [responseData valueForKey:@"delaySecs"],
                                                   @"variant": variant,
                                                   };
-                [[SEGAnalytics sharedAnalytics] track:attemptPayload.event properties:trackProperties];
-                attemptPayload.yesCallback(variant);
-            });
+                // Must be run on serialQueue's thread.  Store attemptId shortly before invoking yesCallback().
+                [self.goalNameToTrackProperties setValue:trackProperties forKey:attemptPayload.event];  // used by reportGoalResult
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    // We follow the pattern of [self dispatchBackground...], whose implementation puts an
+                    // @autoreleasepool before calling the block.
+                    @autoreleasepool
+                    {
+                        [[SEGAnalytics sharedAnalytics] track:attemptPayload.event properties:trackProperties];
+                        attemptPayload.yesCallback(variant);
+                    }
+                });
+            };
+            float delaySecs = 0.;
+            if ([[responseData valueForKey:@"delaySecs"] isKindOfClass:[NSNumber class]]) {
+                delaySecs = [[responseData valueForKey:@"delaySecs"] floatValue];
+            }
+            if (delaySecs > 0) {
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delaySecs * NSEC_PER_SEC)),
+                               _serialQueue, ^{
+                                   @autoreleasepool
+                                   {
+                                       finish();
+                                   }
+                               });
+            } else {
+                finish();
+            }
         } else if (attemptPayload.noCallback != nil) {
             dispatch_async(dispatch_get_main_queue(), ^{
-                attemptPayload.noCallback();
+                @autoreleasepool
+                {
+                    attemptPayload.noCallback();
+                }
             });
         }
         

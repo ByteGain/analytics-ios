@@ -281,9 +281,17 @@ dontMakeAttemptCallback:(SEGGoalDontMakeAttemptCallback)dontMakeAttemptCallback
 
 #pragma mark - ReportGoalResult
 
+- (void)reportGoalResult:(NSString*)goalName result:(SEGGoalResult)result options:(NSDictionary *)options
+{
+    [self run:SEGEventTypeReportGoalResult payload:[[SEGReportGoalResultPayload alloc] initWithEvent:goalName
+                                                                                              result:result
+                                                                                             context:SEGCoerceDictionary(SEGCoerceDictionary([options objectForKey:@"context"]))
+                                                                                        integrations:[options objectForKey:@"integrations"]]];
+}
+
 - (void)reportGoalResult:(NSString*)goalName result:(SEGGoalResult)result
 {
-    
+    [self reportGoalResult:goalName result:result options:nil];
 }
 
 #pragma mark - Group

@@ -212,6 +212,17 @@ static NSString *const kSEGAnonymousIdFilename = @"segment.anonymousId";
                                   sync:false];
 }
 
+- (void)reportGoalResult:(NSString *)event
+                  result:(SEGGoalResult)result
+                 options:(NSDictionary *)options
+{
+    SEGReportGoalResultPayload *payload = [[SEGReportGoalResultPayload alloc] initWithEvent:event
+                                                                                     result:result
+                                                                                    context:SEGCoerceDictionary([options objectForKey:@"context"])
+                                                                               integrations:[options objectForKey:@"integrations"]];
+    [self callIntegrationsWithSelector:NSSelectorFromString(@"reportGoalResult:") arguments:@[ payload ] options:options sync:false];
+}
+
 #pragma mark - Screen
 
 - (void)screen:(NSString *)screenTitle properties:(NSDictionary *)properties options:(NSDictionary *)options
@@ -632,6 +643,11 @@ static NSString *const kSEGAnonymousIdFilename = @"segment.anonymousId";
         case SEGEventTypeAttemptGoal: {
             SEGAttemptGoalPayload *p = (SEGAttemptGoalPayload *)context.payload;
             [self attemptGoal:p.event properties:p.properties options:p.options yesCallback:p.yesCallback noCallback:p.noCallback];
+            break;
+        }
+        case SEGEventTypeReportGoalResult: {
+            SEGReportGoalResultPayload *p = (SEGReportGoalResultPayload *)context.payload;
+            [self reportGoalResult:p.event result:p.result options:p.options];
             break;
         }
     }

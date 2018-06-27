@@ -37,6 +37,7 @@
 //    [[SEGAnalytics sharedAnalytics] flush];
     [[SEGAnalytics sharedAnalytics] attemptGoal:@"multi" makeAttemptCallback:^(NSString * _Nullable variant){
         NSLog(@"multi success callback variant %@", variant);
+        [[SEGAnalytics sharedAnalytics] reportGoalResult:@"multi" result:SEGGoalResultSuccess options:nil];
     } dontMakeAttemptCallback:^{
         NSLog(@"multi failure callback");
     }];

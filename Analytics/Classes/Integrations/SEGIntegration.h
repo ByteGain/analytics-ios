@@ -2,6 +2,7 @@
 #import "SEGIdentifyPayload.h"
 #import "SEGTrackPayload.h"
 #import "SEGAttemptGoalPayload.h"
+#import "SEGReportGoalResultPayload.h"
 #import "SEGScreenPayload.h"
 #import "SEGAliasPayload.h"
 #import "SEGIdentifyPayload.h"
@@ -37,6 +38,8 @@ NS_ASSUME_NONNULL_BEGIN
 // AttemptGoal will be called when the user calls:
 // 1. [[SEGAnalytics sharedInstance] attemptGoal:...]
 - (void)attemptGoal:(SEGAttemptGoalPayload *)payload;
+
+- (void)reportGoalResult:(SEGReportGoalResultPayload *)payload;
 
 // Group will be called when the user calls either of the following:
 // 1. [[SEGAnalytics sharedInstance] group:someGroupId];

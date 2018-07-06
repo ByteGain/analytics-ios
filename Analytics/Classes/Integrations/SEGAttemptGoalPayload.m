@@ -7,14 +7,14 @@
                    properties:(NSDictionary *)properties
                       context:(NSDictionary *)context
                  integrations:(NSDictionary *)integrations
-              successCallback:(SEGAttemptGoalSuccessCallback)successCallback
-              failureCallback:(SEGAttemptGoalFailureCallback _Nullable)failureCallback
+              yesCallback:(SEGAttemptGoalYesCallback)yesCallback
+              noCallback:(SEGAttemptGoalNoCallback _Nullable)noCallback
 {
     if (self = [super initWithContext:context integrations:integrations]) {
         _event = [event copy];
         _properties = [properties copy];
-        _successCallback = [successCallback copy];
-        _failureCallback = [failureCallback copy];
+        _yesCallback = [yesCallback copy];
+        _noCallback = [noCallback copy];
     }
     return self;
 }

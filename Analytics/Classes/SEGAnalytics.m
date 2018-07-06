@@ -253,28 +253,45 @@ NSString *const SEGBuildKeyV2 = @"SEGBuildKeyV2";
 
 #pragma mark - AttemptGoal
 
-- (void)attemptGoal:(NSString *)goalName
-    successCallback:(SEGGoalSuccessCallback)successCallback
-    failureCallback:(SEGGoalFailureCallback)failureCallback
-            options:(NSDictionary * _Nullable)options
+- (void)    attemptGoal:(NSString *)goalName
+    makeAttemptCallback:(nonnull SEGGoalMakeAttemptCallback)makeAttemptCallback
+dontMakeAttemptCallback:(nonnull SEGGoalDontMakeAttemptCallback)dontMakeAttemptCallback
+                options:(NSDictionary * _Nullable)options
 {
     [self run:SEGEventTypeAttemptGoal payload:
                                       [[SEGAttemptGoalPayload alloc] initWithEvent:goalName
                                                                         properties:@{}
                                                                            context:SEGCoerceDictionary([options objectForKey:@"context"])
                                                                       integrations:[options objectForKey:@"integrations"]
-                                                                   successCallback:[successCallback copy]
-                                                                   failureCallback:[failureCallback copy]]];
+                                                                   yesCallback:[makeAttemptCallback copy]
+                                                                   noCallback:[dontMakeAttemptCallback copy]]];
 }
 
-- (void)attemptGoal:(NSString *)goalName successCallback:(SEGGoalSuccessCallback)successCallback failureCallback:(SEGGoalFailureCallback)failureCallback
+- (void)    attemptGoal:(NSString *)goalName
+    makeAttemptCallback:(SEGGoalMakeAttemptCallback)makeAttemptCallback
+dontMakeAttemptCallback:(SEGGoalDontMakeAttemptCallback)dontMakeAttemptCallback
 {
-    [self attemptGoal:goalName successCallback:successCallback failureCallback:failureCallback options:nil];
+    [self attemptGoal:goalName makeAttemptCallback:makeAttemptCallback dontMakeAttemptCallback:dontMakeAttemptCallback options:nil];
 }
 
-- (void)attemptGoal:(NSString *)goalName successCallback:(SEGGoalSuccessCallback)successCallback
+- (void)    attemptGoal:(NSString *)goalName makeAttemptCallback:(SEGGoalMakeAttemptCallback)makeAttemptCallback
 {
-    [self attemptGoal:goalName successCallback:successCallback failureCallback:^{} options:nil];
+    [self attemptGoal:goalName makeAttemptCallback:makeAttemptCallback dontMakeAttemptCallback:^{} options:nil];
+}
+
+#pragma mark - ReportGoalResult
+
+- (void)reportGoalResult:(NSString*)goalName result:(SEGGoalResult)result options:(NSDictionary *)options
+{
+    [self run:SEGEventTypeReportGoalResult payload:[[SEGReportGoalResultPayload alloc] initWithEvent:goalName
+                                                                                              result:result
+                                                                                             context:SEGCoerceDictionary(SEGCoerceDictionary([options objectForKey:@"context"]))
+                                                                                        integrations:[options objectForKey:@"integrations"]]];
+}
+
+- (void)reportGoalResult:(NSString*)goalName result:(SEGGoalResult)result
+{
+    [self reportGoalResult:goalName result:result options:nil];
 }
 
 #pragma mark - Group

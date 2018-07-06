@@ -194,8 +194,8 @@ static NSString *const kSEGAnonymousIdFilename = @"segment.anonymousId";
 - (void)attemptGoal:(NSString *)event
          properties:(NSDictionary *)properties
             options:(NSDictionary *)options
-    successCallback:(SEGAttemptGoalSuccessCallback) successCallback
-    failureCallback:(SEGAttemptGoalFailureCallback _Nullable) failureCallback
+    yesCallback:(SEGAttemptGoalYesCallback) yesCallback
+    noCallback:(SEGAttemptGoalNoCallback _Nullable) noCallback
 {
     NSCAssert1(event.length > 0, @"event (%@) must not be empty.", event);
     
@@ -203,13 +203,24 @@ static NSString *const kSEGAnonymousIdFilename = @"segment.anonymousId";
                                                                        properties:SEGCoerceDictionary(properties)
                                                                           context:SEGCoerceDictionary([options objectForKey:@"context"])
                                                                      integrations:[options objectForKey:@"integrations"]
-                                                                  successCallback:successCallback
-                                                                  failureCallback:failureCallback];
+                                                                  yesCallback:yesCallback
+                                                                  noCallback:noCallback];
 
     [self callIntegrationsWithSelector:NSSelectorFromString(@"attemptGoal:")
                              arguments:@[ payload ]
                                options:options
                                   sync:false];
+}
+
+- (void)reportGoalResult:(NSString *)event
+                  result:(SEGGoalResult)result
+                 options:(NSDictionary *)options
+{
+    SEGReportGoalResultPayload *payload = [[SEGReportGoalResultPayload alloc] initWithEvent:event
+                                                                                     result:result
+                                                                                    context:SEGCoerceDictionary([options objectForKey:@"context"])
+                                                                               integrations:[options objectForKey:@"integrations"]];
+    [self callIntegrationsWithSelector:NSSelectorFromString(@"reportGoalResult:") arguments:@[ payload ] options:options sync:false];
 }
 
 #pragma mark - Screen
@@ -631,7 +642,12 @@ static NSString *const kSEGAnonymousIdFilename = @"segment.anonymousId";
             break;
         case SEGEventTypeAttemptGoal: {
             SEGAttemptGoalPayload *p = (SEGAttemptGoalPayload *)context.payload;
-            [self attemptGoal:p.event properties:p.properties options:p.options successCallback:p.successCallback failureCallback:p.failureCallback];
+            [self attemptGoal:p.event properties:p.properties options:p.options yesCallback:p.yesCallback noCallback:p.noCallback];
+            break;
+        }
+        case SEGEventTypeReportGoalResult: {
+            SEGReportGoalResultPayload *p = (SEGReportGoalResultPayload *)context.payload;
+            [self reportGoalResult:p.event result:p.result options:p.options];
             break;
         }
     }

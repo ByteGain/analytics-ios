@@ -35,9 +35,10 @@
     [[SEGAnalytics sharedAnalytics] track:@"Manual Example Fire Event"];
 //    [[SEGAnalytics sharedAnalytics] track:@"Manual Example Fire Event dup"];
 //    [[SEGAnalytics sharedAnalytics] flush];
-    [[SEGAnalytics sharedAnalytics] attemptGoal:@"multi" successCallback:^(NSString * _Nullable variant){
+    [[SEGAnalytics sharedAnalytics] attemptGoal:@"multi" makeAttemptCallback:^(NSString * _Nullable variant){
         NSLog(@"multi success callback variant %@", variant);
-    } failureCallback:^{
+        [[SEGAnalytics sharedAnalytics] reportGoalResult:@"multi" result:SEGGoalResultSuccess options:nil];
+    } dontMakeAttemptCallback:^{
         NSLog(@"multi failure callback");
     }];
     NSLog(@"Hi MTV!");

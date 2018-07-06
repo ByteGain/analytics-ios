@@ -110,8 +110,8 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)screen:(NSString *)screenTitle properties:(SERIALIZABLE_DICT _Nullable)properties;
 - (void)screen:(NSString *)screenTitle;
 
-typedef void(^SEGGoalSuccessCallback)(NSString * _Nullable variation);
-typedef void(^SEGGoalFailureCallback)(void);
+typedef void(^SEGGoalMakeAttemptCallback)(NSString * _Nullable variation);
+typedef void(^SEGGoalDontMakeAttemptCallback)(void);
 
 /*!
  * @method
@@ -121,20 +121,29 @@ typedef void(^SEGGoalFailureCallback)(void);
  *
  * @param goalName   The name of the goal.
  *
- * @param successCallback    The callback to invoke if the goal should be attempted.  It will run on the main thread.
- * For goals with variations, the variation name to attempt is passed as the argument to the callback.  Otherwise, it is null.
+ * @param yesCallback    The callback to invoke if the goal should be attempted.  It will run on the main thread.
+ * For goals with variations, the variation name to attempt is passed as the argument to the callback.  Otherwise, it is nil.
  *
- * @param failureCallback    The callback to invoke (if nonnull) if the goal should not be attempted.  It will run on the main thread.
+ * @param noCallback    The callback to invoke (if nonnull) if the goal should not be attempted.  It will run on the main thread.
  *
  * @param options   A dictionary specifying option values.  An entry for key 'force' with value 'success' or 'failure' will cause the
  * corresponding callback to be run.  For the 'success' case, a variation name can be supplied as the value for the key 'variation'.
  */
-- (void)attemptGoal:(NSString *)goalName
-    successCallback:(SEGGoalSuccessCallback)successCallback
-    failureCallback:(SEGGoalFailureCallback)failureCallback
-            options:(NSDictionary * _Nullable)options;
-- (void)attemptGoal:(NSString *)goalName successCallback:(SEGGoalSuccessCallback)successCallback failureCallback:(SEGGoalFailureCallback)failureCallback;
-- (void)attemptGoal:(NSString *)goalName successCallback:(SEGGoalSuccessCallback)successCallback;
+- (void)    attemptGoal:(NSString *)goalName
+    makeAttemptCallback:(SEGGoalMakeAttemptCallback)yesCallback
+dontMakeAttemptCallback:(SEGGoalDontMakeAttemptCallback)noCallback
+                options:(NSDictionary * _Nullable)options;
+- (void)attemptGoal:(NSString *)goalName makeAttemptCallback:(SEGGoalMakeAttemptCallback)makeAttemptCallback dontMakeAttemptCallback:(SEGGoalDontMakeAttemptCallback)dontMakeAttemptCallback;
+- (void)attemptGoal:(NSString *)goalName makeAttemptCallback:(SEGGoalMakeAttemptCallback)makeAttemptCallback;
+
+/*!
+ * @method
+ *
+ * @abstract
+ * Report whether an attempted goal was successful or not.
+ */
+- (void)reportGoalResult:(NSString*)goalName result:(SEGGoalResult)result options:(SERIALIZABLE_DICT _Nullable)options;
+- (void)reportGoalResult:(NSString*)goalName result:(SEGGoalResult)result;
 
 /*!
  @method

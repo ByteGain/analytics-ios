@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		3481C14AEC76E5A8DA64DA59 /* Pods_AnalyticsTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89033CBF22319674E6CE7E61 /* Pods_AnalyticsTests.framework */; };
+		3A761E4F20DDBA5E002EF083 /* SEGReportGoalResultPayload.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A761E4D20DDBA5E002EF083 /* SEGReportGoalResultPayload.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3A761E5020DDBA5E002EF083 /* SEGReportGoalResultPayload.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A761E4E20DDBA5E002EF083 /* SEGReportGoalResultPayload.m */; };
 		3AC1BDC420BF31070091B6DD /* SEGAttemptGoalPayload.h in Headers */ = {isa = PBXBuildFile; fileRef = 3AC1BDC220BF31070091B6DD /* SEGAttemptGoalPayload.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3AC1BDC520BF31070091B6DD /* SEGAttemptGoalPayload.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AC1BDC320BF31070091B6DD /* SEGAttemptGoalPayload.m */; };
 		6E265C791FB1178C0030E08E /* IntegrationsManagerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E265C781FB1178C0030E08E /* IntegrationsManagerTest.swift */; };
@@ -91,11 +93,14 @@
 
 /* Begin PBXFileReference section */
 		1DF03A6929EEFE7158913224 /* Pods-AnalyticsTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AnalyticsTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AnalyticsTests/Pods-AnalyticsTests.debug.xcconfig"; sourceTree = "<group>"; };
+		3A761E4D20DDBA5E002EF083 /* SEGReportGoalResultPayload.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SEGReportGoalResultPayload.h; sourceTree = "<group>"; };
+		3A761E4E20DDBA5E002EF083 /* SEGReportGoalResultPayload.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SEGReportGoalResultPayload.m; sourceTree = "<group>"; };
 		3AC1BDC220BF31070091B6DD /* SEGAttemptGoalPayload.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SEGAttemptGoalPayload.h; sourceTree = "<group>"; };
 		3AC1BDC320BF31070091B6DD /* SEGAttemptGoalPayload.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SEGAttemptGoalPayload.m; sourceTree = "<group>"; };
 		6E265C781FB1178C0030E08E /* IntegrationsManagerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntegrationsManagerTest.swift; sourceTree = "<group>"; };
 		6EEC1C702017EA370089C478 /* EndToEndTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndToEndTests.swift; sourceTree = "<group>"; };
 		89033CBF22319674E6CE7E61 /* Pods_AnalyticsTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AnalyticsTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D3A7EDFF55573069765A46D0 /* Pods-AnalyticsTests.bg debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AnalyticsTests.bg debug.xcconfig"; path = "Pods/Target Support Files/Pods-AnalyticsTests/Pods-AnalyticsTests.bg debug.xcconfig"; sourceTree = "<group>"; };
 		D3BF8AE673FE0FD91DF5B503 /* Pods-AnalyticsTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AnalyticsTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-AnalyticsTests/Pods-AnalyticsTests.release.xcconfig"; sourceTree = "<group>"; };
 		EA88A5971DED7608009FB66A /* SEGSerializableValue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SEGSerializableValue.h; sourceTree = "<group>"; };
 		EA8F09731E24C5C600B8B93F /* MiddlewareTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MiddlewareTests.swift; sourceTree = "<group>"; };
@@ -206,6 +211,7 @@
 			children = (
 				1DF03A6929EEFE7158913224 /* Pods-AnalyticsTests.debug.xcconfig */,
 				D3BF8AE673FE0FD91DF5B503 /* Pods-AnalyticsTests.release.xcconfig */,
+				D3A7EDFF55573069765A46D0 /* Pods-AnalyticsTests.bg debug.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -324,6 +330,8 @@
 				EADEB88B1DECD12B005322DA /* SEGTrackPayload.m */,
 				3AC1BDC220BF31070091B6DD /* SEGAttemptGoalPayload.h */,
 				3AC1BDC320BF31070091B6DD /* SEGAttemptGoalPayload.m */,
+				3A761E4D20DDBA5E002EF083 /* SEGReportGoalResultPayload.h */,
+				3A761E4E20DDBA5E002EF083 /* SEGReportGoalResultPayload.m */,
 			);
 			path = Integrations;
 			sourceTree = "<group>";
@@ -419,6 +427,7 @@
 				EADEB8D41DECD12B005322DA /* SEGUtils.h in Headers */,
 				EADEB8601DECD080005322DA /* Analytics.h in Headers */,
 				EADEB8C31DECD12B005322DA /* SEGAnalyticsUtils.h in Headers */,
+				3A761E4F20DDBA5E002EF083 /* SEGReportGoalResultPayload.h in Headers */,
 				EADEB8B91DECD12B005322DA /* SEGIntegrationsManager.h in Headers */,
 				EADEB8AE1DECD12B005322DA /* SEGAES256Crypto.h in Headers */,
 				EADEB8C51DECD12B005322DA /* SEGFileStorage.h in Headers */,
@@ -457,7 +466,6 @@
 				EADEB8671DECD0EF005322DA /* Frameworks */,
 				EADEB8681DECD0EF005322DA /* Resources */,
 				B78A9CF1929BFE8D38B50D5C /* [CP] Embed Pods Frameworks */,
-				B179A3824C53C87809396267 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -543,21 +551,6 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		B179A3824C53C87809396267 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-AnalyticsTests/Pods-AnalyticsTests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		B78A9CF1929BFE8D38B50D5C /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -594,6 +587,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EADEB8DD1DECD12B005322DA /* SEGAnalytics.m in Sources */,
+				3A761E5020DDBA5E002EF083 /* SEGReportGoalResultPayload.m in Sources */,
 				EADEB8BE1DECD12B005322DA /* SEGScreenPayload.m in Sources */,
 				EADEB8B61DECD12B005322DA /* SEGIdentifyPayload.m in Sources */,
 				EADEB8CE1DECD12B005322DA /* SEGSegmentIntegrationFactory.m in Sources */,
@@ -737,7 +731,7 @@
 		};
 		3AC1BDAF20B39A700091B6DD /* BG Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1DF03A6929EEFE7158913224 /* Pods-AnalyticsTests.debug.xcconfig */;
+			baseConfigurationReference = D3A7EDFF55573069765A46D0 /* Pods-AnalyticsTests.bg debug.xcconfig */;
 			buildSettings = {
 				INFOPLIST_FILE = AnalyticsTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";

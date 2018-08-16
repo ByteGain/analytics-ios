@@ -1,5 +1,5 @@
 //
-//  SEGAES256Crypto.m
+//  ByteGainAES256Crypto.m
 //  Analytics
 //
 //  Copyright © 2016 Segment. All rights reserved.
@@ -23,7 +23,7 @@ static const NSUInteger kPBKDFSaltSize = 8;
 static const NSUInteger kPBKDFRounds = 10000; // ~80ms on an iPhone 4
 
 
-@implementation SEGAES256Crypto
+@implementation ByteGainAES256Crypto
 
 - (instancetype)initWithPassword:(NSString *)password salt:(NSData *)salt iv:(NSData *_Nonnull)iv
 {
@@ -37,8 +37,8 @@ static const NSUInteger kPBKDFRounds = 10000; // ~80ms on an iPhone 4
 
 - (instancetype)initWithPassword:(NSString *)password
 {
-    NSData *iv = [SEGAES256Crypto randomDataOfLength:kAlgorithmIVSize];
-    NSData *salt = [SEGAES256Crypto randomDataOfLength:kPBKDFSaltSize];
+    NSData *iv = [ByteGainAES256Crypto randomDataOfLength:kAlgorithmIVSize];
+    NSData *salt = [ByteGainAES256Crypto randomDataOfLength:kPBKDFSaltSize];
     return [self initWithPassword:password salt:salt iv:iv];
 }
 
@@ -71,7 +71,7 @@ static const NSUInteger kPBKDFRounds = 10000; // ~80ms on an iPhone 4
         NSError *error = [NSError errorWithDomain:kRNCryptManagerErrorDomain
                                              code:result
                                          userInfo:nil];
-        SEGLog(@"Unable to encrypt data", error);
+        ByteGainLog(@"Unable to encrypt data", error);
         return nil;
     }
     return cipherData;
@@ -101,7 +101,7 @@ static const NSUInteger kPBKDFRounds = 10000; // ~80ms on an iPhone 4
         NSError *error = [NSError errorWithDomain:kRNCryptManagerErrorDomain
                                              code:result
                                          userInfo:nil];
-        SEGLog(@"Unable to decrypt data", error);
+        ByteGainLog(@"Unable to decrypt data", error);
         return nil;
     }
     return decryptedData;
@@ -115,7 +115,7 @@ static const NSUInteger kPBKDFRounds = 10000; // ~80ms on an iPhone 4
                                     length,
                                     data.mutableBytes);
     if (result != kCCSuccess) {
-        SEGLog(@"Unable to generate random bytes: %d", result);
+        ByteGainLog(@"Unable to generate random bytes: %d", result);
     }
 
     return data;
@@ -139,7 +139,7 @@ static const NSUInteger kPBKDFRounds = 10000; // ~80ms on an iPhone 4
 
     // Do not log password here
     if (result != kCCSuccess) {
-        SEGLog(@"Unable to create AES key for password: %d", result);
+        ByteGainLog(@"Unable to create AES key for password: %d", result);
     }
 
     return derivedKey;

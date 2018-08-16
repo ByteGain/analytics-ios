@@ -3,7 +3,7 @@
 #import "SEGAnalyticsUtils.h"
 
 
-@implementation SEGHTTPClient
+@implementation ByteGainHTTPClient
 
 + (NSMutableURLRequest * (^)(NSURL *))defaultRequestFactory
 {
@@ -20,11 +20,11 @@
 }
 
 
-- (instancetype)initWithRequestFactory:(SEGRequestFactory)requestFactory
+- (instancetype)initWithRequestFactory:(ByteGainRequestFactory)requestFactory
 {
     if (self = [self init]) {
         if (requestFactory == nil) {
-            self.requestFactory = [SEGHTTPClient defaultRequestFactory];
+            self.requestFactory = [ByteGainHTTPClient defaultRequestFactory];
         } else {
             self.requestFactory = requestFactory;
         }
@@ -64,10 +64,10 @@
 
 - (NSURLSessionUploadTask *)upload:(NSDictionary *)batch forWriteKey:(NSString *)writeKey completionHandler:(void (^)(BOOL retry, JSON_DICT _Nullable response))completionHandler
 {
-    //    batch = SEGCoerceDictionary(batch);
+    //    batch = ByteGainCoerceDictionary(batch);
     NSURLSession *session = [self sessionForWriteKey:writeKey];
 
-    NSURL *url = [SEGMENT_API_BASE URLByAppendingPathComponent:@"batch"];
+    NSURL *url = [BYTEGAIN_API_BASE URLByAppendingPathComponent:@"batch"];
     NSMutableURLRequest *request = self.requestFactory(url);
 
     // This is a workaround for an IOS 8.3 bug that causes Content-Type to be incorrectly set
@@ -85,7 +85,7 @@
         exception = exc;
     }
     if (error || exception) {
-        SEGLog(@"Error serializing JSON for batch upload %@", error);
+        ByteGainLog(@"Error serializing JSON for batch upload %@", error);
         completionHandler(NO, nil); // Don't retry this batch.
         return nil;
     }
@@ -95,12 +95,12 @@
                                                          fromData:gzippedPayload
                                                 completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError *_Nullable error) {
         if (error) {
-            SEGLog(@"Error uploading request %@.", error);
+            ByteGainLog(@"Error uploading request %@.", error);
             completionHandler(YES, nil);
             return;
         }
         if (response == nil) {
-            SEGLog(@"upload response for /v1/batch is nil");
+            ByteGainLog(@"upload response for /v1/batch is nil");
             completionHandler(NO, nil);
             return;
         }
@@ -112,7 +112,7 @@
             NSError *jsonError = nil;
             id responseJson = [NSJSONSerialization JSONObjectWithData:data options:0 error:&jsonError];
             if (jsonError != nil) {
-                SEGLog(@"Error deserializing response body %@.", jsonError);
+                ByteGainLog(@"Error deserializing response body %@.", jsonError);
                 completionHandler(NO, nil);
                 return;
             }
@@ -121,19 +121,19 @@
         }
         if (code < 400) {
             // 3xx response codes.
-            SEGLog(@"Server responded with unexpected HTTP code %d.", code);
+            ByteGainLog(@"Server responded with unexpected HTTP code %d.", code);
             completionHandler(YES, nil);
             return;
         }
         if (code < 500) {
             // 4xx response codes.
-            SEGLog(@"Server rejected payload with HTTP code %d.", code);
+            ByteGainLog(@"Server rejected payload with HTTP code %d.", code);
             completionHandler(NO, nil);
             return;
         }
 
         // 5xx response codes.
-        SEGLog(@"Server error with HTTP code %d.", code);
+        ByteGainLog(@"Server error with HTTP code %d.", code);
         completionHandler(YES, nil);
     }];
     [task resume];
@@ -144,20 +144,20 @@
 {
     NSURLSession *session = self.genericSession;
 
-    NSURL *url = [SEGMENT_CDN_BASE URLByAppendingPathComponent:[NSString stringWithFormat:@"/projects/%@/settings", writeKey]];
+    NSURL *url = [BYTEGAIN_CDN_BASE URLByAppendingPathComponent:[NSString stringWithFormat:@"/projects/%@/settings", writeKey]];
     NSMutableURLRequest *request = self.requestFactory(url);
     [request setHTTPMethod:@"GET"];
 
     NSURLSessionDataTask *task = [session dataTaskWithRequest:request completionHandler:^(NSData *_Nullable data, NSURLResponse *_Nullable response, NSError *_Nullable error) {
         if (error != nil) {
-            SEGLog(@"Error fetching settings %@.", error);
+            ByteGainLog(@"Error fetching settings %@.", error);
             completionHandler(NO, nil);
             return;
         }
 
         NSInteger code = ((NSHTTPURLResponse *)response).statusCode;
         if (code > 300) {
-            SEGLog(@"Server responded with unexpected HTTP code %d.", code);
+            ByteGainLog(@"Server responded with unexpected HTTP code %d.", code);
             completionHandler(NO, nil);
             return;
         }
@@ -165,7 +165,7 @@
         NSError *jsonError = nil;
         id responseJson = [NSJSONSerialization JSONObjectWithData:data options:0 error:&jsonError];
         if (jsonError != nil) {
-            SEGLog(@"Error deserializing response body %@.", jsonError);
+            ByteGainLog(@"Error deserializing response body %@.", jsonError);
             completionHandler(NO, nil);
             return;
         }
@@ -195,7 +195,7 @@
         exception = exc;
     }
     if (error || exception) {
-        SEGLog(@"Error serializing context to JSON %@", error);
+        ByteGainLog(@"Error serializing context to JSON %@", error);
         completionHandler(NO, nil);
         return nil;
     }
@@ -203,14 +203,14 @@
 
     NSURLSessionUploadTask *task = [session uploadTaskWithRequest:request fromData:gzippedPayload completionHandler:^(NSData *_Nullable data, NSURLResponse *_Nullable response, NSError *_Nullable error) {
         if (error) {
-            SEGLog(@"Error making request %@.", error);
+            ByteGainLog(@"Error making request %@.", error);
             completionHandler(NO, nil);
             return;
         }
 
         NSInteger code = ((NSHTTPURLResponse *)response).statusCode;
         if (code > 300) {
-            SEGLog(@"Server responded with unexpected HTTP code %d.", code);
+            ByteGainLog(@"Server responded with unexpected HTTP code %d.", code);
             completionHandler(NO, nil);
             return;
         }
@@ -218,7 +218,7 @@
         NSError *jsonError = nil;
         id responseJson = [NSJSONSerialization JSONObjectWithData:data options:0 error:&jsonError];
         if (jsonError != nil) {
-            SEGLog(@"Error deserializing response body %@.", jsonError);
+            ByteGainLog(@"Error deserializing response body %@.", jsonError);
             completionHandler(NO, nil);
             return;
         }

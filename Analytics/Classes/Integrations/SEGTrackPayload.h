@@ -4,7 +4,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 
-@interface SEGTrackPayload : SEGPayload
+@interface ByteGainTrackPayload : ByteGainPayload
 
 @property (nonatomic, readonly) NSString *event;
 

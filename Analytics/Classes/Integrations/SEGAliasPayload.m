@@ -1,7 +1,7 @@
 #import "SEGAliasPayload.h"
 
 
-@implementation SEGAliasPayload
+@implementation ByteGainAliasPayload
 
 - (instancetype)initWithNewId:(NSString *)newId
                       context:(NSDictionary *)context

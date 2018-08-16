@@ -1,5 +1,5 @@
 //
-//  SEGContext.h
+//  ByteGainContext.h
 //  Analytics
 //
 //  Created by Tony Xiao on 9/19/16.
@@ -9,76 +9,76 @@
 #import <Foundation/Foundation.h>
 #import "SEGIntegration.h"
 
-typedef NS_ENUM(NSInteger, SEGEventType) {
+typedef NS_ENUM(NSInteger, ByteGainEventType) {
     // Should not happen, but default state
-    SEGEventTypeUndefined,
+    ByteGainEventTypeUndefined,
     // Core Tracking Methods
-    SEGEventTypeIdentify,
-    SEGEventTypeTrack,
-    SEGEventTypeScreen,
-    SEGEventTypeGroup,
-    SEGEventTypeAlias,
+    ByteGainEventTypeIdentify,
+    ByteGainEventTypeTrack,
+    ByteGainEventTypeScreen,
+    ByteGainEventTypeGroup,
+    ByteGainEventTypeAlias,
 
     // General utility
-    SEGEventTypeReset,
-    SEGEventTypeFlush,
+    ByteGainEventTypeReset,
+    ByteGainEventTypeFlush,
 
     // Remote Notification
-    SEGEventTypeReceivedRemoteNotification,
-    SEGEventTypeFailedToRegisterForRemoteNotifications,
-    SEGEventTypeRegisteredForRemoteNotifications,
-    SEGEventTypeHandleActionWithForRemoteNotification,
+    ByteGainEventTypeReceivedRemoteNotification,
+    ByteGainEventTypeFailedToRegisterForRemoteNotifications,
+    ByteGainEventTypeRegisteredForRemoteNotifications,
+    ByteGainEventTypeHandleActionWithForRemoteNotification,
 
     // Application Lifecycle
-    SEGEventTypeApplicationLifecycle,
+    ByteGainEventTypeApplicationLifecycle,
     //    DidFinishLaunching,
-    //    SEGEventTypeApplicationDidEnterBackground,
-    //    SEGEventTypeApplicationWillEnterForeground,
-    //    SEGEventTypeApplicationWillTerminate,
-    //    SEGEventTypeApplicationWillResignActive,
-    //    SEGEventTypeApplicationDidBecomeActive,
+    //    ByteGainEventTypeApplicationDidEnterBackground,
+    //    ByteGainEventTypeApplicationWillEnterForeground,
+    //    ByteGainEventTypeApplicationWillTerminate,
+    //    ByteGainEventTypeApplicationWillResignActive,
+    //    ByteGainEventTypeApplicationDidBecomeActive,
 
     // Misc.
-    SEGEventTypeContinueUserActivity,
-    SEGEventTypeOpenURL,
+    ByteGainEventTypeContinueUserActivity,
+    ByteGainEventTypeOpenURL,
 
     // Goals
-    SEGEventTypeAttemptGoal,
-    SEGEventTypeReportGoalResult,
+    ByteGainEventTypeAttemptGoal,
+    ByteGainEventTypeReportGoalResult,
 };
 
-@class SEGAnalytics;
-@protocol SEGMutableContext;
+@class ByteGainAnalytics;
+@protocol ByteGainMutableContext;
 
 
-@interface SEGContext : NSObject <NSCopying>
+@interface ByteGainContext : NSObject <NSCopying>
 
-// Loopback reference to the top level SEGAnalytics object.
+// Loopback reference to the top level ByteGainAnalytics object.
 // Not sure if it's a good idea to keep this around in the context.
 // since we don't really want people to use it due to the circular
 // reference and logic (Thus prefixing with underscore). But
 // Right now it is required for integrations to work so I guess we'll leave it in.
-@property (nonatomic, readonly, nonnull) SEGAnalytics *_analytics;
-@property (nonatomic, readonly) SEGEventType eventType;
+@property (nonatomic, readonly, nonnull) ByteGainAnalytics *_analytics;
+@property (nonatomic, readonly) ByteGainEventType eventType;
 
 @property (nonatomic, readonly, nullable) NSString *userId;
 @property (nonatomic, readonly, nullable) NSString *anonymousId;
 @property (nonatomic, readonly, nullable) NSError *error;
-@property (nonatomic, readonly, nullable) SEGPayload *payload;
+@property (nonatomic, readonly, nullable) ByteGainPayload *payload;
 @property (nonatomic, readonly) BOOL debug;
 
-- (instancetype _Nonnull)initWithAnalytics:(SEGAnalytics *_Nonnull)analytics;
+- (instancetype _Nonnull)initWithAnalytics:(ByteGainAnalytics *_Nonnull)analytics;
 
-- (SEGContext *_Nonnull)modify:(void (^_Nonnull)(id<SEGMutableContext> _Nonnull ctx))modify;
+- (ByteGainContext *_Nonnull)modify:(void (^_Nonnull)(id<ByteGainMutableContext> _Nonnull ctx))modify;
 
 @end
 
-@protocol SEGMutableContext <NSObject>
+@protocol ByteGainMutableContext <NSObject>
 
-@property (nonatomic) SEGEventType eventType;
+@property (nonatomic) ByteGainEventType eventType;
 @property (nonatomic, nullable) NSString *userId;
 @property (nonatomic, nullable) NSString *anonymousId;
-@property (nonatomic, nullable) SEGPayload *payload;
+@property (nonatomic, nullable) ByteGainPayload *payload;
 @property (nonatomic, nullable) NSError *error;
 @property (nonatomic) BOOL debug;
 

@@ -1,14 +1,14 @@
 #import "SEGAttemptGoalPayload.h"
 
-@implementation SEGAttemptGoalPayload
+@implementation ByteGainAttemptGoalPayload
 
 
 - (instancetype)initWithEvent:(NSString *)event
                    properties:(NSDictionary *)properties
                       context:(NSDictionary *)context
                  integrations:(NSDictionary *)integrations
-              yesCallback:(SEGAttemptGoalYesCallback)yesCallback
-              noCallback:(SEGAttemptGoalNoCallback _Nullable)noCallback
+              yesCallback:(ByteGainAttemptGoalYesCallback)yesCallback
+              noCallback:(ByteGainAttemptGoalNoCallback _Nullable)noCallback
 {
     if (self = [super initWithContext:context integrations:integrations]) {
         _event = [event copy];

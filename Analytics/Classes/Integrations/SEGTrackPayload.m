@@ -1,7 +1,7 @@
 #import "SEGTrackPayload.h"
 
 
-@implementation SEGTrackPayload
+@implementation ByteGainTrackPayload
 
 
 - (instancetype)initWithEvent:(NSString *)event

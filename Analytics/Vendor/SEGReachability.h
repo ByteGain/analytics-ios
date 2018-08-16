@@ -49,34 +49,34 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-extern NSString *const kSEGReachabilityChangedNotification;
+extern NSString *const kByteGainReachabilityChangedNotification;
 
-typedef NS_ENUM(NSInteger, SEGNetworkStatus) {
+typedef NS_ENUM(NSInteger, ByteGainNetworkStatus) {
     // Apple NetworkStatus Compatible Names.
-    SEGNotReachable = 0,
-    SEGReachableViaWiFi = 2,
-    SEGReachableViaWWAN = 1
+    ByteGainNotReachable = 0,
+    ByteGainReachableViaWiFi = 2,
+    ByteGainReachableViaWWAN = 1
 };
 
-@class SEGReachability;
+@class ByteGainReachability;
 
-typedef void (^SEGNetworkReachable)(SEGReachability *reachability);
-typedef void (^SEGNetworkUnreachable)(SEGReachability *reachability);
+typedef void (^ByteGainNetworkReachable)(ByteGainReachability *reachability);
+typedef void (^ByteGainNetworkUnreachable)(ByteGainReachability *reachability);
 
 
-@interface SEGReachability : NSObject
+@interface ByteGainReachability : NSObject
 
-@property (nonatomic, copy, nullable) SEGNetworkReachable reachableBlock;
-@property (nonatomic, copy, nullable) SEGNetworkUnreachable unreachableBlock;
+@property (nonatomic, copy, nullable) ByteGainNetworkReachable reachableBlock;
+@property (nonatomic, copy, nullable) ByteGainNetworkUnreachable unreachableBlock;
 
 
 @property (nonatomic, assign) BOOL reachableOnWWAN;
 
-+ (SEGReachability *_Nullable)reachabilityWithHostname:(NSString *)hostname;
-+ (SEGReachability *_Nullable)reachabilityForInternetConnection;
-+ (SEGReachability *_Nullable)reachabilityForLocalWiFi;
++ (ByteGainReachability *_Nullable)reachabilityWithHostname:(NSString *)hostname;
++ (ByteGainReachability *_Nullable)reachabilityForInternetConnection;
++ (ByteGainReachability *_Nullable)reachabilityForLocalWiFi;
 
-- (SEGReachability *)initWithReachabilityRef:(SCNetworkReachabilityRef)ref;
+- (ByteGainReachability *)initWithReachabilityRef:(SCNetworkReachabilityRef)ref;
 
 - (BOOL)startNotifier;
 - (void)stopNotifier;
@@ -94,7 +94,7 @@ typedef void (^SEGNetworkUnreachable)(SEGReachability *reachability);
 // Is user intervention required?
 - (BOOL)isInterventionRequired;
 
-- (SEGNetworkStatus)currentReachabilityStatus;
+- (ByteGainNetworkStatus)currentReachabilityStatus;
 - (SCNetworkReachabilityFlags)reachabilityFlags;
 - (NSString *)currentReachabilityString;
 - (NSString *)currentReachabilityFlags;

@@ -1,7 +1,7 @@
 #import "SEGPayload.h"
 
 
-@implementation SEGPayload
+@implementation ByteGainPayload
 
 - (instancetype)initWithContext:(NSDictionary *)context integrations:(NSDictionary *)integrations
 {
@@ -15,21 +15,21 @@
 @end
 
 
-@implementation SEGApplicationLifecyclePayload
+@implementation ByteGainApplicationLifecyclePayload
 
 @end
 
 
-@implementation SEGRemoteNotificationPayload
+@implementation ByteGainRemoteNotificationPayload
 
 @end
 
 
-@implementation SEGContinueUserActivityPayload
+@implementation ByteGainContinueUserActivityPayload
 
 @end
 
 
-@implementation SEGOpenURLPayload
+@implementation ByteGainOpenURLPayload
 
 @end

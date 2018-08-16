@@ -11,48 +11,48 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@protocol SEGIntegration <NSObject>
+@protocol ByteGainIntegration <NSObject>
 
 @optional
 // Identify will be called when the user calls either of the following:
-// 1. [[SEGAnalytics sharedInstance] identify:someUserId];
-// 2. [[SEGAnalytics sharedInstance] identify:someUserId traits:someTraits];
-// 3. [[SEGAnalytics sharedInstance] identify:someUserId traits:someTraits options:someOptions];
+// 1. [[ByteGainAnalytics sharedInstance] identify:someUserId];
+// 2. [[ByteGainAnalytics sharedInstance] identify:someUserId traits:someTraits];
+// 3. [[ByteGainAnalytics sharedInstance] identify:someUserId traits:someTraits options:someOptions];
 // @see https://segment.com/docs/spec/identify/
-- (void)identify:(SEGIdentifyPayload *)payload;
+- (void)identify:(ByteGainIdentifyPayload *)payload;
 
 // Track will be called when the user calls either of the following:
-// 1. [[SEGAnalytics sharedInstance] track:someEvent];
-// 2. [[SEGAnalytics sharedInstance] track:someEvent properties:someProperties];
-// 3. [[SEGAnalytics sharedInstance] track:someEvent properties:someProperties options:someOptions];
+// 1. [[ByteGainAnalytics sharedInstance] track:someEvent];
+// 2. [[ByteGainAnalytics sharedInstance] track:someEvent properties:someProperties];
+// 3. [[ByteGainAnalytics sharedInstance] track:someEvent properties:someProperties options:someOptions];
 // @see https://segment.com/docs/spec/track/
-- (void)track:(SEGTrackPayload *)payload;
+- (void)track:(ByteGainTrackPayload *)payload;
 
 // Screen will be called when the user calls either of the following:
-// 1. [[SEGAnalytics sharedInstance] screen:someEvent];
-// 2. [[SEGAnalytics sharedInstance] screen:someEvent properties:someProperties];
-// 3. [[SEGAnalytics sharedInstance] screen:someEvent properties:someProperties options:someOptions];
+// 1. [[ByteGainAnalytics sharedInstance] screen:someEvent];
+// 2. [[ByteGainAnalytics sharedInstance] screen:someEvent properties:someProperties];
+// 3. [[ByteGainAnalytics sharedInstance] screen:someEvent properties:someProperties options:someOptions];
 // @see https://segment.com/docs/spec/screen/
-- (void)screen:(SEGScreenPayload *)payload;
+- (void)screen:(ByteGainScreenPayload *)payload;
 
 // AttemptGoal will be called when the user calls:
-// 1. [[SEGAnalytics sharedInstance] attemptGoal:...]
-- (void)attemptGoal:(SEGAttemptGoalPayload *)payload;
+// 1. [[ByteGainAnalytics sharedInstance] attemptGoal:...]
+- (void)attemptGoal:(ByteGainAttemptGoalPayload *)payload;
 
-- (void)reportGoalResult:(SEGReportGoalResultPayload *)payload;
+- (void)reportGoalResult:(ByteGainReportGoalResultPayload *)payload;
 
 // Group will be called when the user calls either of the following:
-// 1. [[SEGAnalytics sharedInstance] group:someGroupId];
-// 2. [[SEGAnalytics sharedInstance] group:someGroupId traits:];
-// 3. [[SEGAnalytics sharedInstance] group:someGroupId traits:someGroupTraits options:someOptions];
+// 1. [[ByteGainAnalytics sharedInstance] group:someGroupId];
+// 2. [[ByteGainAnalytics sharedInstance] group:someGroupId traits:];
+// 3. [[ByteGainAnalytics sharedInstance] group:someGroupId traits:someGroupTraits options:someOptions];
 // @see https://segment.com/docs/spec/group/
-- (void)group:(SEGGroupPayload *)payload;
+- (void)group:(ByteGainGroupPayload *)payload;
 
 // Alias will be called when the user calls either of the following:
-// 1. [[SEGAnalytics sharedInstance] alias:someNewId];
-// 2. [[SEGAnalytics sharedInstance] alias:someNewId options:someOptions];
+// 1. [[ByteGainAnalytics sharedInstance] alias:someNewId];
+// 2. [[ByteGainAnalytics sharedInstance] alias:someNewId options:someOptions];
 // @see https://segment.com/docs/spec/alias/
-- (void)alias:(SEGAliasPayload *)payload;
+- (void)alias:(ByteGainAliasPayload *)payload;
 
 // Reset is invoked when the user logs out, and any data saved about the user should be cleared.
 - (void)reset;

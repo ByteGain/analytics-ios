@@ -1,5 +1,5 @@
 //
-//  SEGIntegrationsManager.h
+//  ByteGainIntegrationsManager.h
 //  Analytics
 //
 //  Created by Tony Xiao on 9/20/16.
@@ -12,12 +12,12 @@
 /**
  * NSNotification name, that is posted after integrations are loaded.
  */
-extern NSString *_Nonnull SEGAnalyticsIntegrationDidStart;
+extern NSString *_Nonnull ByteGainAnalyticsIntegrationDidStart;
 
-@class SEGAnalytics;
+@class ByteGainAnalytics;
 
 
-@interface SEGIntegrationsManager : NSObject
+@interface ByteGainIntegrationsManager : NSObject
 
 // Exposed for testing.
 + (BOOL)isTrackEvent:(NSString *_Nonnull)event enabledForIntegration:(NSString *_Nonnull)key inPlan:(NSDictionary *_Nonnull)plan;
@@ -25,7 +25,7 @@ extern NSString *_Nonnull SEGAnalyticsIntegrationDidStart;
 // @Deprecated - Exposing for backward API compat reasons only
 @property (nonatomic, readonly) NSMutableDictionary *_Nonnull registeredIntegrations;
 
-- (instancetype _Nonnull)initWithAnalytics:(SEGAnalytics *_Nonnull)analytics;
+- (instancetype _Nonnull)initWithAnalytics:(ByteGainAnalytics *_Nonnull)analytics;
 
 // @Deprecated - Exposing for backward API compat reasons only
 - (NSString *_Nonnull)getAnonymousId;
@@ -33,6 +33,6 @@ extern NSString *_Nonnull SEGAnalyticsIntegrationDidStart;
 @end
 
 
-@interface SEGIntegrationsManager (SEGMiddleware) <SEGMiddleware>
+@interface ByteGainIntegrationsManager (ByteGainMiddleware) <ByteGainMiddleware>
 
 @end

@@ -1,7 +1,7 @@
 #import <UIKit/UIKit.h>
 
 
-@interface UIViewController (SEGScreen)
+@interface UIViewController (ByteGainScreen)
 
 + (void)seg_swizzleViewDidAppear;
 + (UIViewController *)seg_topViewController;

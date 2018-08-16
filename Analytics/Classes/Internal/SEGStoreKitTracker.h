@@ -5,9 +5,9 @@
 NS_ASSUME_NONNULL_BEGIN
 
 
-@interface SEGStoreKitTracker : NSObject <SKPaymentTransactionObserver, SKProductsRequestDelegate>
+@interface ByteGainStoreKitTracker : NSObject <SKPaymentTransactionObserver, SKProductsRequestDelegate>
 
-+ (instancetype)trackTransactionsForAnalytics:(SEGAnalytics *)analytics;
++ (instancetype)trackTransactionsForAnalytics:(ByteGainAnalytics *)analytics;
 
 @end
 

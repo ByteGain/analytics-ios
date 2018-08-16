@@ -4,7 +4,7 @@
 #import "SEGAnalyticsUtils.h"
 
 
-@implementation UIViewController (SEGScreen)
+@implementation UIViewController (ByteGainScreen)
 
 + (void)seg_swizzleViewDidAppear
 {
@@ -38,7 +38,7 @@
 
 + (UIViewController *)seg_topViewController
 {
-    UIViewController *root = [[SEGAnalytics sharedAnalytics] configuration].application.delegate.window.rootViewController;
+    UIViewController *root = [[ByteGainAnalytics sharedAnalytics] configuration].application.delegate.window.rootViewController;
     return [self seg_topViewController:root];
 }
 
@@ -61,7 +61,7 @@
 {
     UIViewController *top = [[self class] seg_topViewController];
     if (!top) {
-        SEGLog(@"Could not infer screen.");
+        ByteGainLog(@"Could not infer screen.");
         return;
     }
 
@@ -70,11 +70,11 @@
         name = [[[top class] description] stringByReplacingOccurrencesOfString:@"ViewController" withString:@""];
         // Class name could be just "ViewController".
         if (name.length == 0) {
-            SEGLog(@"Could not infer screen name.");
+            ByteGainLog(@"Could not infer screen name.");
             name = @"Unknown";
         }
     }
-    [[SEGAnalytics sharedAnalytics] screen:name properties:nil options:nil];
+    [[ByteGainAnalytics sharedAnalytics] screen:name properties:nil options:nil];
 
     [self seg_viewDidAppear:animated];
 }

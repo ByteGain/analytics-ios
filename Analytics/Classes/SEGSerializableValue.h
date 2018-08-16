@@ -1,5 +1,5 @@
 //
-//  SEGSerializableValue.h
+//  ByteGainSerializableValue.h
 //  Analytics
 //
 //  Created by Tony Xiao on 11/29/16.

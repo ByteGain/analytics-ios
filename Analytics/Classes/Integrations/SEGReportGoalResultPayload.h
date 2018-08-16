@@ -3,20 +3,20 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-typedef NS_ENUM(NSInteger, SEGGoalResult) {
-    SEGGoalResultUndefined,     // Not used
-    SEGGoalResultSuccess,       // Success following a prior attemptGoal
-    SEGGoalResultFailure,       // Failure following a prior attemptGoal
-    SEGGoalResultUnsolictedSuccess,  // Accomplishing goal without issuing a prior attemptGoal
+typedef NS_ENUM(NSInteger, ByteGainGoalResult) {
+    ByteGainGoalResultUndefined,     // Not used
+    ByteGainGoalResultSuccess,       // Success following a prior attemptGoal
+    ByteGainGoalResultFailure,       // Failure following a prior attemptGoal
+    ByteGainGoalResultUnsolictedSuccess,  // Accomplishing goal without issuing a prior attemptGoal
 };
 
-@interface SEGReportGoalResultPayload : SEGPayload
+@interface ByteGainReportGoalResultPayload : ByteGainPayload
 
 @property (nonatomic, readonly) NSString *event;
-@property (nonatomic, readonly) SEGGoalResult result;
+@property (nonatomic, readonly) ByteGainGoalResult result;
 
 - (instancetype)initWithEvent:(NSString *)event
-                       result:(SEGGoalResult) result
+                       result:(ByteGainGoalResult) result
                       context:(NSDictionary *)context
                  integrations:(NSDictionary *)integrations;
 

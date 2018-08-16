@@ -1,5 +1,5 @@
 //
-//  SEGUserDefaultsStorage.h
+//  ByteGainUserDefaultsStorage.h
 //  Analytics
 //
 //  Created by Tony Xiao on 8/24/16.
@@ -10,12 +10,12 @@
 #import "SEGStorage.h"
 
 
-@interface SEGUserDefaultsStorage : NSObject <SEGStorage>
+@interface ByteGainUserDefaultsStorage : NSObject <ByteGainStorage>
 
-@property (nonatomic, strong, nullable) id<SEGCrypto> crypto;
+@property (nonatomic, strong, nullable) id<ByteGainCrypto> crypto;
 @property (nonnull, nonatomic, readonly) NSUserDefaults *defaults;
 @property (nullable, nonatomic, readonly) NSString *namespacePrefix;
 
-- (instancetype _Nonnull)initWithDefaults:(NSUserDefaults *_Nonnull)defaults namespacePrefix:(NSString *_Nullable)namespacePrefix crypto:(id<SEGCrypto> _Nullable)crypto;
+- (instancetype _Nonnull)initWithDefaults:(NSUserDefaults *_Nonnull)defaults namespacePrefix:(NSString *_Nullable)namespacePrefix crypto:(id<ByteGainCrypto> _Nullable)crypto;
 
 @end

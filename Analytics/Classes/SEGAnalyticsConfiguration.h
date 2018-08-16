@@ -1,5 +1,5 @@
 //
-//  SEGIntegrationsManager.h
+//  ByteGainIntegrationsManager.h
 //  Analytics
 //
 //  Created by Tony Xiao on 9/20/16.
@@ -9,26 +9,26 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
-@protocol SEGApplicationProtocol <NSObject>
+@protocol ByteGainApplicationProtocol <NSObject>
 @property (nullable, nonatomic, assign) id<UIApplicationDelegate> delegate;
 - (UIBackgroundTaskIdentifier)seg_beginBackgroundTaskWithName:(nullable NSString *)taskName expirationHandler:(void (^__nullable)(void))handler;
 - (void)seg_endBackgroundTask:(UIBackgroundTaskIdentifier)identifier;
 @end
 
 
-@interface UIApplication (SEGApplicationProtocol) <SEGApplicationProtocol>
+@interface UIApplication (ByteGainApplicationProtocol) <ByteGainApplicationProtocol>
 @end
 
-typedef NSMutableURLRequest *_Nonnull (^SEGRequestFactory)(NSURL *_Nonnull);
+typedef NSMutableURLRequest *_Nonnull (^ByteGainRequestFactory)(NSURL *_Nonnull);
 
-@protocol SEGIntegrationFactory;
-@protocol SEGCrypto;
-@protocol SEGMiddleware;
+@protocol ByteGainIntegrationFactory;
+@protocol ByteGainCrypto;
+@protocol ByteGainMiddleware;
 
 /**
  * This object provides a set of properties to control various policies of the analytics client. Other than `writeKey`, these properties can be changed at any time.
  */
-@interface SEGAnalyticsConfiguration : NSObject
+@interface ByteGainAnalyticsConfiguration : NSObject
 
 /**
  * Creates and returns a configuration with default settings and the given write key.
@@ -106,26 +106,26 @@ typedef NSMutableURLRequest *_Nonnull (^SEGRequestFactory)(NSURL *_Nonnull);
 /**
  * Set a custom request factory.
  */
-@property (nonatomic, strong, nullable) SEGRequestFactory requestFactory;
+@property (nonatomic, strong, nullable) ByteGainRequestFactory requestFactory;
 
 /**
  * Set a custom crypto
  */
-@property (nonatomic, strong, nullable) id<SEGCrypto> crypto;
+@property (nonatomic, strong, nullable) id<ByteGainCrypto> crypto;
 
 /**
  * Set custom middlewares. Will be run before all integrations
  */
-@property (nonatomic, strong, nullable) NSArray<id<SEGMiddleware>> *middlewares;
+@property (nonatomic, strong, nullable) NSArray<id<ByteGainMiddleware>> *middlewares;
 
 /**
  * Register a factory that can be used to create an integration.
  */
-- (void)use:(id<SEGIntegrationFactory> _Nonnull)factory;
+- (void)use:(id<ByteGainIntegrationFactory> _Nonnull)factory;
 
 /**
  * Leave this nil for iOS extensions, otherwise set to UIApplication.sharedApplication.
  */
-@property (nonatomic, strong, nullable) id<SEGApplicationProtocol> application;
+@property (nonatomic, strong, nullable) id<ByteGainApplicationProtocol> application;
 
 @end

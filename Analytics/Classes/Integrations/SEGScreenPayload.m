@@ -1,7 +1,7 @@
 #import "SEGScreenPayload.h"
 
 
-@implementation SEGScreenPayload
+@implementation ByteGainScreenPayload
 
 - (instancetype)initWithName:(NSString *)name
                   properties:(NSDictionary *)properties

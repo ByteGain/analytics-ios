@@ -4,7 +4,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 
-@interface SEGGroupPayload : SEGPayload
+@interface ByteGainGroupPayload : ByteGainPayload
 
 @property (nonatomic, readonly) NSString *groupId;
 

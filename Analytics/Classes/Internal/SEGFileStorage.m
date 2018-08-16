@@ -1,5 +1,5 @@
 //
-//  SEGFileStorage.m
+//  ByteGainFileStorage.m
 //  Analytics
 //
 //  Copyright © 2016 Segment. All rights reserved.
@@ -10,21 +10,21 @@
 #import "SEGCrypto.h"
 
 
-@interface SEGFileStorage ()
+@interface ByteGainFileStorage ()
 
 @property (nonatomic, strong, nonnull) NSURL *folderURL;
 
 @end
 
 
-@implementation SEGFileStorage
+@implementation ByteGainFileStorage
 
 - (instancetype)init
 {
-    return [self initWithFolder:[SEGFileStorage applicationSupportDirectoryURL] crypto:nil];
+    return [self initWithFolder:[ByteGainFileStorage applicationSupportDirectoryURL] crypto:nil];
 }
 
-- (instancetype)initWithFolder:(NSURL *)folderURL crypto:(id<SEGCrypto>)crypto
+- (instancetype)initWithFolder:(NSURL *)folderURL crypto:(id<ByteGainCrypto>)crypto
 {
     if (self = [super init]) {
         _folderURL = folderURL;
@@ -40,7 +40,7 @@
     NSURL *url = [self urlForKey:key];
     NSError *error = nil;
     if (![[NSFileManager defaultManager] removeItemAtURL:url error:&error]) {
-        SEGLog(@"Unable to remove key %@ - error removing file at path %@", key, url);
+        ByteGainLog(@"Unable to remove key %@ - error removing file at path %@", key, url);
     }
 }
 
@@ -48,7 +48,7 @@
 {
     NSError *error = nil;
     if (![[NSFileManager defaultManager] removeItemAtURL:self.folderURL error:&error]) {
-        SEGLog(@"ERROR: Unable to reset file storage. Path cannot be removed - %@", self.folderURL.path);
+        ByteGainLog(@"ERROR: Unable to reset file storage. Path cannot be removed - %@", self.folderURL.path);
     }
     [self createDirectoryAtURLIfNeeded:self.folderURL];
 }
@@ -67,7 +67,7 @@
     if (![url setResourceValue:@YES
                         forKey:NSURLIsExcludedFromBackupKey
                          error:&error]) {
-        SEGLog(@"Error excluding %@ from backup %@", [url lastPathComponent], error);
+        ByteGainLog(@"Error excluding %@ from backup %@", [url lastPathComponent], error);
     }
 }
 
@@ -76,7 +76,7 @@
     NSURL *url = [self urlForKey:key];
     NSData *data = [NSData dataWithContentsOfURL:url];
     if (!data) {
-        SEGLog(@"WARNING: No data file for key %@", key);
+        ByteGainLog(@"WARNING: No data file for key %@", key);
         return nil;
     }
     if (self.crypto) {
@@ -151,7 +151,7 @@
                                                              options:0
                                                                error:&error];
     if (error) {
-        SEGLog(@"Unable to serialize data from plist object", error, plist);
+        ByteGainLog(@"Unable to serialize data from plist object", error, plist);
     }
     return data;
 }
@@ -164,7 +164,7 @@
                                                           format:nil
                                                            error:&error];
     if (error) {
-        SEGLog(@"Unable to parse plist from data %@", error);
+        ByteGainLog(@"Unable to parse plist from data %@", error);
     }
     return plist;
 }
@@ -178,7 +178,7 @@
                                        withIntermediateDirectories:YES
                                                         attributes:nil
                                                              error:&error]) {
-            SEGLog(@"error: %@", error.localizedDescription);
+            ByteGainLog(@"error: %@", error.localizedDescription);
         }
     }
 }

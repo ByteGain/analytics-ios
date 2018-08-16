@@ -2,9 +2,9 @@
 #import "SEGSegmentIntegration.h"
 
 
-@implementation SEGSegmentIntegrationFactory
+@implementation ByteGainSegmentIntegrationFactory
 
-- (id)initWithHTTPClient:(SEGHTTPClient *)client storage:(id<SEGStorage>)storage
+- (id)initWithHTTPClient:(ByteGainHTTPClient *)client storage:(id<ByteGainStorage>)storage
 {
     if (self = [super init]) {
         _client = client;
@@ -13,9 +13,9 @@
     return self;
 }
 
-- (id<SEGIntegration>)createWithSettings:(NSDictionary *)settings forAnalytics:(SEGAnalytics *)analytics
+- (id<ByteGainIntegration>)createWithSettings:(NSDictionary *)settings forAnalytics:(ByteGainAnalytics *)analytics
 {
-    return [[SEGSegmentIntegration alloc] initWithAnalytics:analytics httpClient:self.client storage:self.storage];
+    return [[ByteGainSegmentIntegration alloc] initWithAnalytics:analytics httpClient:self.client storage:self.storage];
 }
 
 - (NSString *)key

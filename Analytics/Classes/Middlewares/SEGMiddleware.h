@@ -1,5 +1,5 @@
 //
-//  SEGMiddleware.h
+//  ByteGainMiddleware.h
 //  Analytics
 //
 //  Created by Tony Xiao on 9/19/16.
@@ -9,9 +9,9 @@
 #import <Foundation/Foundation.h>
 #import "SEGContext.h"
 
-typedef void (^SEGMiddlewareNext)(SEGContext *_Nullable newContext);
+typedef void (^ByteGainMiddlewareNext)(ByteGainContext *_Nullable newContext);
 
-@protocol SEGMiddleware
+@protocol ByteGainMiddleware
 @required
 
 // NOTE: If you want to hold onto references of context AFTER passing it through to the next
@@ -26,33 +26,33 @@ typedef void (^SEGMiddlewareNext)(SEGContext *_Nullable newContext);
 // It's ok to save next callback until a more convenient time, but it should always always be done.
 // We'll probably actually add tests to sure it is so.
 // TODO: Should we add error as second param to next?
-- (void)context:(SEGContext *_Nonnull)context next:(SEGMiddlewareNext _Nonnull)next;
+- (void)context:(ByteGainContext *_Nonnull)context next:(ByteGainMiddlewareNext _Nonnull)next;
 
 @end
 
-typedef void (^SEGMiddlewareBlock)(SEGContext *_Nonnull context, SEGMiddlewareNext _Nonnull next);
+typedef void (^ByteGainMiddlewareBlock)(ByteGainContext *_Nonnull context, ByteGainMiddlewareNext _Nonnull next);
 
 
-@interface SEGBlockMiddleware : NSObject <SEGMiddleware>
+@interface ByteGainBlockMiddleware : NSObject <ByteGainMiddleware>
 
-@property (nonnull, nonatomic, readonly) SEGMiddlewareBlock block;
+@property (nonnull, nonatomic, readonly) ByteGainMiddlewareBlock block;
 
-- (instancetype _Nonnull)initWithBlock:(SEGMiddlewareBlock _Nonnull)block;
+- (instancetype _Nonnull)initWithBlock:(ByteGainMiddlewareBlock _Nonnull)block;
 
 @end
 
 
-typedef void (^RunMiddlewaresCallback)(BOOL earlyExit, NSArray<id<SEGMiddleware>> *_Nonnull remainingMiddlewares);
+typedef void (^RunMiddlewaresCallback)(BOOL earlyExit, NSArray<id<ByteGainMiddleware>> *_Nonnull remainingMiddlewares);
 
-// XXX TODO: Add some tests for SEGMiddlewareRunner
-@interface SEGMiddlewareRunner : NSObject
+// XXX TODO: Add some tests for ByteGainMiddlewareRunner
+@interface ByteGainMiddlewareRunner : NSObject
 
 // While it is certainly technically possible to change middlewares dynamically on the fly. we're explicitly NOT
 // gonna support that for now to keep things simple. If there is a real need later we'll see then.
-@property (nonnull, nonatomic, readonly) NSArray<id<SEGMiddleware>> *middlewares;
+@property (nonnull, nonatomic, readonly) NSArray<id<ByteGainMiddleware>> *middlewares;
 
-- (void)run:(SEGContext *_Nonnull)context callback:(RunMiddlewaresCallback _Nullable)callback;
+- (void)run:(ByteGainContext *_Nonnull)context callback:(RunMiddlewaresCallback _Nullable)callback;
 
-- (instancetype _Nonnull)initWithMiddlewares:(NSArray<id<SEGMiddleware>> *_Nonnull)middlewares;
+- (instancetype _Nonnull)initWithMiddlewares:(NSArray<id<ByteGainMiddleware>> *_Nonnull)middlewares;
 
 @end

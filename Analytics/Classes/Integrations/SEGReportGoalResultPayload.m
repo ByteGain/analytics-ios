@@ -1,9 +1,9 @@
 #import "SEGReportGoalResultPayload.h"
 
-@implementation SEGReportGoalResultPayload
+@implementation ByteGainReportGoalResultPayload
 
 - (instancetype)initWithEvent:(NSString *)event
-                       result:(SEGGoalResult) result
+                       result:(ByteGainGoalResult) result
                       context:(NSDictionary *)context
                  integrations:(NSDictionary *)integrations
 {

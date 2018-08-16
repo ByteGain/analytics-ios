@@ -1,0 +1,1294 @@
+./Analytics.h
+./Classes/SEGAnalyticsConfiguration.h
+./Classes/SEGAnalytics.h
+./Classes/SEGAnalyticsConfiguration.m
+./Classes/SEGAnalytics.m
+./Classes/SEGSerializableValue.h
+./Classes/Crypto/SEGAES256Crypto.m
+./Classes/Crypto/SEGAES256Crypto.h
+./Classes/Crypto/SEGCrypto.h
+./Classes/Middlewares/SEGContext.h
+./Classes/Middlewares/SEGMiddleware.m
+./Classes/Middlewares/SEGContext.m
+./Classes/Middlewares/SEGMiddleware.h
+./Classes/Internal/SEGAnalyticsUtils.h
+./Classes/Internal/SEGUserDefaultsStorage.h
+./Classes/Internal/UIViewController+SEGScreen.h
+./Classes/Internal/SEGSegmentIntegrationFactory.m
+./Classes/Internal/SEGStoreKitTracker.h
+./Classes/Internal/SEGSegmentIntegration.h
+./Classes/Internal/NSData+SEGGZIP.m
+./Classes/Internal/SEGHTTPClient.m
+	Replaced:     NSURL *url = [SEGMENT_API_BASE URLByAppendingPathComponent:@"batch"];
+	With:     NSURL *url = [BYTEGAIN_API_BASE URLByAppendingPathComponent:@"batch"];
+	Replaced:     NSURL *url = [SEGMENT_CDN_BASE URLByAppendingPathComponent:[NSString stringWithFormat:@"/projects/%@/settings", writeKey]];
+	With:     NSURL *url = [BYTEGAIN_CDN_BASE URLByAppendingPathComponent:[NSString stringWithFormat:@"/projects/%@/settings", writeKey]];
+./Classes/Internal/SEGUtils.h
+./Classes/Internal/SEGFileStorage.m
+./Classes/Internal/SEGUserDefaultsStorage.m
+./Classes/Internal/SEGAnalyticsUtils.m
+./Classes/Internal/SEGSegmentIntegrationFactory.h
+./Classes/Internal/UIViewController+SEGScreen.m
+./Classes/Internal/SEGStorage.h
+./Classes/Internal/NSData+SEGGZIP.h
+./Classes/Internal/SEGSegmentIntegration.m
+	Replaced:         self.apiURL = [SEGMENT_API_BASE URLByAppendingPathComponent:@"import"];
+	With:         self.apiURL = [BYTEGAIN_API_BASE URLByAppendingPathComponent:@"import"];
+./Classes/Internal/SEGStoreKitTracker.m
+./Classes/Internal/SEGFileStorage.h
+./Classes/Internal/SEGUtils.m
+./Classes/Internal/SEGHTTPClient.h
+	Replaced: //#define SEGMENT_API_BASE [NSURL URLWithString:@"https://api-segment-io-5fsaj1xnikhp.runscope.net/v1"]
+	With: //#define BYTEGAIN_API_BASE [NSURL URLWithString:@"https://api-segment-io-5fsaj1xnikhp.runscope.net/v1"]
+	Replaced: //#define SEGMENT_CDN_BASE [NSURL URLWithString:@"https://cdn-segment-com-5fsaj1xnikhp.runscope.net/v1"]
+	With: //#define BYTEGAIN_CDN_BASE [NSURL URLWithString:@"https://cdn-segment-com-5fsaj1xnikhp.runscope.net/v1"]
+	Replaced: #  define SEGMENT_API_BASE [NSURL URLWithString:@"http://localhost:5001/v1"]
+	With: #  define BYTEGAIN_API_BASE [NSURL URLWithString:@"http://localhost:5001/v1"]
+	Replaced: #  define SEGMENT_API_BASE [NSURL URLWithString:@"https://js.bytegain.com/v1"]
+	With: #  define BYTEGAIN_API_BASE [NSURL URLWithString:@"https://js.bytegain.com/v1"]
+	Replaced: #define SEGMENT_CDN_BASE [NSURL URLWithString:@"https://cdn-settings.segment.com/v1"]
+	With: #define BYTEGAIN_CDN_BASE [NSURL URLWithString:@"https://cdn-settings.segment.com/v1"]
+./Classes/Integrations/SEGGroupPayload.h
+./Classes/Integrations/SEGIntegrationsManager.h
+./Classes/Integrations/SEGTrackPayload.m
+./Classes/Integrations/SEGIntegrationFactory.h
+./Classes/Integrations/SEGAttemptGoalPayload.m
+./Classes/Integrations/SEGReportGoalResultPayload.h
+./Classes/Integrations/SEGAliasPayload.m
+./Classes/Integrations/SEGIdentifyPayload.m
+./Classes/Integrations/SEGPayload.h
+./Classes/Integrations/SEGScreenPayload.h
+./Classes/Integrations/SEGReportGoalResultPayload.m
+./Classes/Integrations/SEGAttemptGoalPayload.h
+./Classes/Integrations/SEGIntegration.h
+./Classes/Integrations/SEGTrackPayload.h
+./Classes/Integrations/SEGIntegrationsManager.m
+./Classes/Integrations/SEGGroupPayload.m
+./Classes/Integrations/SEGPayload.m
+./Classes/Integrations/SEGIdentifyPayload.h
+./Classes/Integrations/SEGAliasPayload.h
+./Classes/Integrations/SEGScreenPayload.m
+./Vendor/SEGReachability.h
+./Vendor/SEGReachability.m
+./Analytics.h
+./Classes/SEGAnalyticsConfiguration.h
+	Replaced: //  SEGIntegrationsManager.h
+	With: //  ByteGainIntegrationsManager.h
+	Replaced: @protocol SEGApplicationProtocol <NSObject>
+	With: @protocol ByteGainApplicationProtocol <NSObject>
+	Replaced: @interface UIApplication (SEGApplicationProtocol) <SEGApplicationProtocol>
+	With: @interface UIApplication (ByteGainApplicationProtocol) <ByteGainApplicationProtocol>
+	Replaced: typedef NSMutableURLRequest *_Nonnull (^SEGRequestFactory)(NSURL *_Nonnull);
+	With: typedef NSMutableURLRequest *_Nonnull (^ByteGainRequestFactory)(NSURL *_Nonnull);
+	Replaced: @protocol SEGIntegrationFactory;
+	With: @protocol ByteGainIntegrationFactory;
+	Replaced: @protocol SEGCrypto;
+	With: @protocol ByteGainCrypto;
+	Replaced: @protocol SEGMiddleware;
+	With: @protocol ByteGainMiddleware;
+	Replaced: @interface SEGAnalyticsConfiguration : NSObject
+	With: @interface ByteGainAnalyticsConfiguration : NSObject
+	Replaced: @property (nonatomic, strong, nullable) SEGRequestFactory requestFactory;
+	With: @property (nonatomic, strong, nullable) ByteGainRequestFactory requestFactory;
+	Replaced: @property (nonatomic, strong, nullable) id<SEGCrypto> crypto;
+	With: @property (nonatomic, strong, nullable) id<ByteGainCrypto> crypto;
+	Replaced: @property (nonatomic, strong, nullable) NSArray<id<SEGMiddleware>> *middlewares;
+	With: @property (nonatomic, strong, nullable) NSArray<id<ByteGainMiddleware>> *middlewares;
+	Replaced: - (void)use:(id<SEGIntegrationFactory> _Nonnull)factory;
+	With: - (void)use:(id<ByteGainIntegrationFactory> _Nonnull)factory;
+	Replaced: @property (nonatomic, strong, nullable) id<SEGApplicationProtocol> application;
+	With: @property (nonatomic, strong, nullable) id<ByteGainApplicationProtocol> application;
+./Classes/SEGAnalytics.h
+	Replaced: @class SEGAnalyticsConfiguration;
+	With: @class ByteGainAnalyticsConfiguration;
+	Replaced: @interface SEGAnalytics : NSObject
+	With: @interface ByteGainAnalytics : NSObject
+	Replaced: @property (nonatomic, strong, readonly) SEGAnalyticsConfiguration *configuration;
+	With: @property (nonatomic, strong, readonly) ByteGainAnalyticsConfiguration *configuration;
+	Replaced: - (instancetype)initWithConfiguration:(SEGAnalyticsConfiguration *)configuration;
+	With: - (instancetype)initWithConfiguration:(ByteGainAnalyticsConfiguration *)configuration;
+	Replaced: + (void)setupWithConfiguration:(SEGAnalyticsConfiguration *)configuration;
+	With: + (void)setupWithConfiguration:(ByteGainAnalyticsConfiguration *)configuration;
+	Replaced: typedef void(^SEGGoalMakeAttemptCallback)(NSString * _Nullable variation);
+	With: typedef void(^ByteGainGoalMakeAttemptCallback)(NSString * _Nullable variation);
+	Replaced: typedef void(^SEGGoalDontMakeAttemptCallback)(void);
+	With: typedef void(^ByteGainGoalDontMakeAttemptCallback)(void);
+	Replaced:     makeAttemptCallback:(SEGGoalMakeAttemptCallback)yesCallback
+	With:     makeAttemptCallback:(ByteGainGoalMakeAttemptCallback)yesCallback
+	Replaced: dontMakeAttemptCallback:(SEGGoalDontMakeAttemptCallback)noCallback
+	With: dontMakeAttemptCallback:(ByteGainGoalDontMakeAttemptCallback)noCallback
+	Replaced: - (void)attemptGoal:(NSString *)goalName makeAttemptCallback:(SEGGoalMakeAttemptCallback)makeAttemptCallback dontMakeAttemptCallback:(SEGGoalDontMakeAttemptCallback)dontMakeAttemptCallback;
+	With: - (void)attemptGoal:(NSString *)goalName makeAttemptCallback:(ByteGainGoalMakeAttemptCallback)makeAttemptCallback dontMakeAttemptCallback:(ByteGainGoalDontMakeAttemptCallback)dontMakeAttemptCallback;
+	Replaced: - (void)attemptGoal:(NSString *)goalName makeAttemptCallback:(SEGGoalMakeAttemptCallback)makeAttemptCallback;
+	With: - (void)attemptGoal:(NSString *)goalName makeAttemptCallback:(ByteGainGoalMakeAttemptCallback)makeAttemptCallback;
+	Replaced: - (void)reportGoalResult:(NSString*)goalName result:(SEGGoalResult)result options:(SERIALIZABLE_DICT _Nullable)options;
+	With: - (void)reportGoalResult:(NSString*)goalName result:(ByteGainGoalResult)result options:(SERIALIZABLE_DICT _Nullable)options;
+	Replaced: - (void)reportGoalResult:(NSString*)goalName result:(SEGGoalResult)result;
+	With: - (void)reportGoalResult:(NSString*)goalName result:(ByteGainGoalResult)result;
+	Replaced: - (SEGAnalyticsConfiguration *)configuration;
+	With: - (ByteGainAnalyticsConfiguration *)configuration;
+./Classes/SEGAnalyticsConfiguration.m
+	Replaced: //  SEGIntegrationsManager.h
+	With: //  ByteGainIntegrationsManager.h
+	Replaced: @implementation UIApplication (SEGApplicationProtocol)
+	With: @implementation UIApplication (ByteGainApplicationProtocol)
+	Replaced: @interface SEGAnalyticsConfiguration ()
+	With: @interface ByteGainAnalyticsConfiguration ()
+	Replaced: @implementation SEGAnalyticsConfiguration
+	With: @implementation ByteGainAnalyticsConfiguration
+	Replaced:     return [[SEGAnalyticsConfiguration alloc] initWithWriteKey:writeKey];
+	With:     return [[ByteGainAnalyticsConfiguration alloc] initWithWriteKey:writeKey];
+	Replaced: - (void)use:(id<SEGIntegrationFactory>)factory
+	With: - (void)use:(id<ByteGainIntegrationFactory>)factory
+./Classes/SEGAnalytics.m
+	Replaced: static SEGAnalytics *__sharedInstance = nil;
+	With: static ByteGainAnalytics *__sharedInstance = nil;
+	Replaced: @interface SEGAnalytics ()
+	With: @interface ByteGainAnalytics ()
+	Replaced: @property (nonatomic, strong) SEGAnalyticsConfiguration *configuration;
+	With: @property (nonatomic, strong) ByteGainAnalyticsConfiguration *configuration;
+	Replaced: @property (nonatomic, strong) SEGStoreKitTracker *storeKitTracker;
+	With: @property (nonatomic, strong) ByteGainStoreKitTracker *storeKitTracker;
+	Replaced: @property (nonatomic, strong) SEGIntegrationsManager *integrationsManager;
+	With: @property (nonatomic, strong) ByteGainIntegrationsManager *integrationsManager;
+	Replaced: @property (nonatomic, strong) SEGMiddlewareRunner *runner;
+	With: @property (nonatomic, strong) ByteGainMiddlewareRunner *runner;
+	Replaced: @implementation SEGAnalytics
+	With: @implementation ByteGainAnalytics
+	Replaced: + (void)setupWithConfiguration:(SEGAnalyticsConfiguration *)configuration
+	With: + (void)setupWithConfiguration:(ByteGainAnalyticsConfiguration *)configuration
+	Replaced: - (instancetype)initWithConfiguration:(SEGAnalyticsConfiguration *)configuration
+	With: - (instancetype)initWithConfiguration:(ByteGainAnalyticsConfiguration *)configuration
+	Replaced:         self.integrationsManager = [[SEGIntegrationsManager alloc] initWithAnalytics:self];
+	With:         self.integrationsManager = [[ByteGainIntegrationsManager alloc] initWithAnalytics:self];
+	Replaced:         self.runner = [[SEGMiddlewareRunner alloc] initWithMiddlewares:
+	With:         self.runner = [[ByteGainMiddlewareRunner alloc] initWithMiddlewares:
+	Replaced:         id<SEGApplicationProtocol> application = configuration.application;
+	With:         id<ByteGainApplicationProtocol> application = configuration.application;
+	Replaced:             _storeKitTracker = [SEGStoreKitTracker trackTransactionsForAnalytics:self];
+	With:             _storeKitTracker = [ByteGainStoreKitTracker trackTransactionsForAnalytics:self];
+	Replaced: NSString *const SEGVersionKey = @"SEGVersionKey";
+	With: NSString *const ByteGainVersionKey = @"ByteGainVersionKey";
+	Replaced: NSString *const SEGBuildKeyV1 = @"SEGBuildKey";
+	With: NSString *const ByteGainBuildKeyV1 = @"ByteGainBuildKey";
+	Replaced: NSString *const SEGBuildKeyV2 = @"SEGBuildKeyV2";
+	With: NSString *const ByteGainBuildKeyV2 = @"ByteGainBuildKeyV2";
+	Replaced:     SEGApplicationLifecyclePayload *payload = [[SEGApplicationLifecyclePayload alloc] init];
+	With:     ByteGainApplicationLifecyclePayload *payload = [[ByteGainApplicationLifecyclePayload alloc] init];
+	Replaced:     [self run:SEGEventTypeApplicationLifecycle payload:payload];
+	With:     [self run:ByteGainEventTypeApplicationLifecycle payload:payload];
+	Replaced:     // Previously SEGBuildKey was stored an integer. This was incorrect because the CFBundleVersion
+	With:     // Previously ByteGainBuildKey was stored an integer. This was incorrect because the CFBundleVersion
+	Replaced:     // can be a string. This migrates SEGBuildKey to be stored as a string.
+	With:     // can be a string. This migrates ByteGainBuildKey to be stored as a string.
+	Replaced:     NSInteger previousBuildV1 = [[NSUserDefaults standardUserDefaults] integerForKey:SEGBuildKeyV1];
+	With:     NSInteger previousBuildV1 = [[NSUserDefaults standardUserDefaults] integerForKey:ByteGainBuildKeyV1];
+	Replaced:         [[NSUserDefaults standardUserDefaults] setObject:[@(previousBuildV1) stringValue] forKey:SEGBuildKeyV2];
+	With:         [[NSUserDefaults standardUserDefaults] setObject:[@(previousBuildV1) stringValue] forKey:ByteGainBuildKeyV2];
+	Replaced:         [[NSUserDefaults standardUserDefaults] removeObjectForKey:SEGBuildKeyV1];
+	With:         [[NSUserDefaults standardUserDefaults] removeObjectForKey:ByteGainBuildKeyV1];
+	Replaced:     NSString *previousVersion = [[NSUserDefaults standardUserDefaults] stringForKey:SEGVersionKey];
+	With:     NSString *previousVersion = [[NSUserDefaults standardUserDefaults] stringForKey:ByteGainVersionKey];
+	Replaced:     NSString *previousBuildV2 = [[NSUserDefaults standardUserDefaults] stringForKey:SEGBuildKeyV2];
+	With:     NSString *previousBuildV2 = [[NSUserDefaults standardUserDefaults] stringForKey:ByteGainBuildKeyV2];
+	Replaced:     [[NSUserDefaults standardUserDefaults] setObject:currentVersion forKey:SEGVersionKey];
+	With:     [[NSUserDefaults standardUserDefaults] setObject:currentVersion forKey:ByteGainVersionKey];
+	Replaced:     [[NSUserDefaults standardUserDefaults] setObject:currentBuild forKey:SEGBuildKeyV2];
+	With:     [[NSUserDefaults standardUserDefaults] setObject:currentBuild forKey:ByteGainBuildKeyV2];
+	Replaced:     [self run:SEGEventTypeIdentify payload:
+	With:     [self run:ByteGainEventTypeIdentify payload:
+	Replaced:                                        [[SEGIdentifyPayload alloc] initWithUserId:userId
+	With:                                        [[ByteGainIdentifyPayload alloc] initWithUserId:userId
+	Replaced:                                                                            traits:SEGCoerceDictionary(traits)
+	With:                                                                            traits:ByteGainCoerceDictionary(traits)
+	Replaced:                                                                           context:SEGCoerceDictionary([options objectForKey:@"context"])
+	With:                                                                           context:ByteGainCoerceDictionary([options objectForKey:@"context"])
+	Replaced:     [self run:SEGEventTypeTrack payload:
+	With:     [self run:ByteGainEventTypeTrack payload:
+	Replaced:                                     [[SEGTrackPayload alloc] initWithEvent:event
+	With:                                     [[ByteGainTrackPayload alloc] initWithEvent:event
+	Replaced:                                                                 properties:SEGCoerceDictionary(properties)
+	With:                                                                 properties:ByteGainCoerceDictionary(properties)
+	Replaced:                                                                    context:SEGCoerceDictionary([options objectForKey:@"context"])
+	With:                                                                    context:ByteGainCoerceDictionary([options objectForKey:@"context"])
+	Replaced:     [self run:SEGEventTypeScreen payload:
+	With:     [self run:ByteGainEventTypeScreen payload:
+	Replaced:                                      [[SEGScreenPayload alloc] initWithName:screenTitle
+	With:                                      [[ByteGainScreenPayload alloc] initWithName:screenTitle
+	Replaced:                                                                  properties:SEGCoerceDictionary(properties)
+	With:                                                                  properties:ByteGainCoerceDictionary(properties)
+	Replaced:                                                                     context:SEGCoerceDictionary([options objectForKey:@"context"])
+	With:                                                                     context:ByteGainCoerceDictionary([options objectForKey:@"context"])
+	Replaced:     makeAttemptCallback:(nonnull SEGGoalMakeAttemptCallback)makeAttemptCallback
+	With:     makeAttemptCallback:(nonnull ByteGainGoalMakeAttemptCallback)makeAttemptCallback
+	Replaced: dontMakeAttemptCallback:(nonnull SEGGoalDontMakeAttemptCallback)dontMakeAttemptCallback
+	With: dontMakeAttemptCallback:(nonnull ByteGainGoalDontMakeAttemptCallback)dontMakeAttemptCallback
+	Replaced:     [self run:SEGEventTypeAttemptGoal payload:
+	With:     [self run:ByteGainEventTypeAttemptGoal payload:
+	Replaced:                                       [[SEGAttemptGoalPayload alloc] initWithEvent:goalName
+	With:                                       [[ByteGainAttemptGoalPayload alloc] initWithEvent:goalName
+	Replaced:                                                                            context:SEGCoerceDictionary([options objectForKey:@"context"])
+	With:                                                                            context:ByteGainCoerceDictionary([options objectForKey:@"context"])
+	Replaced:     makeAttemptCallback:(SEGGoalMakeAttemptCallback)makeAttemptCallback
+	With:     makeAttemptCallback:(ByteGainGoalMakeAttemptCallback)makeAttemptCallback
+	Replaced: dontMakeAttemptCallback:(SEGGoalDontMakeAttemptCallback)dontMakeAttemptCallback
+	With: dontMakeAttemptCallback:(ByteGainGoalDontMakeAttemptCallback)dontMakeAttemptCallback
+	Replaced: - (void)    attemptGoal:(NSString *)goalName makeAttemptCallback:(SEGGoalMakeAttemptCallback)makeAttemptCallback
+	With: - (void)    attemptGoal:(NSString *)goalName makeAttemptCallback:(ByteGainGoalMakeAttemptCallback)makeAttemptCallback
+	Replaced: - (void)reportGoalResult:(NSString*)goalName result:(SEGGoalResult)result options:(NSDictionary *)options
+	With: - (void)reportGoalResult:(NSString*)goalName result:(ByteGainGoalResult)result options:(NSDictionary *)options
+	Replaced:     [self run:SEGEventTypeReportGoalResult payload:[[SEGReportGoalResultPayload alloc] initWithEvent:goalName
+	With:     [self run:ByteGainEventTypeReportGoalResult payload:[[ByteGainReportGoalResultPayload alloc] initWithEvent:goalName
+	Replaced:                                                                                              context:SEGCoerceDictionary(SEGCoerceDictionary([options objectForKey:@"context"]))
+	With:                                                                                              context:ByteGainCoerceDictionary(ByteGainCoerceDictionary([options objectForKey:@"context"]))
+	Replaced: - (void)reportGoalResult:(NSString*)goalName result:(SEGGoalResult)result
+	With: - (void)reportGoalResult:(NSString*)goalName result:(ByteGainGoalResult)result
+	Replaced:     [self run:SEGEventTypeGroup payload:
+	With:     [self run:ByteGainEventTypeGroup payload:
+	Replaced:                                     [[SEGGroupPayload alloc] initWithGroupId:groupId
+	With:                                     [[ByteGainGroupPayload alloc] initWithGroupId:groupId
+	Replaced:                                                                       traits:SEGCoerceDictionary(traits)
+	With:                                                                       traits:ByteGainCoerceDictionary(traits)
+	Replaced:                                                                      context:SEGCoerceDictionary([options objectForKey:@"context"])
+	With:                                                                      context:ByteGainCoerceDictionary([options objectForKey:@"context"])
+	Replaced:     [self run:SEGEventTypeAlias payload:
+	With:     [self run:ByteGainEventTypeAlias payload:
+	Replaced:                                     [[SEGAliasPayload alloc] initWithNewId:newId
+	With:                                     [[ByteGainAliasPayload alloc] initWithNewId:newId
+	Replaced:                                                                    context:SEGCoerceDictionary([options objectForKey:@"context"])
+	With:                                                                    context:ByteGainCoerceDictionary([options objectForKey:@"context"])
+	Replaced:     SEGRemoteNotificationPayload *payload = [[SEGRemoteNotificationPayload alloc] init];
+	With:     ByteGainRemoteNotificationPayload *payload = [[ByteGainRemoteNotificationPayload alloc] init];
+	Replaced:     [self run:SEGEventTypeReceivedRemoteNotification payload:payload];
+	With:     [self run:ByteGainEventTypeReceivedRemoteNotification payload:payload];
+	Replaced:     SEGRemoteNotificationPayload *payload = [[SEGRemoteNotificationPayload alloc] init];
+	With:     ByteGainRemoteNotificationPayload *payload = [[ByteGainRemoteNotificationPayload alloc] init];
+	Replaced:     [self run:SEGEventTypeFailedToRegisterForRemoteNotifications payload:payload];
+	With:     [self run:ByteGainEventTypeFailedToRegisterForRemoteNotifications payload:payload];
+	Replaced:     SEGRemoteNotificationPayload *payload = [[SEGRemoteNotificationPayload alloc] init];
+	With:     ByteGainRemoteNotificationPayload *payload = [[ByteGainRemoteNotificationPayload alloc] init];
+	Replaced:     [self run:SEGEventTypeRegisteredForRemoteNotifications payload:payload];
+	With:     [self run:ByteGainEventTypeRegisteredForRemoteNotifications payload:payload];
+	Replaced:     SEGRemoteNotificationPayload *payload = [[SEGRemoteNotificationPayload alloc] init];
+	With:     ByteGainRemoteNotificationPayload *payload = [[ByteGainRemoteNotificationPayload alloc] init];
+	Replaced:     [self run:SEGEventTypeHandleActionWithForRemoteNotification payload:payload];
+	With:     [self run:ByteGainEventTypeHandleActionWithForRemoteNotification payload:payload];
+	Replaced:     SEGContinueUserActivityPayload *payload = [[SEGContinueUserActivityPayload alloc] init];
+	With:     ByteGainContinueUserActivityPayload *payload = [[ByteGainContinueUserActivityPayload alloc] init];
+	Replaced:     [self run:SEGEventTypeContinueUserActivity payload:payload];
+	With:     [self run:ByteGainEventTypeContinueUserActivity payload:payload];
+	Replaced:     SEGOpenURLPayload *payload = [[SEGOpenURLPayload alloc] init];
+	With:     ByteGainOpenURLPayload *payload = [[ByteGainOpenURLPayload alloc] init];
+	Replaced:     [self run:SEGEventTypeOpenURL payload:payload];
+	With:     [self run:ByteGainEventTypeOpenURL payload:payload];
+	Replaced:     [self run:SEGEventTypeReset payload:nil];
+	With:     [self run:ByteGainEventTypeReset payload:nil];
+	Replaced:     [self run:SEGEventTypeFlush payload:nil];
+	With:     [self run:ByteGainEventTypeFlush payload:nil];
+	Replaced:     SEGSetShowDebugLogs(showDebugLogs);
+	With:     ByteGainSetShowDebugLogs(showDebugLogs);
+	Replaced: - (void)run:(SEGEventType)eventType payload:(SEGPayload *)payload
+	With: - (void)run:(ByteGainEventType)eventType payload:(ByteGainPayload *)payload
+	Replaced:     SEGContext *context = [[[SEGContext alloc] initWithAnalytics:self] modify:^(id<SEGMutableContext> _Nonnull ctx) {
+	With:     ByteGainContext *context = [[[ByteGainContext alloc] initWithAnalytics:self] modify:^(id<ByteGainMutableContext> _Nonnull ctx) {
+./Classes/SEGSerializableValue.h
+	Replaced: //  SEGSerializableValue.h
+	With: //  ByteGainSerializableValue.h
+./Classes/Crypto/SEGAES256Crypto.m
+	Replaced: //  SEGAES256Crypto.m
+	With: //  ByteGainAES256Crypto.m
+	Replaced: @implementation SEGAES256Crypto
+	With: @implementation ByteGainAES256Crypto
+	Replaced:     NSData *iv = [SEGAES256Crypto randomDataOfLength:kAlgorithmIVSize];
+	With:     NSData *iv = [ByteGainAES256Crypto randomDataOfLength:kAlgorithmIVSize];
+	Replaced:     NSData *salt = [SEGAES256Crypto randomDataOfLength:kPBKDFSaltSize];
+	With:     NSData *salt = [ByteGainAES256Crypto randomDataOfLength:kPBKDFSaltSize];
+	Replaced:         SEGLog(@"Unable to encrypt data", error);
+	With:         ByteGainLog(@"Unable to encrypt data", error);
+	Replaced:         SEGLog(@"Unable to decrypt data", error);
+	With:         ByteGainLog(@"Unable to decrypt data", error);
+	Replaced:         SEGLog(@"Unable to generate random bytes: %d", result);
+	With:         ByteGainLog(@"Unable to generate random bytes: %d", result);
+	Replaced:         SEGLog(@"Unable to create AES key for password: %d", result);
+	With:         ByteGainLog(@"Unable to create AES key for password: %d", result);
+./Classes/Crypto/SEGAES256Crypto.h
+	Replaced: //  SEGAES256Crypto.h
+	With: //  ByteGainAES256Crypto.h
+	Replaced: @interface SEGAES256Crypto : NSObject <SEGCrypto>
+	With: @interface ByteGainAES256Crypto : NSObject <ByteGainCrypto>
+./Classes/Crypto/SEGCrypto.h
+	Replaced: //  SEGCrypto.h
+	With: //  ByteGainCrypto.h
+	Replaced: @protocol SEGCrypto <NSObject>
+	With: @protocol ByteGainCrypto <NSObject>
+./Classes/Middlewares/SEGContext.h
+	Replaced: //  SEGContext.h
+	With: //  ByteGainContext.h
+	Replaced: typedef NS_ENUM(NSInteger, SEGEventType) {
+	With: typedef NS_ENUM(NSInteger, ByteGainEventType) {
+	Replaced:     SEGEventTypeUndefined,
+	With:     ByteGainEventTypeUndefined,
+	Replaced:     SEGEventTypeIdentify,
+	With:     ByteGainEventTypeIdentify,
+	Replaced:     SEGEventTypeTrack,
+	With:     ByteGainEventTypeTrack,
+	Replaced:     SEGEventTypeScreen,
+	With:     ByteGainEventTypeScreen,
+	Replaced:     SEGEventTypeGroup,
+	With:     ByteGainEventTypeGroup,
+	Replaced:     SEGEventTypeAlias,
+	With:     ByteGainEventTypeAlias,
+	Replaced:     SEGEventTypeReset,
+	With:     ByteGainEventTypeReset,
+	Replaced:     SEGEventTypeFlush,
+	With:     ByteGainEventTypeFlush,
+	Replaced:     SEGEventTypeReceivedRemoteNotification,
+	With:     ByteGainEventTypeReceivedRemoteNotification,
+	Replaced:     SEGEventTypeFailedToRegisterForRemoteNotifications,
+	With:     ByteGainEventTypeFailedToRegisterForRemoteNotifications,
+	Replaced:     SEGEventTypeRegisteredForRemoteNotifications,
+	With:     ByteGainEventTypeRegisteredForRemoteNotifications,
+	Replaced:     SEGEventTypeHandleActionWithForRemoteNotification,
+	With:     ByteGainEventTypeHandleActionWithForRemoteNotification,
+	Replaced:     SEGEventTypeApplicationLifecycle,
+	With:     ByteGainEventTypeApplicationLifecycle,
+	Replaced:     //    SEGEventTypeApplicationDidEnterBackground,
+	With:     //    ByteGainEventTypeApplicationDidEnterBackground,
+	Replaced:     //    SEGEventTypeApplicationWillEnterForeground,
+	With:     //    ByteGainEventTypeApplicationWillEnterForeground,
+	Replaced:     //    SEGEventTypeApplicationWillTerminate,
+	With:     //    ByteGainEventTypeApplicationWillTerminate,
+	Replaced:     //    SEGEventTypeApplicationWillResignActive,
+	With:     //    ByteGainEventTypeApplicationWillResignActive,
+	Replaced:     //    SEGEventTypeApplicationDidBecomeActive,
+	With:     //    ByteGainEventTypeApplicationDidBecomeActive,
+	Replaced:     SEGEventTypeContinueUserActivity,
+	With:     ByteGainEventTypeContinueUserActivity,
+	Replaced:     SEGEventTypeOpenURL,
+	With:     ByteGainEventTypeOpenURL,
+	Replaced:     SEGEventTypeAttemptGoal,
+	With:     ByteGainEventTypeAttemptGoal,
+	Replaced:     SEGEventTypeReportGoalResult,
+	With:     ByteGainEventTypeReportGoalResult,
+	Replaced: @class SEGAnalytics;
+	With: @class ByteGainAnalytics;
+	Replaced: @protocol SEGMutableContext;
+	With: @protocol ByteGainMutableContext;
+	Replaced: @interface SEGContext : NSObject <NSCopying>
+	With: @interface ByteGainContext : NSObject <NSCopying>
+	Replaced: // Loopback reference to the top level SEGAnalytics object.
+	With: // Loopback reference to the top level ByteGainAnalytics object.
+	Replaced: @property (nonatomic, readonly, nonnull) SEGAnalytics *_analytics;
+	With: @property (nonatomic, readonly, nonnull) ByteGainAnalytics *_analytics;
+	Replaced: @property (nonatomic, readonly) SEGEventType eventType;
+	With: @property (nonatomic, readonly) ByteGainEventType eventType;
+	Replaced: @property (nonatomic, readonly, nullable) SEGPayload *payload;
+	With: @property (nonatomic, readonly, nullable) ByteGainPayload *payload;
+	Replaced: - (instancetype _Nonnull)initWithAnalytics:(SEGAnalytics *_Nonnull)analytics;
+	With: - (instancetype _Nonnull)initWithAnalytics:(ByteGainAnalytics *_Nonnull)analytics;
+	Replaced: - (SEGContext *_Nonnull)modify:(void (^_Nonnull)(id<SEGMutableContext> _Nonnull ctx))modify;
+	With: - (ByteGainContext *_Nonnull)modify:(void (^_Nonnull)(id<ByteGainMutableContext> _Nonnull ctx))modify;
+	Replaced: @protocol SEGMutableContext <NSObject>
+	With: @protocol ByteGainMutableContext <NSObject>
+	Replaced: @property (nonatomic) SEGEventType eventType;
+	With: @property (nonatomic) ByteGainEventType eventType;
+	Replaced: @property (nonatomic, nullable) SEGPayload *payload;
+	With: @property (nonatomic, nullable) ByteGainPayload *payload;
+./Classes/Middlewares/SEGMiddleware.m
+	Replaced: //  SEGMiddleware.m
+	With: //  ByteGainMiddleware.m
+	Replaced: @implementation SEGBlockMiddleware
+	With: @implementation ByteGainBlockMiddleware
+	Replaced: - (instancetype)initWithBlock:(SEGMiddlewareBlock)block
+	With: - (instancetype)initWithBlock:(ByteGainMiddlewareBlock)block
+	Replaced: - (void)context:(SEGContext *)context next:(SEGMiddlewareNext)next
+	With: - (void)context:(ByteGainContext *)context next:(ByteGainMiddlewareNext)next
+	Replaced: @implementation SEGMiddlewareRunner
+	With: @implementation ByteGainMiddlewareRunner
+	Replaced: - (instancetype)initWithMiddlewares:(NSArray<id<SEGMiddleware>> *_Nonnull)middlewares
+	With: - (instancetype)initWithMiddlewares:(NSArray<id<ByteGainMiddleware>> *_Nonnull)middlewares
+	Replaced: - (void)run:(SEGContext *_Nonnull)context callback:(RunMiddlewaresCallback _Nullable)callback
+	With: - (void)run:(ByteGainContext *_Nonnull)context callback:(RunMiddlewaresCallback _Nullable)callback
+	Replaced: // TODO: Maybe rename SEGContext to SEGEvent to be a bit more clear?
+	With: // TODO: Maybe rename ByteGainContext to ByteGainEvent to be a bit more clear?
+	Replaced: - (void)runMiddlewares:(NSArray<id<SEGMiddleware>> *_Nonnull)middlewares
+	With: - (void)runMiddlewares:(NSArray<id<ByteGainMiddleware>> *_Nonnull)middlewares
+	Replaced:                context:(SEGContext *_Nonnull)context
+	With:                context:(ByteGainContext *_Nonnull)context
+	Replaced:     [middlewares[0] context:context next:^(SEGContext *_Nullable newContext) {
+	With:     [middlewares[0] context:context next:^(ByteGainContext *_Nullable newContext) {
+./Classes/Middlewares/SEGContext.m
+	Replaced: //  SEGContext.m
+	With: //  ByteGainContext.m
+	Replaced: @interface SEGContext () <SEGMutableContext>
+	With: @interface ByteGainContext () <ByteGainMutableContext>
+	Replaced: @property (nonatomic) SEGEventType eventType;
+	With: @property (nonatomic) ByteGainEventType eventType;
+	Replaced: @property (nonatomic, nullable) SEGPayload *payload;
+	With: @property (nonatomic, nullable) ByteGainPayload *payload;
+	Replaced: @implementation SEGContext
+	With: @implementation ByteGainContext
+	Replaced: - (instancetype)initWithAnalytics:(SEGAnalytics *)analytics
+	With: - (instancetype)initWithAnalytics:(ByteGainAnalytics *)analytics
+	Replaced: - (SEGContext *_Nonnull)modify:(void (^_Nonnull)(id<SEGMutableContext> _Nonnull ctx))modify
+	With: - (ByteGainContext *_Nonnull)modify:(void (^_Nonnull)(id<ByteGainMutableContext> _Nonnull ctx))modify
+	Replaced:     // We're also being a bit clever here by implementing SEGContext actually as a mutable
+	With:     // We're also being a bit clever here by implementing ByteGainContext actually as a mutable
+	Replaced:     SEGContext *context = self.debug ? [self copy] : self;
+	With:     ByteGainContext *context = self.debug ? [self copy] : self;
+	Replaced:     SEGContext *ctx = [[SEGContext allocWithZone:zone] initWithAnalytics:self._analytics];
+	With:     ByteGainContext *ctx = [[ByteGainContext allocWithZone:zone] initWithAnalytics:self._analytics];
+./Classes/Middlewares/SEGMiddleware.h
+	Replaced: //  SEGMiddleware.h
+	With: //  ByteGainMiddleware.h
+	Replaced: typedef void (^SEGMiddlewareNext)(SEGContext *_Nullable newContext);
+	With: typedef void (^ByteGainMiddlewareNext)(ByteGainContext *_Nullable newContext);
+	Replaced: @protocol SEGMiddleware
+	With: @protocol ByteGainMiddleware
+	Replaced: - (void)context:(SEGContext *_Nonnull)context next:(SEGMiddlewareNext _Nonnull)next;
+	With: - (void)context:(ByteGainContext *_Nonnull)context next:(ByteGainMiddlewareNext _Nonnull)next;
+	Replaced: typedef void (^SEGMiddlewareBlock)(SEGContext *_Nonnull context, SEGMiddlewareNext _Nonnull next);
+	With: typedef void (^ByteGainMiddlewareBlock)(ByteGainContext *_Nonnull context, ByteGainMiddlewareNext _Nonnull next);
+	Replaced: @interface SEGBlockMiddleware : NSObject <SEGMiddleware>
+	With: @interface ByteGainBlockMiddleware : NSObject <ByteGainMiddleware>
+	Replaced: @property (nonnull, nonatomic, readonly) SEGMiddlewareBlock block;
+	With: @property (nonnull, nonatomic, readonly) ByteGainMiddlewareBlock block;
+	Replaced: - (instancetype _Nonnull)initWithBlock:(SEGMiddlewareBlock _Nonnull)block;
+	With: - (instancetype _Nonnull)initWithBlock:(ByteGainMiddlewareBlock _Nonnull)block;
+	Replaced: typedef void (^RunMiddlewaresCallback)(BOOL earlyExit, NSArray<id<SEGMiddleware>> *_Nonnull remainingMiddlewares);
+	With: typedef void (^RunMiddlewaresCallback)(BOOL earlyExit, NSArray<id<ByteGainMiddleware>> *_Nonnull remainingMiddlewares);
+	Replaced: // XXX TODO: Add some tests for SEGMiddlewareRunner
+	With: // XXX TODO: Add some tests for ByteGainMiddlewareRunner
+	Replaced: @interface SEGMiddlewareRunner : NSObject
+	With: @interface ByteGainMiddlewareRunner : NSObject
+	Replaced: @property (nonnull, nonatomic, readonly) NSArray<id<SEGMiddleware>> *middlewares;
+	With: @property (nonnull, nonatomic, readonly) NSArray<id<ByteGainMiddleware>> *middlewares;
+	Replaced: - (void)run:(SEGContext *_Nonnull)context callback:(RunMiddlewaresCallback _Nullable)callback;
+	With: - (void)run:(ByteGainContext *_Nonnull)context callback:(RunMiddlewaresCallback _Nullable)callback;
+	Replaced: - (instancetype _Nonnull)initWithMiddlewares:(NSArray<id<SEGMiddleware>> *_Nonnull)middlewares;
+	With: - (instancetype _Nonnull)initWithMiddlewares:(NSArray<id<ByteGainMiddleware>> *_Nonnull)middlewares;
+./Classes/Internal/SEGAnalyticsUtils.h
+	Replaced: void SEGSetShowDebugLogs(BOOL showDebugLogs);
+	With: void ByteGainSetShowDebugLogs(BOOL showDebugLogs);
+	Replaced: void SEGLog(NSString *format, ...);
+	With: void ByteGainLog(NSString *format, ...);
+	Replaced: JSON_DICT SEGCoerceDictionary(NSDictionary *_Nullable dict);
+	With: JSON_DICT ByteGainCoerceDictionary(NSDictionary *_Nullable dict);
+	Replaced: NSString *_Nullable SEGIDFA(void);
+	With: NSString *_Nullable ByteGainIDFA(void);
+	Replaced: NSString *SEGEventNameForScreenTitle(NSString *title);
+	With: NSString *ByteGainEventNameForScreenTitle(NSString *title);
+./Classes/Internal/SEGUserDefaultsStorage.h
+	Replaced: //  SEGUserDefaultsStorage.h
+	With: //  ByteGainUserDefaultsStorage.h
+	Replaced: @interface SEGUserDefaultsStorage : NSObject <SEGStorage>
+	With: @interface ByteGainUserDefaultsStorage : NSObject <ByteGainStorage>
+	Replaced: @property (nonatomic, strong, nullable) id<SEGCrypto> crypto;
+	With: @property (nonatomic, strong, nullable) id<ByteGainCrypto> crypto;
+	Replaced: - (instancetype _Nonnull)initWithDefaults:(NSUserDefaults *_Nonnull)defaults namespacePrefix:(NSString *_Nullable)namespacePrefix crypto:(id<SEGCrypto> _Nullable)crypto;
+	With: - (instancetype _Nonnull)initWithDefaults:(NSUserDefaults *_Nonnull)defaults namespacePrefix:(NSString *_Nullable)namespacePrefix crypto:(id<ByteGainCrypto> _Nullable)crypto;
+./Classes/Internal/UIViewController+SEGScreen.h
+	Replaced: @interface UIViewController (SEGScreen)
+	With: @interface UIViewController (ByteGainScreen)
+./Classes/Internal/SEGSegmentIntegrationFactory.m
+	Replaced: @implementation SEGSegmentIntegrationFactory
+	With: @implementation ByteGainSegmentIntegrationFactory
+	Replaced: - (id)initWithHTTPClient:(SEGHTTPClient *)client storage:(id<SEGStorage>)storage
+	With: - (id)initWithHTTPClient:(ByteGainHTTPClient *)client storage:(id<ByteGainStorage>)storage
+	Replaced: - (id<SEGIntegration>)createWithSettings:(NSDictionary *)settings forAnalytics:(SEGAnalytics *)analytics
+	With: - (id<ByteGainIntegration>)createWithSettings:(NSDictionary *)settings forAnalytics:(ByteGainAnalytics *)analytics
+	Replaced:     return [[SEGSegmentIntegration alloc] initWithAnalytics:analytics httpClient:self.client storage:self.storage];
+	With:     return [[ByteGainSegmentIntegration alloc] initWithAnalytics:analytics httpClient:self.client storage:self.storage];
+./Classes/Internal/SEGStoreKitTracker.h
+	Replaced: @interface SEGStoreKitTracker : NSObject <SKPaymentTransactionObserver, SKProductsRequestDelegate>
+	With: @interface ByteGainStoreKitTracker : NSObject <SKPaymentTransactionObserver, SKProductsRequestDelegate>
+	Replaced: + (instancetype)trackTransactionsForAnalytics:(SEGAnalytics *)analytics;
+	With: + (instancetype)trackTransactionsForAnalytics:(ByteGainAnalytics *)analytics;
+./Classes/Internal/SEGSegmentIntegration.h
+	Replaced: extern NSString *const SEGSegmentDidSendRequestNotification;
+	With: extern NSString *const ByteGainSegmentDidSendRequestNotification;
+	Replaced: extern NSString *const SEGSegmentRequestDidSucceedNotification;
+	With: extern NSString *const ByteGainSegmentRequestDidSucceedNotification;
+	Replaced: extern NSString *const SEGSegmentRequestDidFailNotification;
+	With: extern NSString *const ByteGainSegmentRequestDidFailNotification;
+	Replaced: @interface SEGSegmentIntegration : NSObject <SEGIntegration>
+	With: @interface ByteGainSegmentIntegration : NSObject <ByteGainIntegration>
+	Replaced: - (id)initWithAnalytics:(SEGAnalytics *)analytics httpClient:(SEGHTTPClient *)httpClient storage:(id<SEGStorage>)storage;
+	With: - (id)initWithAnalytics:(ByteGainAnalytics *)analytics httpClient:(ByteGainHTTPClient *)httpClient storage:(id<ByteGainStorage>)storage;
+./Classes/Internal/NSData+SEGGZIP.m
+	Replaced: @implementation NSData (SEG_GZIP)
+	With: @implementation NSData (ByteGain_GZIP)
+./Classes/Internal/SEGHTTPClient.m
+	Replaced: @implementation SEGHTTPClient
+	With: @implementation ByteGainHTTPClient
+	Replaced: - (instancetype)initWithRequestFactory:(SEGRequestFactory)requestFactory
+	With: - (instancetype)initWithRequestFactory:(ByteGainRequestFactory)requestFactory
+	Replaced:             self.requestFactory = [SEGHTTPClient defaultRequestFactory];
+	With:             self.requestFactory = [ByteGainHTTPClient defaultRequestFactory];
+	Replaced:     //    batch = SEGCoerceDictionary(batch);
+	With:     //    batch = ByteGainCoerceDictionary(batch);
+	Replaced:         SEGLog(@"Error serializing JSON for batch upload %@", error);
+	With:         ByteGainLog(@"Error serializing JSON for batch upload %@", error);
+	Replaced:             SEGLog(@"Error uploading request %@.", error);
+	With:             ByteGainLog(@"Error uploading request %@.", error);
+	Replaced:             SEGLog(@"upload response for /v1/batch is nil");
+	With:             ByteGainLog(@"upload response for /v1/batch is nil");
+	Replaced:                 SEGLog(@"Error deserializing response body %@.", jsonError);
+	With:                 ByteGainLog(@"Error deserializing response body %@.", jsonError);
+	Replaced:             SEGLog(@"Server responded with unexpected HTTP code %d.", code);
+	With:             ByteGainLog(@"Server responded with unexpected HTTP code %d.", code);
+	Replaced:             SEGLog(@"Server rejected payload with HTTP code %d.", code);
+	With:             ByteGainLog(@"Server rejected payload with HTTP code %d.", code);
+	Replaced:         SEGLog(@"Server error with HTTP code %d.", code);
+	With:         ByteGainLog(@"Server error with HTTP code %d.", code);
+	Replaced:             SEGLog(@"Error fetching settings %@.", error);
+	With:             ByteGainLog(@"Error fetching settings %@.", error);
+	Replaced:             SEGLog(@"Server responded with unexpected HTTP code %d.", code);
+	With:             ByteGainLog(@"Server responded with unexpected HTTP code %d.", code);
+	Replaced:             SEGLog(@"Error deserializing response body %@.", jsonError);
+	With:             ByteGainLog(@"Error deserializing response body %@.", jsonError);
+	Replaced:         SEGLog(@"Error serializing context to JSON %@", error);
+	With:         ByteGainLog(@"Error serializing context to JSON %@", error);
+	Replaced:             SEGLog(@"Error making request %@.", error);
+	With:             ByteGainLog(@"Error making request %@.", error);
+	Replaced:             SEGLog(@"Server responded with unexpected HTTP code %d.", code);
+	With:             ByteGainLog(@"Server responded with unexpected HTTP code %d.", code);
+	Replaced:             SEGLog(@"Error deserializing response body %@.", jsonError);
+	With:             ByteGainLog(@"Error deserializing response body %@.", jsonError);
+./Classes/Internal/SEGUtils.h
+	Replaced: //  SEGUtils.h
+	With: //  ByteGainUtils.h
+	Replaced: @interface SEGUtils : NSObject
+	With: @interface ByteGainUtils : NSObject
+./Classes/Internal/SEGFileStorage.m
+	Replaced: //  SEGFileStorage.m
+	With: //  ByteGainFileStorage.m
+	Replaced: @interface SEGFileStorage ()
+	With: @interface ByteGainFileStorage ()
+	Replaced: @implementation SEGFileStorage
+	With: @implementation ByteGainFileStorage
+	Replaced:     return [self initWithFolder:[SEGFileStorage applicationSupportDirectoryURL] crypto:nil];
+	With:     return [self initWithFolder:[ByteGainFileStorage applicationSupportDirectoryURL] crypto:nil];
+	Replaced: - (instancetype)initWithFolder:(NSURL *)folderURL crypto:(id<SEGCrypto>)crypto
+	With: - (instancetype)initWithFolder:(NSURL *)folderURL crypto:(id<ByteGainCrypto>)crypto
+	Replaced:         SEGLog(@"Unable to remove key %@ - error removing file at path %@", key, url);
+	With:         ByteGainLog(@"Unable to remove key %@ - error removing file at path %@", key, url);
+	Replaced:         SEGLog(@"ERROR: Unable to reset file storage. Path cannot be removed - %@", self.folderURL.path);
+	With:         ByteGainLog(@"ERROR: Unable to reset file storage. Path cannot be removed - %@", self.folderURL.path);
+	Replaced:         SEGLog(@"Error excluding %@ from backup %@", [url lastPathComponent], error);
+	With:         ByteGainLog(@"Error excluding %@ from backup %@", [url lastPathComponent], error);
+	Replaced:         SEGLog(@"WARNING: No data file for key %@", key);
+	With:         ByteGainLog(@"WARNING: No data file for key %@", key);
+	Replaced:         SEGLog(@"Unable to serialize data from plist object", error, plist);
+	With:         ByteGainLog(@"Unable to serialize data from plist object", error, plist);
+	Replaced:         SEGLog(@"Unable to parse plist from data %@", error);
+	With:         ByteGainLog(@"Unable to parse plist from data %@", error);
+	Replaced:             SEGLog(@"error: %@", error.localizedDescription);
+	With:             ByteGainLog(@"error: %@", error.localizedDescription);
+./Classes/Internal/SEGUserDefaultsStorage.m
+	Replaced: //  SEGUserDefaultsStorage.m
+	With: //  ByteGainUserDefaultsStorage.m
+	Replaced: @implementation SEGUserDefaultsStorage
+	With: @implementation ByteGainUserDefaultsStorage
+	Replaced: - (instancetype)initWithDefaults:(NSUserDefaults *)defaults namespacePrefix:(NSString *)namespacePrefix crypto:(id<SEGCrypto>)crypto
+	With: - (instancetype)initWithDefaults:(NSUserDefaults *)defaults namespacePrefix:(NSString *)namespacePrefix crypto:(id<ByteGainCrypto>)crypto
+	Replaced:         SEGLog(@"WARNING: No data file for key %@", key);
+	With:         ByteGainLog(@"WARNING: No data file for key %@", key);
+	Replaced:     return data ? [SEGUtils plistFromData:data] : nil;
+	With:     return data ? [ByteGainUtils plistFromData:data] : nil;
+	Replaced:     NSData *data = [SEGUtils dataFromPlist:plist];
+	With:     NSData *data = [ByteGainUtils dataFromPlist:plist];
+./Classes/Internal/SEGAnalyticsUtils.m
+	Replaced: void SEGSetShowDebugLogs(BOOL showDebugLogs)
+	With: void ByteGainSetShowDebugLogs(BOOL showDebugLogs)
+	Replaced: void SEGLog(NSString *format, ...)
+	With: void ByteGainLog(NSString *format, ...)
+	Replaced: static id SEGCoerceJSONObject(id obj)
+	With: static id ByteGainCoerceJSONObject(id obj)
+	Replaced:             [array addObject:SEGCoerceJSONObject(i)];
+	With:             [array addObject:ByteGainCoerceJSONObject(i)];
+	Replaced:             // Hotfix for issue where SEGFileStorage uses plist which does NOT support NSNull
+	With:             // Hotfix for issue where ByteGainFileStorage uses plist which does NOT support NSNull
+	Replaced:                 SEGLog(@"warning: dictionary keys should be strings. got: %@. coercing "
+	With:                 ByteGainLog(@"warning: dictionary keys should be strings. got: %@. coercing "
+	Replaced:             dict[key.description] = SEGCoerceJSONObject(obj[key]);
+	With:             dict[key.description] = ByteGainCoerceJSONObject(obj[key]);
+	Replaced:     SEGLog(@"warning: dictionary values should be valid json types. got: %@. "
+	With:     ByteGainLog(@"warning: dictionary values should be valid json types. got: %@. "
+	Replaced: NSDictionary *SEGCoerceDictionary(NSDictionary *dict)
+	With: NSDictionary *ByteGainCoerceDictionary(NSDictionary *dict)
+	Replaced:     return SEGCoerceJSONObject(dict);
+	With:     return ByteGainCoerceJSONObject(dict);
+	Replaced: NSString *SEGIDFA()
+	With: NSString *ByteGainIDFA()
+	Replaced: NSString *SEGEventNameForScreenTitle(NSString *title)
+	With: NSString *ByteGainEventNameForScreenTitle(NSString *title)
+./Classes/Internal/SEGSegmentIntegrationFactory.h
+	Replaced: @interface SEGSegmentIntegrationFactory : NSObject <SEGIntegrationFactory>
+	With: @interface ByteGainSegmentIntegrationFactory : NSObject <ByteGainIntegrationFactory>
+	Replaced: @property (nonatomic, strong) SEGHTTPClient *client;
+	With: @property (nonatomic, strong) ByteGainHTTPClient *client;
+	Replaced: @property (nonatomic, strong) id<SEGStorage> storage;
+	With: @property (nonatomic, strong) id<ByteGainStorage> storage;
+	Replaced: - (instancetype)initWithHTTPClient:(SEGHTTPClient *)client storage:(id<SEGStorage>)storage;
+	With: - (instancetype)initWithHTTPClient:(ByteGainHTTPClient *)client storage:(id<ByteGainStorage>)storage;
+./Classes/Internal/UIViewController+SEGScreen.m
+	Replaced: @implementation UIViewController (SEGScreen)
+	With: @implementation UIViewController (ByteGainScreen)
+	Replaced:     UIViewController *root = [[SEGAnalytics sharedAnalytics] configuration].application.delegate.window.rootViewController;
+	With:     UIViewController *root = [[ByteGainAnalytics sharedAnalytics] configuration].application.delegate.window.rootViewController;
+	Replaced:         SEGLog(@"Could not infer screen.");
+	With:         ByteGainLog(@"Could not infer screen.");
+	Replaced:             SEGLog(@"Could not infer screen name.");
+	With:             ByteGainLog(@"Could not infer screen name.");
+	Replaced:     [[SEGAnalytics sharedAnalytics] screen:name properties:nil options:nil];
+	With:     [[ByteGainAnalytics sharedAnalytics] screen:name properties:nil options:nil];
+./Classes/Internal/SEGStorage.h
+	Replaced: //  SEGStorage.h
+	With: //  ByteGainStorage.h
+	Replaced: @protocol SEGStorage <NSObject>
+	With: @protocol ByteGainStorage <NSObject>
+	Replaced: @property (nonatomic, strong, nullable) id<SEGCrypto> crypto;
+	With: @property (nonatomic, strong, nullable) id<ByteGainCrypto> crypto;
+./Classes/Internal/NSData+SEGGZIP.h
+	Replaced: @interface NSData (SEG_GZIP)
+	With: @interface NSData (ByteGain_GZIP)
+./Classes/Internal/SEGSegmentIntegration.m
+	Replaced: NSString *const SEGSegmentDidSendRequestNotification = @"SegmentDidSendRequest";
+	With: NSString *const ByteGainSegmentDidSendRequestNotification = @"SegmentDidSendRequest";
+	Replaced: NSString *const SEGSegmentRequestDidSucceedNotification = @"SegmentRequestDidSucceed";
+	With: NSString *const ByteGainSegmentRequestDidSucceedNotification = @"SegmentRequestDidSucceed";
+	Replaced: NSString *const SEGSegmentRequestDidFailNotification = @"SegmentRequestDidFail";
+	With: NSString *const ByteGainSegmentRequestDidFailNotification = @"SegmentRequestDidFail";
+	Replaced: NSString *const SEGAdvertisingClassIdentifier = @"ASIdentifierManager";
+	With: NSString *const ByteGainAdvertisingClassIdentifier = @"ASIdentifierManager";
+	Replaced: NSString *const SEGADClientClass = @"ADClient";
+	With: NSString *const ByteGainADClientClass = @"ADClient";
+	Replaced: NSString *const SEGUserIdKey = @"SEGUserId";
+	With: NSString *const ByteGainUserIdKey = @"ByteGainUserId";
+	Replaced: NSString *const SEGQueueKey = @"SEGQueue";
+	With: NSString *const ByteGainQueueKey = @"ByteGainQueue";
+	Replaced: NSString *const SEGTraitsKey = @"SEGTraits";
+	With: NSString *const ByteGainTraitsKey = @"ByteGainTraits";
+	Replaced: NSString *const kSEGUserIdFilename = @"segmentio.userId";
+	With: NSString *const kByteGainUserIdFilename = @"segmentio.userId";
+	Replaced: NSString *const kSEGQueueFilename = @"segmentio.queue.plist";
+	With: NSString *const kByteGainQueueFilename = @"segmentio.queue.plist";
+	Replaced: NSString *const kSEGTraitsFilename = @"segmentio.traits.plist";
+	With: NSString *const kByteGainTraitsFilename = @"segmentio.traits.plist";
+	Replaced:     Class advertisingManager = NSClassFromString(SEGAdvertisingClassIdentifier);
+	With:     Class advertisingManager = NSClassFromString(ByteGainAdvertisingClassIdentifier);
+	Replaced: @interface SEGSegmentIntegration ()
+	With: @interface ByteGainSegmentIntegration ()
+	Replaced: @property (nonatomic, strong) SEGReachability *reachability;
+	With: @property (nonatomic, strong) ByteGainReachability *reachability;
+	Replaced: @property (nonatomic, assign) SEGAnalytics *analytics;
+	With: @property (nonatomic, assign) ByteGainAnalytics *analytics;
+	Replaced: @property (nonatomic, assign) SEGAnalyticsConfiguration *configuration;
+	With: @property (nonatomic, assign) ByteGainAnalyticsConfiguration *configuration;
+	Replaced: @property (nonatomic, strong) SEGHTTPClient *httpClient;
+	With: @property (nonatomic, strong) ByteGainHTTPClient *httpClient;
+	Replaced: @property (nonatomic, strong) id<SEGStorage> storage;
+	With: @property (nonatomic, strong) id<ByteGainStorage> storage;
+	Replaced: @property (nonatomic, strong) NSMutableDictionary *responsePayloads;  // accessed only by main thread.  Maps response call ID to SEGPayload (has callbacks)
+	With: @property (nonatomic, strong) NSMutableDictionary *responsePayloads;  // accessed only by main thread.  Maps response call ID to ByteGainPayload (has callbacks)
+	Replaced: @implementation SEGSegmentIntegration
+	With: @implementation ByteGainSegmentIntegration
+	Replaced: - (id)initWithAnalytics:(SEGAnalytics *)analytics httpClient:(SEGHTTPClient *)httpClient storage:(id<SEGStorage>)storage
+	With: - (id)initWithAnalytics:(ByteGainAnalytics *)analytics httpClient:(ByteGainHTTPClient *)httpClient storage:(id<ByteGainStorage>)storage
+	Replaced:         self.reachability = [SEGReachability reachabilityWithHostname:@"google.com"];
+	With:         self.reachability = [ByteGainReachability reachabilityWithHostname:@"google.com"];
+	Replaced:             if ([[NSUserDefaults standardUserDefaults] objectForKey:SEGQueueKey]) {
+	With:             if ([[NSUserDefaults standardUserDefaults] objectForKey:ByteGainQueueKey]) {
+	Replaced:                 [[NSUserDefaults standardUserDefaults] removeObjectForKey:SEGQueueKey];
+	With:                 [[NSUserDefaults standardUserDefaults] removeObjectForKey:ByteGainQueueKey];
+	Replaced:             if ([[NSUserDefaults standardUserDefaults] objectForKey:SEGTraitsKey]) {
+	With:             if ([[NSUserDefaults standardUserDefaults] objectForKey:ByteGainTraitsKey]) {
+	Replaced:                 [[NSUserDefaults standardUserDefaults] removeObjectForKey:SEGTraitsKey];
+	With:                 [[NSUserDefaults standardUserDefaults] removeObjectForKey:ByteGainTraitsKey];
+	Replaced:         @"version" : [SEGAnalytics version]
+	With:         @"version" : [ByteGainAnalytics version]
+	Replaced:         if (NSClassFromString(SEGAdvertisingClassIdentifier)) {
+	With:         if (NSClassFromString(ByteGainAdvertisingClassIdentifier)) {
+	Replaced:             NSString *idfa = SEGIDFA();
+	With:             NSString *idfa = ByteGainIDFA();
+	Replaced:     Class adClient = NSClassFromString(SEGADClientClass);
+	With:     Class adClient = NSClassFromString(ByteGainADClientClass);
+	Replaced:         id<SEGApplicationProtocol> application = [self.analytics configuration].application;
+	With:         id<ByteGainApplicationProtocol> application = [self.analytics configuration].application;
+	Replaced:     // inside @synchronized(self) block for SEGIntegrationsManager as both events queue and main queue
+	With:     // inside @synchronized(self) block for ByteGainIntegrationsManager as both events queue and main queue
+	Replaced:             id<SEGApplicationProtocol> application = [self.analytics configuration].application;
+	With:             id<ByteGainApplicationProtocol> application = [self.analytics configuration].application;
+	Replaced:         [self.storage setString:userId forKey:SEGUserIdKey];
+	With:         [self.storage setString:userId forKey:ByteGainUserIdKey];
+	Replaced:         [self.storage setString:userId forKey:kSEGUserIdFilename];
+	With:         [self.storage setString:userId forKey:kByteGainUserIdFilename];
+	Replaced:         [self.storage setDictionary:[self.traits copy] forKey:SEGTraitsKey];
+	With:         [self.storage setDictionary:[self.traits copy] forKey:ByteGainTraitsKey];
+	Replaced:         [self.storage setDictionary:[self.traits copy] forKey:kSEGTraitsFilename];
+	With:         [self.storage setDictionary:[self.traits copy] forKey:kByteGainTraitsFilename];
+	Replaced: - (void)identify:(SEGIdentifyPayload *)payload
+	With: - (void)identify:(ByteGainIdentifyPayload *)payload
+	Replaced: - (void)track:(SEGTrackPayload *)payload
+	With: - (void)track:(ByteGainTrackPayload *)payload
+	Replaced:     SEGLog(@"segment integration received payload %@", payload);
+	With:     ByteGainLog(@"segment integration received payload %@", payload);
+	Replaced: - (void)screen:(SEGScreenPayload *)payload
+	With: - (void)screen:(ByteGainScreenPayload *)payload
+	Replaced: - (void)attemptGoal:(SEGAttemptGoalPayload *)payload
+	With: - (void)attemptGoal:(ByteGainAttemptGoalPayload *)payload
+	Replaced: - (void)reportGoalResult:(SEGReportGoalResultPayload *)payload
+	With: - (void)reportGoalResult:(ByteGainReportGoalResultPayload *)payload
+	Replaced:     NSString *result = payload.result == SEGGoalResultFailure ? @"failure" : @"success";
+	With:     NSString *result = payload.result == ByteGainGoalResultFailure ? @"failure" : @"success";
+	Replaced:         if (payload.result != SEGGoalResultUnsolictedSuccess) {
+	With:         if (payload.result != ByteGainGoalResultUnsolictedSuccess) {
+	Replaced: - (void)group:(SEGGroupPayload *)payload
+	With: - (void)group:(ByteGainGroupPayload *)payload
+	Replaced: - (void)alias:(SEGAliasPayload *)payload
+	With: - (void)alias:(ByteGainAliasPayload *)payload
+	Replaced:         SEGLog(@"%@ Enqueueing action: %@", self, payload);
+	With:         ByteGainLog(@"%@ Enqueueing action: %@", self, payload);
+	Replaced:         SEGLog(@"%@ Error writing payload: %@", self, exception);
+	With:         ByteGainLog(@"%@ Error writing payload: %@", self, exception);
+	Replaced:             SEGLog(@"%@ No queued API calls to flush.", self);
+	With:             ByteGainLog(@"%@ No queued API calls to flush.", self);
+	Replaced:             SEGLog(@"%@ API request already in progress, not flushing again.", self);
+	With:             ByteGainLog(@"%@ API request already in progress, not flushing again.", self);
+	Replaced:         SEGLog(@"%@ Length is %lu.", self, (unsigned long)self.queue.count);
+	With:         ByteGainLog(@"%@ Length is %lu.", self, (unsigned long)self.queue.count);
+	Replaced:         [self.storage removeKey:SEGUserIdKey];
+	With:         [self.storage removeKey:ByteGainUserIdKey];
+	Replaced:         [self.storage removeKey:SEGTraitsKey];
+	With:         [self.storage removeKey:ByteGainTraitsKey];
+	Replaced:         [self.storage removeKey:kSEGUserIdFilename];
+	With:         [self.storage removeKey:kByteGainUserIdFilename];
+	Replaced:         [self.storage removeKey:kSEGTraitsFilename];
+	With:         [self.storage removeKey:kByteGainTraitsFilename];
+	Replaced:         SEGLog(@"sent notification %@", name);
+	With:         ByteGainLog(@"sent notification %@", name);
+	Replaced:     SEGLog(@"%@ Flushing %lu of %lu queued API calls.", self, (unsigned long)batch.count, (unsigned long)self.queue.count);
+	With:     ByteGainLog(@"%@ Flushing %lu of %lu queued API calls.", self, (unsigned long)batch.count, (unsigned long)self.queue.count);
+	Replaced:     SEGLog(@"Flushing batch %@.", payload);
+	With:     ByteGainLog(@"Flushing batch %@.", payload);
+	Replaced:                 [self notifyForName:SEGSegmentRequestDidFailNotification userInfo:batch];
+	With:                 [self notifyForName:ByteGainSegmentRequestDidFailNotification userInfo:batch];
+	Replaced:             [self notifyForName:SEGSegmentRequestDidSucceedNotification userInfo:batch];
+	With:             [self notifyForName:ByteGainSegmentRequestDidSucceedNotification userInfo:batch];
+	Replaced:     [self notifyForName:SEGSegmentDidSendRequestNotification userInfo:batch];
+	With:     [self notifyForName:ByteGainSegmentDidSendRequestNotification userInfo:batch];
+	Replaced:         SEGAttemptGoalPayload *attemptPayload = [SEGAttemptGoalPayload cast:[self.responsePayloads objectForKey:key]];
+	With:         ByteGainAttemptGoalPayload *attemptPayload = [ByteGainAttemptGoalPayload cast:[self.responsePayloads objectForKey:key]];
+	Replaced:                         [[SEGAnalytics sharedAnalytics] track:attemptPayload.event properties:trackProperties];
+	With:                         [[ByteGainAnalytics sharedAnalytics] track:attemptPayload.event properties:trackProperties];
+	Replaced:         _queue = [[self.storage arrayForKey:SEGQueueKey] ?: @[] mutableCopy];
+	With:         _queue = [[self.storage arrayForKey:ByteGainQueueKey] ?: @[] mutableCopy];
+	Replaced:         _queue = [[self.storage arrayForKey:kSEGQueueFilename] ?: @[] mutableCopy];
+	With:         _queue = [[self.storage arrayForKey:kByteGainQueueFilename] ?: @[] mutableCopy];
+	Replaced:         _traits = [[self.storage dictionaryForKey:SEGTraitsKey] ?: @{} mutableCopy];
+	With:         _traits = [[self.storage dictionaryForKey:ByteGainTraitsKey] ?: @{} mutableCopy];
+	Replaced:         _traits = [[self.storage dictionaryForKey:kSEGTraitsFilename] ?: @{} mutableCopy];
+	With:         _traits = [[self.storage dictionaryForKey:kByteGainTraitsFilename] ?: @{} mutableCopy];
+	Replaced:     return [[NSUserDefaults standardUserDefaults] valueForKey:SEGUserIdKey] ?: [self.storage stringForKey:kSEGUserIdFilename];
+	With:     return [[NSUserDefaults standardUserDefaults] valueForKey:ByteGainUserIdKey] ?: [self.storage stringForKey:kByteGainUserIdFilename];
+	Replaced:     [self.storage setArray:[self.queue copy] forKey:SEGQueueKey];
+	With:     [self.storage setArray:[self.queue copy] forKey:ByteGainQueueKey];
+	Replaced:     [self.storage setArray:[self.queue copy] forKey:kSEGQueueFilename];
+	With:     [self.storage setArray:[self.queue copy] forKey:kByteGainQueueFilename];
+	Replaced: NSString *const SEGTrackedAttributionKey = @"SEGTrackedAttributionKey";
+	With: NSString *const ByteGainTrackedAttributionKey = @"ByteGainTrackedAttributionKey";
+	Replaced:     BOOL trackedAttribution = [[NSUserDefaults standardUserDefaults] boolForKey:SEGTrackedAttributionKey];
+	With:     BOOL trackedAttribution = [[NSUserDefaults standardUserDefaults] boolForKey:ByteGainTrackedAttributionKey];
+	Replaced:                 [[NSUserDefaults standardUserDefaults] setBool:YES forKey:SEGTrackedAttributionKey];
+	With:                 [[NSUserDefaults standardUserDefaults] setBool:YES forKey:ByteGainTrackedAttributionKey];
+./Classes/Internal/SEGStoreKitTracker.m
+	Replaced: @interface SEGStoreKitTracker ()
+	With: @interface ByteGainStoreKitTracker ()
+	Replaced: @property (nonatomic, readonly) SEGAnalytics *analytics;
+	With: @property (nonatomic, readonly) ByteGainAnalytics *analytics;
+	Replaced: @implementation SEGStoreKitTracker
+	With: @implementation ByteGainStoreKitTracker
+	Replaced: + (instancetype)trackTransactionsForAnalytics:(SEGAnalytics *)analytics
+	With: + (instancetype)trackTransactionsForAnalytics:(ByteGainAnalytics *)analytics
+	Replaced:     return [[SEGStoreKitTracker alloc] initWithAnalytics:analytics];
+	With:     return [[ByteGainStoreKitTracker alloc] initWithAnalytics:analytics];
+	Replaced: - (instancetype)initWithAnalytics:(SEGAnalytics *)analytics
+	With: - (instancetype)initWithAnalytics:(ByteGainAnalytics *)analytics
+./Classes/Internal/SEGFileStorage.h
+	Replaced: //  SEGFileStorage.h
+	With: //  ByteGainFileStorage.h
+	Replaced: @interface SEGFileStorage : NSObject <SEGStorage>
+	With: @interface ByteGainFileStorage : NSObject <ByteGainStorage>
+	Replaced: @property (nonatomic, strong, nullable) id<SEGCrypto> crypto;
+	With: @property (nonatomic, strong, nullable) id<ByteGainCrypto> crypto;
+	Replaced: - (instancetype _Nonnull)initWithFolder:(NSURL *_Nonnull)folderURL crypto:(id<SEGCrypto> _Nullable)crypto;
+	With: - (instancetype _Nonnull)initWithFolder:(NSURL *_Nonnull)folderURL crypto:(id<ByteGainCrypto> _Nullable)crypto;
+./Classes/Internal/SEGUtils.m
+	Replaced: //  SEGUtils.m
+	With: //  ByteGainUtils.m
+	Replaced: @implementation SEGUtils
+	With: @implementation ByteGainUtils
+	Replaced:         SEGLog(@"Unable to serialize data from plist object", error, plist);
+	With:         ByteGainLog(@"Unable to serialize data from plist object", error, plist);
+	Replaced:         SEGLog(@"Unable to parse plist from data %@", error);
+	With:         ByteGainLog(@"Unable to parse plist from data %@", error);
+./Classes/Internal/SEGHTTPClient.h
+	Replaced: // TODO: Make this configurable via SEGAnalyticsConfiguration
+	With: // TODO: Make this configurable via ByteGainAnalyticsConfiguration
+	Replaced: @interface SEGHTTPClient : NSObject
+	With: @interface ByteGainHTTPClient : NSObject
+	Replaced: @property (nonatomic, strong) SEGRequestFactory requestFactory;
+	With: @property (nonatomic, strong) ByteGainRequestFactory requestFactory;
+	Replaced: + (SEGRequestFactory)defaultRequestFactory;
+	With: + (ByteGainRequestFactory)defaultRequestFactory;
+	Replaced: - (instancetype)initWithRequestFactory:(SEGRequestFactory _Nullable)requestFactory;
+	With: - (instancetype)initWithRequestFactory:(ByteGainRequestFactory _Nullable)requestFactory;
+	Replaced:  * Completion handlers are called on a dispatch queue internal to SEGHTTPClient. 
+	With:  * Completion handlers are called on a dispatch queue internal to ByteGainHTTPClient. 
+./Classes/Integrations/SEGGroupPayload.h
+	Replaced: @interface SEGGroupPayload : SEGPayload
+	With: @interface ByteGainGroupPayload : ByteGainPayload
+./Classes/Integrations/SEGIntegrationsManager.h
+	Replaced: //  SEGIntegrationsManager.h
+	With: //  ByteGainIntegrationsManager.h
+	Replaced: extern NSString *_Nonnull SEGAnalyticsIntegrationDidStart;
+	With: extern NSString *_Nonnull ByteGainAnalyticsIntegrationDidStart;
+	Replaced: @class SEGAnalytics;
+	With: @class ByteGainAnalytics;
+	Replaced: @interface SEGIntegrationsManager : NSObject
+	With: @interface ByteGainIntegrationsManager : NSObject
+	Replaced: - (instancetype _Nonnull)initWithAnalytics:(SEGAnalytics *_Nonnull)analytics;
+	With: - (instancetype _Nonnull)initWithAnalytics:(ByteGainAnalytics *_Nonnull)analytics;
+	Replaced: @interface SEGIntegrationsManager (SEGMiddleware) <SEGMiddleware>
+	With: @interface ByteGainIntegrationsManager (ByteGainMiddleware) <ByteGainMiddleware>
+./Classes/Integrations/SEGTrackPayload.m
+	Replaced: @implementation SEGTrackPayload
+	With: @implementation ByteGainTrackPayload
+./Classes/Integrations/SEGIntegrationFactory.h
+	Replaced: @class SEGAnalytics;
+	With: @class ByteGainAnalytics;
+	Replaced: @protocol SEGIntegrationFactory
+	With: @protocol ByteGainIntegrationFactory
+	Replaced: - (id<SEGIntegration>)createWithSettings:(NSDictionary *)settings forAnalytics:(SEGAnalytics *)analytics;
+	With: - (id<ByteGainIntegration>)createWithSettings:(NSDictionary *)settings forAnalytics:(ByteGainAnalytics *)analytics;
+./Classes/Integrations/SEGAttemptGoalPayload.m
+	Replaced: @implementation SEGAttemptGoalPayload
+	With: @implementation ByteGainAttemptGoalPayload
+	Replaced:               yesCallback:(SEGAttemptGoalYesCallback)yesCallback
+	With:               yesCallback:(ByteGainAttemptGoalYesCallback)yesCallback
+	Replaced:               noCallback:(SEGAttemptGoalNoCallback _Nullable)noCallback
+	With:               noCallback:(ByteGainAttemptGoalNoCallback _Nullable)noCallback
+./Classes/Integrations/SEGReportGoalResultPayload.h
+	Replaced: typedef NS_ENUM(NSInteger, SEGGoalResult) {
+	With: typedef NS_ENUM(NSInteger, ByteGainGoalResult) {
+	Replaced:     SEGGoalResultUndefined,     // Not used
+	With:     ByteGainGoalResultUndefined,     // Not used
+	Replaced:     SEGGoalResultSuccess,       // Success following a prior attemptGoal
+	With:     ByteGainGoalResultSuccess,       // Success following a prior attemptGoal
+	Replaced:     SEGGoalResultFailure,       // Failure following a prior attemptGoal
+	With:     ByteGainGoalResultFailure,       // Failure following a prior attemptGoal
+	Replaced:     SEGGoalResultUnsolictedSuccess,  // Accomplishing goal without issuing a prior attemptGoal
+	With:     ByteGainGoalResultUnsolictedSuccess,  // Accomplishing goal without issuing a prior attemptGoal
+	Replaced: @interface SEGReportGoalResultPayload : SEGPayload
+	With: @interface ByteGainReportGoalResultPayload : ByteGainPayload
+	Replaced: @property (nonatomic, readonly) SEGGoalResult result;
+	With: @property (nonatomic, readonly) ByteGainGoalResult result;
+	Replaced:                        result:(SEGGoalResult) result
+	With:                        result:(ByteGainGoalResult) result
+./Classes/Integrations/SEGAliasPayload.m
+	Replaced: @implementation SEGAliasPayload
+	With: @implementation ByteGainAliasPayload
+./Classes/Integrations/SEGIdentifyPayload.m
+	Replaced: @implementation SEGIdentifyPayload
+	With: @implementation ByteGainIdentifyPayload
+./Classes/Integrations/SEGPayload.h
+	Replaced: @interface SEGPayload : NSObject
+	With: @interface ByteGainPayload : NSObject
+	Replaced: @interface SEGApplicationLifecyclePayload : SEGPayload
+	With: @interface ByteGainApplicationLifecyclePayload : ByteGainPayload
+	Replaced: @interface SEGContinueUserActivityPayload : SEGPayload
+	With: @interface ByteGainContinueUserActivityPayload : ByteGainPayload
+	Replaced: @interface SEGOpenURLPayload : SEGPayload
+	With: @interface ByteGainOpenURLPayload : ByteGainPayload
+	Replaced: @interface SEGRemoteNotificationPayload : SEGPayload
+	With: @interface ByteGainRemoteNotificationPayload : ByteGainPayload
+	Replaced: // SEGEventTypeHandleActionWithForRemoteNotification
+	With: // ByteGainEventTypeHandleActionWithForRemoteNotification
+	Replaced: // SEGEventTypeHandleActionWithForRemoteNotification
+	With: // ByteGainEventTypeHandleActionWithForRemoteNotification
+	Replaced: // SEGEventTypeReceivedRemoteNotification
+	With: // ByteGainEventTypeReceivedRemoteNotification
+	Replaced: // SEGEventTypeFailedToRegisterForRemoteNotifications
+	With: // ByteGainEventTypeFailedToRegisterForRemoteNotifications
+	Replaced: // SEGEventTypeRegisteredForRemoteNotifications
+	With: // ByteGainEventTypeRegisteredForRemoteNotifications
+./Classes/Integrations/SEGScreenPayload.h
+	Replaced: @interface SEGScreenPayload : SEGPayload
+	With: @interface ByteGainScreenPayload : ByteGainPayload
+./Classes/Integrations/SEGReportGoalResultPayload.m
+	Replaced: @implementation SEGReportGoalResultPayload
+	With: @implementation ByteGainReportGoalResultPayload
+	Replaced:                        result:(SEGGoalResult) result
+	With:                        result:(ByteGainGoalResult) result
+./Classes/Integrations/SEGAttemptGoalPayload.h
+	Replaced: @interface SEGAttemptGoalPayload : SEGPayload
+	With: @interface ByteGainAttemptGoalPayload : ByteGainPayload
+	Replaced: typedef void(^SEGAttemptGoalYesCallback)(NSString * _Nullable);
+	With: typedef void(^ByteGainAttemptGoalYesCallback)(NSString * _Nullable);
+	Replaced: typedef void(^SEGAttemptGoalNoCallback)(void);
+	With: typedef void(^ByteGainAttemptGoalNoCallback)(void);
+	Replaced: @property (nonatomic, readonly) SEGAttemptGoalYesCallback yesCallback;
+	With: @property (nonatomic, readonly) ByteGainAttemptGoalYesCallback yesCallback;
+	Replaced: @property (nonatomic, readonly, nullable) SEGAttemptGoalNoCallback noCallback;
+	With: @property (nonatomic, readonly, nullable) ByteGainAttemptGoalNoCallback noCallback;
+	Replaced:               yesCallback:(SEGAttemptGoalYesCallback) successCallback
+	With:               yesCallback:(ByteGainAttemptGoalYesCallback) successCallback
+	Replaced:               noCallback:(SEGAttemptGoalNoCallback _Nullable) failureCallback;
+	With:               noCallback:(ByteGainAttemptGoalNoCallback _Nullable) failureCallback;
+	Replaced: // Returns object or nil if object is not a SEGAttemptPayload.
+	With: // Returns object or nil if object is not a ByteGainAttemptPayload.
+./Classes/Integrations/SEGIntegration.h
+	Replaced: @protocol SEGIntegration <NSObject>
+	With: @protocol ByteGainIntegration <NSObject>
+	Replaced: // 1. [[SEGAnalytics sharedInstance] identify:someUserId];
+	With: // 1. [[ByteGainAnalytics sharedInstance] identify:someUserId];
+	Replaced: // 2. [[SEGAnalytics sharedInstance] identify:someUserId traits:someTraits];
+	With: // 2. [[ByteGainAnalytics sharedInstance] identify:someUserId traits:someTraits];
+	Replaced: // 3. [[SEGAnalytics sharedInstance] identify:someUserId traits:someTraits options:someOptions];
+	With: // 3. [[ByteGainAnalytics sharedInstance] identify:someUserId traits:someTraits options:someOptions];
+	Replaced: - (void)identify:(SEGIdentifyPayload *)payload;
+	With: - (void)identify:(ByteGainIdentifyPayload *)payload;
+	Replaced: // 1. [[SEGAnalytics sharedInstance] track:someEvent];
+	With: // 1. [[ByteGainAnalytics sharedInstance] track:someEvent];
+	Replaced: // 2. [[SEGAnalytics sharedInstance] track:someEvent properties:someProperties];
+	With: // 2. [[ByteGainAnalytics sharedInstance] track:someEvent properties:someProperties];
+	Replaced: // 3. [[SEGAnalytics sharedInstance] track:someEvent properties:someProperties options:someOptions];
+	With: // 3. [[ByteGainAnalytics sharedInstance] track:someEvent properties:someProperties options:someOptions];
+	Replaced: - (void)track:(SEGTrackPayload *)payload;
+	With: - (void)track:(ByteGainTrackPayload *)payload;
+	Replaced: // 1. [[SEGAnalytics sharedInstance] screen:someEvent];
+	With: // 1. [[ByteGainAnalytics sharedInstance] screen:someEvent];
+	Replaced: // 2. [[SEGAnalytics sharedInstance] screen:someEvent properties:someProperties];
+	With: // 2. [[ByteGainAnalytics sharedInstance] screen:someEvent properties:someProperties];
+	Replaced: // 3. [[SEGAnalytics sharedInstance] screen:someEvent properties:someProperties options:someOptions];
+	With: // 3. [[ByteGainAnalytics sharedInstance] screen:someEvent properties:someProperties options:someOptions];
+	Replaced: - (void)screen:(SEGScreenPayload *)payload;
+	With: - (void)screen:(ByteGainScreenPayload *)payload;
+	Replaced: // 1. [[SEGAnalytics sharedInstance] attemptGoal:...]
+	With: // 1. [[ByteGainAnalytics sharedInstance] attemptGoal:...]
+	Replaced: - (void)attemptGoal:(SEGAttemptGoalPayload *)payload;
+	With: - (void)attemptGoal:(ByteGainAttemptGoalPayload *)payload;
+	Replaced: - (void)reportGoalResult:(SEGReportGoalResultPayload *)payload;
+	With: - (void)reportGoalResult:(ByteGainReportGoalResultPayload *)payload;
+	Replaced: // 1. [[SEGAnalytics sharedInstance] group:someGroupId];
+	With: // 1. [[ByteGainAnalytics sharedInstance] group:someGroupId];
+	Replaced: // 2. [[SEGAnalytics sharedInstance] group:someGroupId traits:];
+	With: // 2. [[ByteGainAnalytics sharedInstance] group:someGroupId traits:];
+	Replaced: // 3. [[SEGAnalytics sharedInstance] group:someGroupId traits:someGroupTraits options:someOptions];
+	With: // 3. [[ByteGainAnalytics sharedInstance] group:someGroupId traits:someGroupTraits options:someOptions];
+	Replaced: - (void)group:(SEGGroupPayload *)payload;
+	With: - (void)group:(ByteGainGroupPayload *)payload;
+	Replaced: // 1. [[SEGAnalytics sharedInstance] alias:someNewId];
+	With: // 1. [[ByteGainAnalytics sharedInstance] alias:someNewId];
+	Replaced: // 2. [[SEGAnalytics sharedInstance] alias:someNewId options:someOptions];
+	With: // 2. [[ByteGainAnalytics sharedInstance] alias:someNewId options:someOptions];
+	Replaced: - (void)alias:(SEGAliasPayload *)payload;
+	With: - (void)alias:(ByteGainAliasPayload *)payload;
+./Classes/Integrations/SEGTrackPayload.h
+	Replaced: @interface SEGTrackPayload : SEGPayload
+	With: @interface ByteGainTrackPayload : ByteGainPayload
+./Classes/Integrations/SEGIntegrationsManager.m
+	Replaced: //  SEGIntegrationsManager.m
+	With: //  ByteGainIntegrationsManager.m
+	Replaced: NSString *SEGAnalyticsIntegrationDidStart = @"io.segment.analytics.integration.did.start";
+	With: NSString *ByteGainAnalyticsIntegrationDidStart = @"io.segment.analytics.integration.did.start";
+	Replaced: static NSString *const SEGAnonymousIdKey = @"SEGAnonymousId";
+	With: static NSString *const ByteGainAnonymousIdKey = @"ByteGainAnonymousId";
+	Replaced: static NSString *const kSEGAnonymousIdFilename = @"segment.anonymousId";
+	With: static NSString *const kByteGainAnonymousIdFilename = @"segment.anonymousId";
+	Replaced: @interface SEGAnalyticsConfiguration (Private)
+	With: @interface ByteGainAnalyticsConfiguration (Private)
+	Replaced: @interface SEGIntegrationsManager ()
+	With: @interface ByteGainIntegrationsManager ()
+	Replaced: @property (nonatomic, strong) SEGAnalytics *analytics;
+	With: @property (nonatomic, strong) ByteGainAnalytics *analytics;
+	Replaced: @property (nonatomic, strong) SEGAnalyticsConfiguration *configuration;
+	With: @property (nonatomic, strong) ByteGainAnalyticsConfiguration *configuration;
+	Replaced: @property (nonatomic, strong) SEGHTTPClient *httpClient;
+	With: @property (nonatomic, strong) ByteGainHTTPClient *httpClient;
+	Replaced: @property (nonatomic, strong) id<SEGStorage> storage;
+	With: @property (nonatomic, strong) id<ByteGainStorage> storage;
+	Replaced: @implementation SEGIntegrationsManager
+	With: @implementation ByteGainIntegrationsManager
+	Replaced: - (instancetype _Nonnull)initWithAnalytics:(SEGAnalytics *_Nonnull)analytics
+	With: - (instancetype _Nonnull)initWithAnalytics:(ByteGainAnalytics *_Nonnull)analytics
+	Replaced:     SEGAnalyticsConfiguration *configuration = analytics.configuration;
+	With:     ByteGainAnalyticsConfiguration *configuration = analytics.configuration;
+	Replaced:         self.httpClient = [[SEGHTTPClient alloc] initWithRequestFactory:configuration.requestFactory];
+	With:         self.httpClient = [[ByteGainHTTPClient alloc] initWithRequestFactory:configuration.requestFactory];
+	Replaced:         self.storage = [[SEGUserDefaultsStorage alloc] initWithDefaults:[NSUserDefaults standardUserDefaults] namespacePrefix:nil crypto:configuration.crypto];
+	With:         self.storage = [[ByteGainUserDefaultsStorage alloc] initWithDefaults:[NSUserDefaults standardUserDefaults] namespacePrefix:nil crypto:configuration.crypto];
+	Replaced:         self.storage = [[SEGFileStorage alloc] initWithFolder:[SEGFileStorage applicationSupportDirectoryURL] crypto:configuration.crypto];
+	With:         self.storage = [[ByteGainFileStorage alloc] initWithFolder:[ByteGainFileStorage applicationSupportDirectoryURL] crypto:configuration.crypto];
+	Replaced:         [factories addObject:[[SEGSegmentIntegrationFactory alloc] initWithHTTPClient:self.httpClient storage:self.storage]];
+	With:         [factories addObject:[[ByteGainSegmentIntegrationFactory alloc] initWithHTTPClient:self.httpClient storage:self.storage]];
+	Replaced:         id<SEGApplicationProtocol> application = configuration.application;
+	With:         id<ByteGainApplicationProtocol> application = configuration.application;
+	Replaced:     SEGLog(@"Application state change notification: %@", notificationName);
+	With:     ByteGainLog(@"Application state change notification: %@", notificationName);
+	Replaced:     SEGIdentifyPayload *payload = [[SEGIdentifyPayload alloc] initWithUserId:userId
+	With:     ByteGainIdentifyPayload *payload = [[ByteGainIdentifyPayload alloc] initWithUserId:userId
+	Replaced:                                                                       traits:SEGCoerceDictionary(traits)
+	With:                                                                       traits:ByteGainCoerceDictionary(traits)
+	Replaced:                                                                      context:SEGCoerceDictionary([options objectForKey:@"context"])
+	With:                                                                      context:ByteGainCoerceDictionary([options objectForKey:@"context"])
+	Replaced:     SEGTrackPayload *payload = [[SEGTrackPayload alloc] initWithEvent:event
+	With:     ByteGainTrackPayload *payload = [[ByteGainTrackPayload alloc] initWithEvent:event
+	Replaced:                                                            properties:SEGCoerceDictionary(properties)
+	With:                                                            properties:ByteGainCoerceDictionary(properties)
+	Replaced:                                                               context:SEGCoerceDictionary([options objectForKey:@"context"])
+	With:                                                               context:ByteGainCoerceDictionary([options objectForKey:@"context"])
+	Replaced:     yesCallback:(SEGAttemptGoalYesCallback) yesCallback
+	With:     yesCallback:(ByteGainAttemptGoalYesCallback) yesCallback
+	Replaced:     noCallback:(SEGAttemptGoalNoCallback _Nullable) noCallback
+	With:     noCallback:(ByteGainAttemptGoalNoCallback _Nullable) noCallback
+	Replaced:     SEGAttemptGoalPayload *payload = [[SEGAttemptGoalPayload alloc] initWithEvent:event
+	With:     ByteGainAttemptGoalPayload *payload = [[ByteGainAttemptGoalPayload alloc] initWithEvent:event
+	Replaced:                                                                        properties:SEGCoerceDictionary(properties)
+	With:                                                                        properties:ByteGainCoerceDictionary(properties)
+	Replaced:                                                                           context:SEGCoerceDictionary([options objectForKey:@"context"])
+	With:                                                                           context:ByteGainCoerceDictionary([options objectForKey:@"context"])
+	Replaced:                   result:(SEGGoalResult)result
+	With:                   result:(ByteGainGoalResult)result
+	Replaced:     SEGReportGoalResultPayload *payload = [[SEGReportGoalResultPayload alloc] initWithEvent:event
+	With:     ByteGainReportGoalResultPayload *payload = [[ByteGainReportGoalResultPayload alloc] initWithEvent:event
+	Replaced:                                                                                     context:SEGCoerceDictionary([options objectForKey:@"context"])
+	With:                                                                                     context:ByteGainCoerceDictionary([options objectForKey:@"context"])
+	Replaced:     SEGScreenPayload *payload = [[SEGScreenPayload alloc] initWithName:screenTitle
+	With:     ByteGainScreenPayload *payload = [[ByteGainScreenPayload alloc] initWithName:screenTitle
+	Replaced:                                                             properties:SEGCoerceDictionary(properties)
+	With:                                                             properties:ByteGainCoerceDictionary(properties)
+	Replaced:                                                                context:SEGCoerceDictionary([options objectForKey:@"context"])
+	With:                                                                context:ByteGainCoerceDictionary([options objectForKey:@"context"])
+	Replaced:     SEGGroupPayload *payload = [[SEGGroupPayload alloc] initWithGroupId:groupId
+	With:     ByteGainGroupPayload *payload = [[ByteGainGroupPayload alloc] initWithGroupId:groupId
+	Replaced:                                                                  traits:SEGCoerceDictionary(traits)
+	With:                                                                  traits:ByteGainCoerceDictionary(traits)
+	Replaced:                                                                 context:SEGCoerceDictionary([options objectForKey:@"context"])
+	With:                                                                 context:ByteGainCoerceDictionary([options objectForKey:@"context"])
+	Replaced:     SEGAliasPayload *payload = [[SEGAliasPayload alloc] initWithNewId:newId
+	With:     ByteGainAliasPayload *payload = [[ByteGainAliasPayload alloc] initWithNewId:newId
+	Replaced:                                                               context:SEGCoerceDictionary([options objectForKey:@"context"])
+	With:                                                               context:ByteGainCoerceDictionary([options objectForKey:@"context"])
+	Replaced:     NSString *anonymousId = [self.storage stringForKey:SEGAnonymousIdKey];
+	With:     NSString *anonymousId = [self.storage stringForKey:ByteGainAnonymousIdKey];
+	Replaced:     NSString *anonymousId = [self.storage stringForKey:kSEGAnonymousIdFilename];
+	With:     NSString *anonymousId = [self.storage stringForKey:kByteGainAnonymousIdFilename];
+	Replaced:         SEGLog(@"New anonymousId: %@", anonymousId);
+	With:         ByteGainLog(@"New anonymousId: %@", anonymousId);
+	Replaced:         [self.storage setString:anonymousId forKey:SEGAnonymousIdKey];
+	With:         [self.storage setString:anonymousId forKey:ByteGainAnonymousIdKey];
+	Replaced:         [self.storage setString:anonymousId forKey:kSEGAnonymousIdFilename];
+	With:         [self.storage setString:anonymousId forKey:kByteGainAnonymousIdFilename];
+	Replaced:     [self.storage setString:anonymousId forKey:SEGAnonymousIdKey];
+	With:     [self.storage setString:anonymousId forKey:ByteGainAnonymousIdKey];
+	Replaced:         for (id<SEGIntegrationFactory> factory in self.factories) {
+	With:         for (id<ByteGainIntegrationFactory> factory in self.factories) {
+	Replaced:                 id<SEGIntegration> integration = [factory createWithSettings:integrationSettings forAnalytics:self.analytics];
+	With:                 id<ByteGainIntegration> integration = [factory createWithSettings:integrationSettings forAnalytics:self.analytics];
+	Replaced:                 [[NSNotificationCenter defaultCenter] postNotificationName:SEGAnalyticsIntegrationDidStart object:key userInfo:nil];
+	With:                 [[NSNotificationCenter defaultCenter] postNotificationName:ByteGainAnalyticsIntegrationDidStart object:key userInfo:nil];
+	Replaced:                 SEGLog(@"No settings for %@. Skipping.", key);
+	With:                 ByteGainLog(@"No settings for %@. Skipping.", key);
+	Replaced:     [self.integrations enumerateKeysAndObjectsUsingBlock:^(NSString *key, id<SEGIntegration> integration, BOOL *stop) {
+	With:     [self.integrations enumerateKeysAndObjectsUsingBlock:^(NSString *key, id<ByteGainIntegration> integration, BOOL *stop) {
+	Replaced: - (void)invokeIntegration:(id<SEGIntegration>)integration key:(NSString *)key selector:(SEL)selector arguments:(NSArray *)arguments options:(NSDictionary *)options
+	With: - (void)invokeIntegration:(id<ByteGainIntegration>)integration key:(NSString *)key selector:(SEL)selector arguments:(NSArray *)arguments options:(NSDictionary *)options
+	Replaced:         SEGLog(@"Not sending call to %@ because it doesn't respond to %@.", key, NSStringFromSelector(selector));
+	With:         ByteGainLog(@"Not sending call to %@ because it doesn't respond to %@.", key, NSStringFromSelector(selector));
+	Replaced:         SEGLog(@"Not sending call to %@ because it is disabled in options.", key);
+	With:         ByteGainLog(@"Not sending call to %@ because it is disabled in options.", key);
+	Replaced:         SEGTrackPayload *eventPayload = arguments[0];
+	With:         ByteGainTrackPayload *eventPayload = arguments[0];
+	Replaced:             SEGLog(@"Not sending call to %@ because it is disabled in plan.", key);
+	With:             ByteGainLog(@"Not sending call to %@ because it is disabled in plan.", key);
+	Replaced:     SEGLog(@"Running: %@ with arguments %@ on integration: %@", eventType, arguments, key);
+	With:     ByteGainLog(@"Running: %@ with arguments %@ on integration: %@", eventType, arguments, key);
+	Replaced:     struct objc_method_description description = protocol_getMethodDescription(@protocol(SEGIntegration), selector, NO, YES);
+	With:     struct objc_method_description description = protocol_getMethodDescription(@protocol(ByteGainIntegration), selector, NO, YES);
+	Replaced:     SEGLog(@"Queueing: %@", obj);
+	With:     ByteGainLog(@"Queueing: %@", obj);
+	Replaced: @interface SEGPayload (Options)
+	With: @interface ByteGainPayload (Options)
+	Replaced: @implementation SEGPayload (Options)
+	With: @implementation ByteGainPayload (Options)
+	Replaced: @implementation SEGIntegrationsManager (SEGMiddleware)
+	With: @implementation ByteGainIntegrationsManager (ByteGainMiddleware)
+	Replaced: - (void)context:(SEGContext *)context next:(void (^_Nonnull)(SEGContext *_Nullable))next
+	With: - (void)context:(ByteGainContext *)context next:(void (^_Nonnull)(ByteGainContext *_Nullable))next
+	Replaced:         case SEGEventTypeIdentify: {
+	With:         case ByteGainEventTypeIdentify: {
+	Replaced:             SEGIdentifyPayload *p = (SEGIdentifyPayload *)context.payload;
+	With:             ByteGainIdentifyPayload *p = (ByteGainIdentifyPayload *)context.payload;
+	Replaced:         case SEGEventTypeTrack: {
+	With:         case ByteGainEventTypeTrack: {
+	Replaced:             SEGTrackPayload *p = (SEGTrackPayload *)context.payload;
+	With:             ByteGainTrackPayload *p = (ByteGainTrackPayload *)context.payload;
+	Replaced:         case SEGEventTypeScreen: {
+	With:         case ByteGainEventTypeScreen: {
+	Replaced:             SEGScreenPayload *p = (SEGScreenPayload *)context.payload;
+	With:             ByteGainScreenPayload *p = (ByteGainScreenPayload *)context.payload;
+	Replaced:         case SEGEventTypeGroup: {
+	With:         case ByteGainEventTypeGroup: {
+	Replaced:             SEGGroupPayload *p = (SEGGroupPayload *)context.payload;
+	With:             ByteGainGroupPayload *p = (ByteGainGroupPayload *)context.payload;
+	Replaced:         case SEGEventTypeAlias: {
+	With:         case ByteGainEventTypeAlias: {
+	Replaced:             SEGAliasPayload *p = (SEGAliasPayload *)context.payload;
+	With:             ByteGainAliasPayload *p = (ByteGainAliasPayload *)context.payload;
+	Replaced:         case SEGEventTypeReset:
+	With:         case ByteGainEventTypeReset:
+	Replaced:         case SEGEventTypeFlush:
+	With:         case ByteGainEventTypeFlush:
+	Replaced:         case SEGEventTypeReceivedRemoteNotification:
+	With:         case ByteGainEventTypeReceivedRemoteNotification:
+	Replaced:                       [(SEGRemoteNotificationPayload *)context.payload userInfo]];
+	With:                       [(ByteGainRemoteNotificationPayload *)context.payload userInfo]];
+	Replaced:         case SEGEventTypeFailedToRegisterForRemoteNotifications:
+	With:         case ByteGainEventTypeFailedToRegisterForRemoteNotifications:
+	Replaced:                       [(SEGRemoteNotificationPayload *)context.payload error]];
+	With:                       [(ByteGainRemoteNotificationPayload *)context.payload error]];
+	Replaced:         case SEGEventTypeRegisteredForRemoteNotifications:
+	With:         case ByteGainEventTypeRegisteredForRemoteNotifications:
+	Replaced:                       [(SEGRemoteNotificationPayload *)context.payload deviceToken]];
+	With:                       [(ByteGainRemoteNotificationPayload *)context.payload deviceToken]];
+	Replaced:         case SEGEventTypeHandleActionWithForRemoteNotification: {
+	With:         case ByteGainEventTypeHandleActionWithForRemoteNotification: {
+	Replaced:             SEGRemoteNotificationPayload *payload = (SEGRemoteNotificationPayload *)context.payload;
+	With:             ByteGainRemoteNotificationPayload *payload = (ByteGainRemoteNotificationPayload *)context.payload;
+	Replaced:         case SEGEventTypeApplicationLifecycle:
+	With:         case ByteGainEventTypeApplicationLifecycle:
+	Replaced:                       [(SEGApplicationLifecyclePayload *)context.payload notificationName]];
+	With:                       [(ByteGainApplicationLifecyclePayload *)context.payload notificationName]];
+	Replaced:         case SEGEventTypeContinueUserActivity:
+	With:         case ByteGainEventTypeContinueUserActivity:
+	Replaced:                       [(SEGContinueUserActivityPayload *)context.payload activity]];
+	With:                       [(ByteGainContinueUserActivityPayload *)context.payload activity]];
+	Replaced:         case SEGEventTypeOpenURL: {
+	With:         case ByteGainEventTypeOpenURL: {
+	Replaced:             SEGOpenURLPayload *payload = (SEGOpenURLPayload *)context.payload;
+	With:             ByteGainOpenURLPayload *payload = (ByteGainOpenURLPayload *)context.payload;
+	Replaced:         case SEGEventTypeUndefined:
+	With:         case ByteGainEventTypeUndefined:
+	Replaced:         case SEGEventTypeAttemptGoal: {
+	With:         case ByteGainEventTypeAttemptGoal: {
+	Replaced:             SEGAttemptGoalPayload *p = (SEGAttemptGoalPayload *)context.payload;
+	With:             ByteGainAttemptGoalPayload *p = (ByteGainAttemptGoalPayload *)context.payload;
+	Replaced:         case SEGEventTypeReportGoalResult: {
+	With:         case ByteGainEventTypeReportGoalResult: {
+	Replaced:             SEGReportGoalResultPayload *p = (SEGReportGoalResultPayload *)context.payload;
+	With:             ByteGainReportGoalResultPayload *p = (ByteGainReportGoalResultPayload *)context.payload;
+./Classes/Integrations/SEGGroupPayload.m
+	Replaced: @implementation SEGGroupPayload
+	With: @implementation ByteGainGroupPayload
+./Classes/Integrations/SEGPayload.m
+	Replaced: @implementation SEGPayload
+	With: @implementation ByteGainPayload
+	Replaced: @implementation SEGApplicationLifecyclePayload
+	With: @implementation ByteGainApplicationLifecyclePayload
+	Replaced: @implementation SEGRemoteNotificationPayload
+	With: @implementation ByteGainRemoteNotificationPayload
+	Replaced: @implementation SEGContinueUserActivityPayload
+	With: @implementation ByteGainContinueUserActivityPayload
+	Replaced: @implementation SEGOpenURLPayload
+	With: @implementation ByteGainOpenURLPayload
+./Classes/Integrations/SEGIdentifyPayload.h
+	Replaced: @interface SEGIdentifyPayload : SEGPayload
+	With: @interface ByteGainIdentifyPayload : ByteGainPayload
+./Classes/Integrations/SEGAliasPayload.h
+	Replaced: @interface SEGAliasPayload : SEGPayload
+	With: @interface ByteGainAliasPayload : ByteGainPayload
+./Classes/Integrations/SEGScreenPayload.m
+	Replaced: @implementation SEGScreenPayload
+	With: @implementation ByteGainScreenPayload
+./Vendor/SEGReachability.h
+	Replaced: extern NSString *const kSEGReachabilityChangedNotification;
+	With: extern NSString *const kByteGainReachabilityChangedNotification;
+	Replaced: typedef NS_ENUM(NSInteger, SEGNetworkStatus) {
+	With: typedef NS_ENUM(NSInteger, ByteGainNetworkStatus) {
+	Replaced:     SEGNotReachable = 0,
+	With:     ByteGainNotReachable = 0,
+	Replaced:     SEGReachableViaWiFi = 2,
+	With:     ByteGainReachableViaWiFi = 2,
+	Replaced:     SEGReachableViaWWAN = 1
+	With:     ByteGainReachableViaWWAN = 1
+	Replaced: @class SEGReachability;
+	With: @class ByteGainReachability;
+	Replaced: typedef void (^SEGNetworkReachable)(SEGReachability *reachability);
+	With: typedef void (^ByteGainNetworkReachable)(ByteGainReachability *reachability);
+	Replaced: typedef void (^SEGNetworkUnreachable)(SEGReachability *reachability);
+	With: typedef void (^ByteGainNetworkUnreachable)(ByteGainReachability *reachability);
+	Replaced: @interface SEGReachability : NSObject
+	With: @interface ByteGainReachability : NSObject
+	Replaced: @property (nonatomic, copy, nullable) SEGNetworkReachable reachableBlock;
+	With: @property (nonatomic, copy, nullable) ByteGainNetworkReachable reachableBlock;
+	Replaced: @property (nonatomic, copy, nullable) SEGNetworkUnreachable unreachableBlock;
+	With: @property (nonatomic, copy, nullable) ByteGainNetworkUnreachable unreachableBlock;
+	Replaced: + (SEGReachability *_Nullable)reachabilityWithHostname:(NSString *)hostname;
+	With: + (ByteGainReachability *_Nullable)reachabilityWithHostname:(NSString *)hostname;
+	Replaced: + (SEGReachability *_Nullable)reachabilityForInternetConnection;
+	With: + (ByteGainReachability *_Nullable)reachabilityForInternetConnection;
+	Replaced: + (SEGReachability *_Nullable)reachabilityForLocalWiFi;
+	With: + (ByteGainReachability *_Nullable)reachabilityForLocalWiFi;
+	Replaced: - (SEGReachability *)initWithReachabilityRef:(SCNetworkReachabilityRef)ref;
+	With: - (ByteGainReachability *)initWithReachabilityRef:(SCNetworkReachabilityRef)ref;
+	Replaced: - (SEGNetworkStatus)currentReachabilityStatus;
+	With: - (ByteGainNetworkStatus)currentReachabilityStatus;
+./Vendor/SEGReachability.m
+	Replaced: NSString *const kSEGReachabilityChangedNotification = @"kSEGReachabilityChangedNotification";
+	With: NSString *const kByteGainReachabilityChangedNotification = @"kByteGainReachabilityChangedNotification";
+	Replaced: @interface SEGReachability ()
+	With: @interface ByteGainReachability ()
+	Replaced:     SEGReachability *reachability = ((__bridge SEGReachability *)info);
+	With:     ByteGainReachability *reachability = ((__bridge ByteGainReachability *)info);
+	Replaced:     SEGReachability *reachability = ((SEGReachability *)info);
+	With:     ByteGainReachability *reachability = ((ByteGainReachability *)info);
+	Replaced: @implementation SEGReachability
+	With: @implementation ByteGainReachability
+	Replaced: + (SEGReachability *)reachabilityWithHostName:(NSString *)hostname
+	With: + (ByteGainReachability *)reachabilityWithHostName:(NSString *)hostname
+	Replaced:     return [SEGReachability reachabilityWithHostname:hostname];
+	With:     return [ByteGainReachability reachabilityWithHostname:hostname];
+	Replaced: + (SEGReachability *)reachabilityWithHostname:(NSString *)hostname
+	With: + (ByteGainReachability *)reachabilityWithHostname:(NSString *)hostname
+	Replaced: + (SEGReachability *)reachabilityWithAddress:(const struct sockaddr_in *)hostAddress
+	With: + (ByteGainReachability *)reachabilityWithAddress:(const struct sockaddr_in *)hostAddress
+	Replaced: + (SEGReachability *)reachabilityForInternetConnection
+	With: + (ByteGainReachability *)reachabilityForInternetConnection
+	Replaced: + (SEGReachability *)reachabilityForLocalWiFi
+	With: + (ByteGainReachability *)reachabilityForLocalWiFi
+	Replaced: - (SEGReachability *)initWithReachabilityRef:(SCNetworkReachabilityRef)ref
+	With: - (ByteGainReachability *)initWithReachabilityRef:(SCNetworkReachabilityRef)ref
+	Replaced: //SEGReachability: WR ct-----
+	With: //ByteGainReachability: WR ct-----
+	Replaced: //SEGReachability: -- -------
+	With: //ByteGainReachability: -- -------
+	Replaced: //SEGReachability: WR ct-----
+	With: //ByteGainReachability: WR ct-----
+	Replaced: //SEGReachability: -- -------
+	With: //ByteGainReachability: -- -------
+	Replaced: - (SEGNetworkStatus)currentReachabilityStatus
+	With: - (ByteGainNetworkStatus)currentReachabilityStatus
+	Replaced:             return SEGReachableViaWiFi;
+	With:             return ByteGainReachableViaWiFi;
+	Replaced:         return SEGReachableViaWWAN;
+	With:         return ByteGainReachableViaWWAN;
+	Replaced:     return SEGNotReachable;
+	With:     return ByteGainNotReachable;
+	Replaced:     SEGNetworkStatus temp = [self currentReachabilityStatus];
+	With:     ByteGainNetworkStatus temp = [self currentReachabilityStatus];
+	Replaced:     if (temp == SEGReachableViaWiFi) {
+	With:     if (temp == ByteGainReachableViaWiFi) {
+	Replaced:         [[NSNotificationCenter defaultCenter] postNotificationName:kSEGReachabilityChangedNotification
+	With:         [[NSNotificationCenter defaultCenter] postNotificationName:kByteGainReachabilityChangedNotification

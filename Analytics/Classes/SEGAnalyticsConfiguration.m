@@ -1,5 +1,5 @@
 //
-//  SEGIntegrationsManager.h
+//  ByteGainIntegrationsManager.h
 //  Analytics
 //
 //  Created by Tony Xiao on 9/20/16.
@@ -10,7 +10,7 @@
 #import "SEGCrypto.h"
 
 
-@implementation UIApplication (SEGApplicationProtocol)
+@implementation UIApplication (ByteGainApplicationProtocol)
 
 - (UIBackgroundTaskIdentifier)seg_beginBackgroundTaskWithName:(nullable NSString *)taskName expirationHandler:(void (^__nullable)(void))handler
 {
@@ -25,7 +25,7 @@
 @end
 
 
-@interface SEGAnalyticsConfiguration ()
+@interface ByteGainAnalyticsConfiguration ()
 
 @property (nonatomic, copy, readwrite) NSString *writeKey;
 @property (nonatomic, strong, readonly) NSMutableArray *factories;
@@ -33,11 +33,11 @@
 @end
 
 
-@implementation SEGAnalyticsConfiguration
+@implementation ByteGainAnalyticsConfiguration
 
 + (instancetype)configurationWithWriteKey:(NSString *)writeKey
 {
-    return [[SEGAnalyticsConfiguration alloc] initWithWriteKey:writeKey];
+    return [[ByteGainAnalyticsConfiguration alloc] initWithWriteKey:writeKey];
 }
 
 - (instancetype)initWithWriteKey:(NSString *)writeKey
@@ -67,7 +67,7 @@
     return self;
 }
 
-- (void)use:(id<SEGIntegrationFactory>)factory
+- (void)use:(id<ByteGainIntegrationFactory>)factory
 {
     [self.factories addObject:factory];
 }

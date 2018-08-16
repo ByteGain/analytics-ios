@@ -1,5 +1,5 @@
 //
-//  SEGStorage.h
+//  ByteGainStorage.h
 //  Analytics
 //
 //  Copyright © 2016 Segment. All rights reserved.
@@ -8,9 +8,9 @@
 #import <Foundation/Foundation.h>
 #import "SEGCrypto.h"
 
-@protocol SEGStorage <NSObject>
+@protocol ByteGainStorage <NSObject>
 
-@property (nonatomic, strong, nullable) id<SEGCrypto> crypto;
+@property (nonatomic, strong, nullable) id<ByteGainCrypto> crypto;
 
 - (void)removeKey:(NSString *_Nonnull)key;
 - (void)resetAll;

@@ -1,5 +1,5 @@
 //
-//  SEGUtils.h
+//  ByteGainUtils.h
 //
 //
 
@@ -7,7 +7,7 @@
 #import "SEGAnalyticsUtils.h"
 
 
-@interface SEGUtils : NSObject
+@interface ByteGainUtils : NSObject
 
 + (NSData *_Nullable)dataFromPlist:(nonnull id)plist;
 + (id _Nullable)plistFromData:(NSData *_Nonnull)data;

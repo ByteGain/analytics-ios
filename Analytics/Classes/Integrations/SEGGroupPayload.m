@@ -1,7 +1,7 @@
 #import "SEGGroupPayload.h"
 
 
-@implementation SEGGroupPayload
+@implementation ByteGainGroupPayload
 
 - (instancetype)initWithGroupId:(NSString *)groupId
                          traits:(NSDictionary *)traits

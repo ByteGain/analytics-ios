@@ -1,5 +1,5 @@
 //
-//  SEGIntegrationsManager.m
+//  ByteGainIntegrationsManager.m
 //  Analytics
 //
 //  Created by Tony Xiao on 9/20/16.
@@ -26,23 +26,23 @@
 #import "SEGScreenPayload.h"
 #import "SEGAliasPayload.h"
 
-NSString *SEGAnalyticsIntegrationDidStart = @"io.segment.analytics.integration.did.start";
-static NSString *const SEGAnonymousIdKey = @"SEGAnonymousId";
-static NSString *const kSEGAnonymousIdFilename = @"segment.anonymousId";
+NSString *ByteGainAnalyticsIntegrationDidStart = @"io.segment.analytics.integration.did.start";
+static NSString *const ByteGainAnonymousIdKey = @"ByteGainAnonymousId";
+static NSString *const kByteGainAnonymousIdFilename = @"segment.anonymousId";
 
 
-@interface SEGAnalyticsConfiguration (Private)
+@interface ByteGainAnalyticsConfiguration (Private)
 
 @property (nonatomic, strong) NSArray *factories;
 
 @end
 
 
-@interface SEGIntegrationsManager ()
+@interface ByteGainIntegrationsManager ()
 
-@property (nonatomic, strong) SEGAnalytics *analytics;
+@property (nonatomic, strong) ByteGainAnalytics *analytics;
 @property (nonatomic, strong) NSDictionary *cachedSettings;
-@property (nonatomic, strong) SEGAnalyticsConfiguration *configuration;
+@property (nonatomic, strong) ByteGainAnalyticsConfiguration *configuration;
 @property (nonatomic, strong) dispatch_queue_t serialQueue;
 @property (nonatomic, strong) NSMutableArray *messageQueue;
 @property (nonatomic, strong) NSArray *factories;
@@ -50,20 +50,20 @@ static NSString *const kSEGAnonymousIdFilename = @"segment.anonymousId";
 @property (nonatomic, strong) NSMutableDictionary *registeredIntegrations;
 @property (nonatomic) volatile BOOL initialized;
 @property (nonatomic, copy) NSString *cachedAnonymousId;
-@property (nonatomic, strong) SEGHTTPClient *httpClient;
+@property (nonatomic, strong) ByteGainHTTPClient *httpClient;
 @property (nonatomic, strong) NSURLSessionDataTask *settingsRequest;
-@property (nonatomic, strong) id<SEGStorage> storage;
+@property (nonatomic, strong) id<ByteGainStorage> storage;
 
 @end
 
 
-@implementation SEGIntegrationsManager
+@implementation ByteGainIntegrationsManager
 
 @synthesize cachedSettings = _cachedSettings;
 
-- (instancetype _Nonnull)initWithAnalytics:(SEGAnalytics *_Nonnull)analytics
+- (instancetype _Nonnull)initWithAnalytics:(ByteGainAnalytics *_Nonnull)analytics
 {
-    SEGAnalyticsConfiguration *configuration = analytics.configuration;
+    ByteGainAnalyticsConfiguration *configuration = analytics.configuration;
     NSCParameterAssert(configuration != nil);
 
     if (self = [super init]) {
@@ -71,15 +71,15 @@ static NSString *const kSEGAnonymousIdFilename = @"segment.anonymousId";
         self.configuration = configuration;
         self.serialQueue = seg_dispatch_queue_create_specific("io.segment.analytics", DISPATCH_QUEUE_SERIAL);
         self.messageQueue = [[NSMutableArray alloc] init];
-        self.httpClient = [[SEGHTTPClient alloc] initWithRequestFactory:configuration.requestFactory];
+        self.httpClient = [[ByteGainHTTPClient alloc] initWithRequestFactory:configuration.requestFactory];
 #if TARGET_OS_TV
-        self.storage = [[SEGUserDefaultsStorage alloc] initWithDefaults:[NSUserDefaults standardUserDefaults] namespacePrefix:nil crypto:configuration.crypto];
+        self.storage = [[ByteGainUserDefaultsStorage alloc] initWithDefaults:[NSUserDefaults standardUserDefaults] namespacePrefix:nil crypto:configuration.crypto];
 #else
-        self.storage = [[SEGFileStorage alloc] initWithFolder:[SEGFileStorage applicationSupportDirectoryURL] crypto:configuration.crypto];
+        self.storage = [[ByteGainFileStorage alloc] initWithFolder:[ByteGainFileStorage applicationSupportDirectoryURL] crypto:configuration.crypto];
 #endif
         self.cachedAnonymousId = [self loadOrGenerateAnonymousID:NO];
         NSMutableArray *factories = [[configuration factories] mutableCopy];
-        [factories addObject:[[SEGSegmentIntegrationFactory alloc] initWithHTTPClient:self.httpClient storage:self.storage]];
+        [factories addObject:[[ByteGainSegmentIntegrationFactory alloc] initWithHTTPClient:self.httpClient storage:self.storage]];
         self.factories = [factories copy];
         self.integrations = [NSMutableDictionary dictionaryWithCapacity:factories.count];
         self.registeredIntegrations = [NSMutableDictionary dictionaryWithCapacity:factories.count];
@@ -91,7 +91,7 @@ static NSString *const kSEGAnonymousIdFilename = @"segment.anonymousId";
         NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
 
         // Update settings on foreground
-        id<SEGApplicationProtocol> application = configuration.application;
+        id<ByteGainApplicationProtocol> application = configuration.application;
         if (application) {
             [nc addObserver:self selector:@selector(onAppForeground:) name:UIApplicationWillEnterForegroundNotification object:application];
         }
@@ -114,7 +114,7 @@ static NSString *const kSEGAnonymousIdFilename = @"segment.anonymousId";
 
 - (void)handleAppStateNotification:(NSString *)notificationName
 {
-    SEGLog(@"Application state change notification: %@", notificationName);
+    ByteGainLog(@"Application state change notification: %@", notificationName);
     static NSDictionary *selectorMapping;
     static dispatch_once_t selectorMappingOnce;
     dispatch_once(&selectorMappingOnce, ^{
@@ -160,10 +160,10 @@ static NSString *const kSEGAnonymousIdFilename = @"segment.anonymousId";
         anonymousId = self.cachedAnonymousId;
     }
 
-    SEGIdentifyPayload *payload = [[SEGIdentifyPayload alloc] initWithUserId:userId
+    ByteGainIdentifyPayload *payload = [[ByteGainIdentifyPayload alloc] initWithUserId:userId
                                                                  anonymousId:anonymousId
-                                                                      traits:SEGCoerceDictionary(traits)
-                                                                     context:SEGCoerceDictionary([options objectForKey:@"context"])
+                                                                      traits:ByteGainCoerceDictionary(traits)
+                                                                     context:ByteGainCoerceDictionary([options objectForKey:@"context"])
                                                                 integrations:[options objectForKey:@"integrations"]];
 
     [self callIntegrationsWithSelector:NSSelectorFromString(@"identify:")
@@ -178,9 +178,9 @@ static NSString *const kSEGAnonymousIdFilename = @"segment.anonymousId";
 {
     NSCAssert1(event.length > 0, @"event (%@) must not be empty.", event);
     
-    SEGTrackPayload *payload = [[SEGTrackPayload alloc] initWithEvent:event
-                                                           properties:SEGCoerceDictionary(properties)
-                                                              context:SEGCoerceDictionary([options objectForKey:@"context"])
+    ByteGainTrackPayload *payload = [[ByteGainTrackPayload alloc] initWithEvent:event
+                                                           properties:ByteGainCoerceDictionary(properties)
+                                                              context:ByteGainCoerceDictionary([options objectForKey:@"context"])
                                                          integrations:[options objectForKey:@"integrations"]];
     
     [self callIntegrationsWithSelector:NSSelectorFromString(@"track:")
@@ -194,14 +194,14 @@ static NSString *const kSEGAnonymousIdFilename = @"segment.anonymousId";
 - (void)attemptGoal:(NSString *)event
          properties:(NSDictionary *)properties
             options:(NSDictionary *)options
-    yesCallback:(SEGAttemptGoalYesCallback) yesCallback
-    noCallback:(SEGAttemptGoalNoCallback _Nullable) noCallback
+    yesCallback:(ByteGainAttemptGoalYesCallback) yesCallback
+    noCallback:(ByteGainAttemptGoalNoCallback _Nullable) noCallback
 {
     NSCAssert1(event.length > 0, @"event (%@) must not be empty.", event);
     
-    SEGAttemptGoalPayload *payload = [[SEGAttemptGoalPayload alloc] initWithEvent:event
-                                                                       properties:SEGCoerceDictionary(properties)
-                                                                          context:SEGCoerceDictionary([options objectForKey:@"context"])
+    ByteGainAttemptGoalPayload *payload = [[ByteGainAttemptGoalPayload alloc] initWithEvent:event
+                                                                       properties:ByteGainCoerceDictionary(properties)
+                                                                          context:ByteGainCoerceDictionary([options objectForKey:@"context"])
                                                                      integrations:[options objectForKey:@"integrations"]
                                                                   yesCallback:yesCallback
                                                                   noCallback:noCallback];
@@ -213,12 +213,12 @@ static NSString *const kSEGAnonymousIdFilename = @"segment.anonymousId";
 }
 
 - (void)reportGoalResult:(NSString *)event
-                  result:(SEGGoalResult)result
+                  result:(ByteGainGoalResult)result
                  options:(NSDictionary *)options
 {
-    SEGReportGoalResultPayload *payload = [[SEGReportGoalResultPayload alloc] initWithEvent:event
+    ByteGainReportGoalResultPayload *payload = [[ByteGainReportGoalResultPayload alloc] initWithEvent:event
                                                                                      result:result
-                                                                                    context:SEGCoerceDictionary([options objectForKey:@"context"])
+                                                                                    context:ByteGainCoerceDictionary([options objectForKey:@"context"])
                                                                                integrations:[options objectForKey:@"integrations"]];
     [self callIntegrationsWithSelector:NSSelectorFromString(@"reportGoalResult:") arguments:@[ payload ] options:options sync:false];
 }
@@ -229,9 +229,9 @@ static NSString *const kSEGAnonymousIdFilename = @"segment.anonymousId";
 {
     NSCAssert1(screenTitle.length > 0, @"screen name (%@) must not be empty.", screenTitle);
 
-    SEGScreenPayload *payload = [[SEGScreenPayload alloc] initWithName:screenTitle
-                                                            properties:SEGCoerceDictionary(properties)
-                                                               context:SEGCoerceDictionary([options objectForKey:@"context"])
+    ByteGainScreenPayload *payload = [[ByteGainScreenPayload alloc] initWithName:screenTitle
+                                                            properties:ByteGainCoerceDictionary(properties)
+                                                               context:ByteGainCoerceDictionary([options objectForKey:@"context"])
                                                           integrations:[options objectForKey:@"integrations"]];
 
     [self callIntegrationsWithSelector:NSSelectorFromString(@"screen:")
@@ -244,9 +244,9 @@ static NSString *const kSEGAnonymousIdFilename = @"segment.anonymousId";
 
 - (void)group:(NSString *)groupId traits:(NSDictionary *)traits options:(NSDictionary *)options
 {
-    SEGGroupPayload *payload = [[SEGGroupPayload alloc] initWithGroupId:groupId
-                                                                 traits:SEGCoerceDictionary(traits)
-                                                                context:SEGCoerceDictionary([options objectForKey:@"context"])
+    ByteGainGroupPayload *payload = [[ByteGainGroupPayload alloc] initWithGroupId:groupId
+                                                                 traits:ByteGainCoerceDictionary(traits)
+                                                                context:ByteGainCoerceDictionary([options objectForKey:@"context"])
                                                            integrations:[options objectForKey:@"integrations"]];
 
     [self callIntegrationsWithSelector:NSSelectorFromString(@"group:")
@@ -259,8 +259,8 @@ static NSString *const kSEGAnonymousIdFilename = @"segment.anonymousId";
 
 - (void)alias:(NSString *)newId options:(NSDictionary *)options
 {
-    SEGAliasPayload *payload = [[SEGAliasPayload alloc] initWithNewId:newId
-                                                              context:SEGCoerceDictionary([options objectForKey:@"context"])
+    ByteGainAliasPayload *payload = [[ByteGainAliasPayload alloc] initWithNewId:newId
+                                                              context:ByteGainCoerceDictionary([options objectForKey:@"context"])
                                                          integrations:[options objectForKey:@"integrations"]];
 
     [self callIntegrationsWithSelector:NSSelectorFromString(@"alias:")
@@ -320,9 +320,9 @@ static NSString *const kSEGAnonymousIdFilename = @"segment.anonymousId";
 - (NSString *)loadOrGenerateAnonymousID:(BOOL)reset
 {
 #if TARGET_OS_TV
-    NSString *anonymousId = [self.storage stringForKey:SEGAnonymousIdKey];
+    NSString *anonymousId = [self.storage stringForKey:ByteGainAnonymousIdKey];
 #else
-    NSString *anonymousId = [self.storage stringForKey:kSEGAnonymousIdFilename];
+    NSString *anonymousId = [self.storage stringForKey:kByteGainAnonymousIdFilename];
 #endif
 
     if (!anonymousId || reset) {
@@ -330,11 +330,11 @@ static NSString *const kSEGAnonymousIdFilename = @"segment.anonymousId";
         // identifierForVendor (iOS6 and later, can't be changed on logout),
         // or MAC address (blocked in iOS 7). For more info see https://segment.io/libraries/ios#ids
         anonymousId = GenerateUUIDString();
-        SEGLog(@"New anonymousId: %@", anonymousId);
+        ByteGainLog(@"New anonymousId: %@", anonymousId);
 #if TARGET_OS_TV
-        [self.storage setString:anonymousId forKey:SEGAnonymousIdKey];
+        [self.storage setString:anonymousId forKey:ByteGainAnonymousIdKey];
 #else
-        [self.storage setString:anonymousId forKey:kSEGAnonymousIdFilename];
+        [self.storage setString:anonymousId forKey:kByteGainAnonymousIdFilename];
 #endif
     }
     return anonymousId;
@@ -344,7 +344,7 @@ static NSString *const kSEGAnonymousIdFilename = @"segment.anonymousId";
 {
     self.cachedAnonymousId = anonymousId;
 #if TARGET_OS_TV
-    [self.storage setString:anonymousId forKey:SEGAnonymousIdKey];
+    [self.storage setString:anonymousId forKey:ByteGainAnonymousIdKey];
 #else
     [self.storage setString:anonymousId forKey:@"segment.anonymousId"];
 #endif
@@ -382,18 +382,18 @@ static NSString *const kSEGAnonymousIdFilename = @"segment.anonymousId";
         if (self.initialized) {
             return;
         }
-        for (id<SEGIntegrationFactory> factory in self.factories) {
+        for (id<ByteGainIntegrationFactory> factory in self.factories) {
             NSString *key = [factory key];
             NSDictionary *integrationSettings = [projectSettings objectForKey:key];
             if (integrationSettings) {
-                id<SEGIntegration> integration = [factory createWithSettings:integrationSettings forAnalytics:self.analytics];
+                id<ByteGainIntegration> integration = [factory createWithSettings:integrationSettings forAnalytics:self.analytics];
                 if (integration != nil) {
                     self.integrations[key] = integration;
                     self.registeredIntegrations[key] = @NO;
                 }
-                [[NSNotificationCenter defaultCenter] postNotificationName:SEGAnalyticsIntegrationDidStart object:key userInfo:nil];
+                [[NSNotificationCenter defaultCenter] postNotificationName:ByteGainAnalyticsIntegrationDidStart object:key userInfo:nil];
             } else {
-                SEGLog(@"No settings for %@. Skipping.", key);
+                ByteGainLog(@"No settings for %@. Skipping.", key);
             }
         }
         [self flushMessageQueue];
@@ -468,41 +468,41 @@ static NSString *const kSEGAnonymousIdFilename = @"segment.anonymousId";
 
 - (void)forwardSelector:(SEL)selector arguments:(NSArray *)arguments options:(NSDictionary *)options
 {
-    [self.integrations enumerateKeysAndObjectsUsingBlock:^(NSString *key, id<SEGIntegration> integration, BOOL *stop) {
+    [self.integrations enumerateKeysAndObjectsUsingBlock:^(NSString *key, id<ByteGainIntegration> integration, BOOL *stop) {
         [self invokeIntegration:integration key:key selector:selector arguments:arguments options:options];
     }];
 }
 
-- (void)invokeIntegration:(id<SEGIntegration>)integration key:(NSString *)key selector:(SEL)selector arguments:(NSArray *)arguments options:(NSDictionary *)options
+- (void)invokeIntegration:(id<ByteGainIntegration>)integration key:(NSString *)key selector:(SEL)selector arguments:(NSArray *)arguments options:(NSDictionary *)options
 {
     if (![integration respondsToSelector:selector]) {
-        SEGLog(@"Not sending call to %@ because it doesn't respond to %@.", key, NSStringFromSelector(selector));
+        ByteGainLog(@"Not sending call to %@ because it doesn't respond to %@.", key, NSStringFromSelector(selector));
         return;
     }
 
     if (![[self class] isIntegration:key enabledInOptions:options[@"integrations"]]) {
-        SEGLog(@"Not sending call to %@ because it is disabled in options.", key);
+        ByteGainLog(@"Not sending call to %@ because it is disabled in options.", key);
         return;
     }
 
     NSString *eventType = NSStringFromSelector(selector);
     if ([eventType hasPrefix:@"track:"]) {
-        SEGTrackPayload *eventPayload = arguments[0];
+        ByteGainTrackPayload *eventPayload = arguments[0];
         BOOL enabled = [[self class] isTrackEvent:eventPayload.event enabledForIntegration:key inPlan:self.cachedSettings[@"plan"]];
         if (!enabled) {
-            SEGLog(@"Not sending call to %@ because it is disabled in plan.", key);
+            ByteGainLog(@"Not sending call to %@ because it is disabled in plan.", key);
             return;
         }
     }
 
-    SEGLog(@"Running: %@ with arguments %@ on integration: %@", eventType, arguments, key);
+    ByteGainLog(@"Running: %@ with arguments %@ on integration: %@", eventType, arguments, key);
     NSInvocation *invocation = [self invocationForSelector:selector arguments:arguments];
     [invocation invokeWithTarget:integration];
 }
 
 - (NSInvocation *)invocationForSelector:(SEL)selector arguments:(NSArray *)arguments
 {
-    struct objc_method_description description = protocol_getMethodDescription(@protocol(SEGIntegration), selector, NO, YES);
+    struct objc_method_description description = protocol_getMethodDescription(@protocol(ByteGainIntegration), selector, NO, YES);
 
     NSMethodSignature *signature = [NSMethodSignature signatureWithObjCTypes:description.types];
 
@@ -518,7 +518,7 @@ static NSString *const kSEGAnonymousIdFilename = @"segment.anonymousId";
 - (void)queueSelector:(SEL)selector arguments:(NSArray *)arguments options:(NSDictionary *)options
 {
     NSArray *obj = @[ NSStringFromSelector(selector), arguments ?: @[], options ?: @{} ];
-    SEGLog(@"Queueing: %@", obj);
+    ByteGainLog(@"Queueing: %@", obj);
     [_messageQueue addObject:obj];
 }
 
@@ -550,12 +550,12 @@ static NSString *const kSEGAnonymousIdFilename = @"segment.anonymousId";
 @end
 
 
-@interface SEGPayload (Options)
+@interface ByteGainPayload (Options)
 @property (readonly) NSDictionary *options;
 @end
 
 
-@implementation SEGPayload (Options)
+@implementation ByteGainPayload (Options)
 
 // Combine context and integrations to form options
 - (NSDictionary *)options
@@ -569,84 +569,84 @@ static NSString *const kSEGAnonymousIdFilename = @"segment.anonymousId";
 @end
 
 
-@implementation SEGIntegrationsManager (SEGMiddleware)
+@implementation ByteGainIntegrationsManager (ByteGainMiddleware)
 
-- (void)context:(SEGContext *)context next:(void (^_Nonnull)(SEGContext *_Nullable))next
+- (void)context:(ByteGainContext *)context next:(void (^_Nonnull)(ByteGainContext *_Nullable))next
 {
     switch (context.eventType) {
-        case SEGEventTypeIdentify: {
-            SEGIdentifyPayload *p = (SEGIdentifyPayload *)context.payload;
+        case ByteGainEventTypeIdentify: {
+            ByteGainIdentifyPayload *p = (ByteGainIdentifyPayload *)context.payload;
             [self identify:p.userId traits:p.traits options:p.options];
             break;
         }
-        case SEGEventTypeTrack: {
-            SEGTrackPayload *p = (SEGTrackPayload *)context.payload;
+        case ByteGainEventTypeTrack: {
+            ByteGainTrackPayload *p = (ByteGainTrackPayload *)context.payload;
             [self track:p.event properties:p.properties options:p.options];
             break;
         }
-        case SEGEventTypeScreen: {
-            SEGScreenPayload *p = (SEGScreenPayload *)context.payload;
+        case ByteGainEventTypeScreen: {
+            ByteGainScreenPayload *p = (ByteGainScreenPayload *)context.payload;
             [self screen:p.name properties:p.properties options:p.options];
             break;
         }
-        case SEGEventTypeGroup: {
-            SEGGroupPayload *p = (SEGGroupPayload *)context.payload;
+        case ByteGainEventTypeGroup: {
+            ByteGainGroupPayload *p = (ByteGainGroupPayload *)context.payload;
             [self group:p.groupId traits:p.traits options:p.options];
             break;
         }
-        case SEGEventTypeAlias: {
-            SEGAliasPayload *p = (SEGAliasPayload *)context.payload;
+        case ByteGainEventTypeAlias: {
+            ByteGainAliasPayload *p = (ByteGainAliasPayload *)context.payload;
             [self alias:p.theNewId options:p.options];
             break;
         }
-        case SEGEventTypeReset:
+        case ByteGainEventTypeReset:
             [self reset];
             break;
-        case SEGEventTypeFlush:
+        case ByteGainEventTypeFlush:
             [self flush];
             break;
-        case SEGEventTypeReceivedRemoteNotification:
+        case ByteGainEventTypeReceivedRemoteNotification:
             [self receivedRemoteNotification:
-                      [(SEGRemoteNotificationPayload *)context.payload userInfo]];
+                      [(ByteGainRemoteNotificationPayload *)context.payload userInfo]];
             break;
-        case SEGEventTypeFailedToRegisterForRemoteNotifications:
+        case ByteGainEventTypeFailedToRegisterForRemoteNotifications:
             [self failedToRegisterForRemoteNotificationsWithError:
-                      [(SEGRemoteNotificationPayload *)context.payload error]];
+                      [(ByteGainRemoteNotificationPayload *)context.payload error]];
             break;
-        case SEGEventTypeRegisteredForRemoteNotifications:
+        case ByteGainEventTypeRegisteredForRemoteNotifications:
             [self registeredForRemoteNotificationsWithDeviceToken:
-                      [(SEGRemoteNotificationPayload *)context.payload deviceToken]];
+                      [(ByteGainRemoteNotificationPayload *)context.payload deviceToken]];
             break;
-        case SEGEventTypeHandleActionWithForRemoteNotification: {
-            SEGRemoteNotificationPayload *payload = (SEGRemoteNotificationPayload *)context.payload;
+        case ByteGainEventTypeHandleActionWithForRemoteNotification: {
+            ByteGainRemoteNotificationPayload *payload = (ByteGainRemoteNotificationPayload *)context.payload;
             [self handleActionWithIdentifier:payload.actionIdentifier
                        forRemoteNotification:payload.userInfo];
             break;
         }
-        case SEGEventTypeApplicationLifecycle:
+        case ByteGainEventTypeApplicationLifecycle:
             [self handleAppStateNotification:
-                      [(SEGApplicationLifecyclePayload *)context.payload notificationName]];
+                      [(ByteGainApplicationLifecyclePayload *)context.payload notificationName]];
             break;
-        case SEGEventTypeContinueUserActivity:
+        case ByteGainEventTypeContinueUserActivity:
             [self continueUserActivity:
-                      [(SEGContinueUserActivityPayload *)context.payload activity]];
+                      [(ByteGainContinueUserActivityPayload *)context.payload activity]];
             break;
-        case SEGEventTypeOpenURL: {
-            SEGOpenURLPayload *payload = (SEGOpenURLPayload *)context.payload;
+        case ByteGainEventTypeOpenURL: {
+            ByteGainOpenURLPayload *payload = (ByteGainOpenURLPayload *)context.payload;
             [self openURL:payload.url options:payload.options];
             break;
         }
-        case SEGEventTypeUndefined:
+        case ByteGainEventTypeUndefined:
             NSAssert(NO, @"Received context with undefined event type %@", context);
             NSLog(@"[ERROR]: Received context with undefined event type %@", context);
             break;
-        case SEGEventTypeAttemptGoal: {
-            SEGAttemptGoalPayload *p = (SEGAttemptGoalPayload *)context.payload;
+        case ByteGainEventTypeAttemptGoal: {
+            ByteGainAttemptGoalPayload *p = (ByteGainAttemptGoalPayload *)context.payload;
             [self attemptGoal:p.event properties:p.properties options:p.options yesCallback:p.yesCallback noCallback:p.noCallback];
             break;
         }
-        case SEGEventTypeReportGoalResult: {
-            SEGReportGoalResultPayload *p = (SEGReportGoalResultPayload *)context.payload;
+        case ByteGainEventTypeReportGoalResult: {
+            ByteGainReportGoalResultPayload *p = (ByteGainReportGoalResultPayload *)context.payload;
             [self reportGoalResult:p.event result:p.result options:p.options];
             break;
         }

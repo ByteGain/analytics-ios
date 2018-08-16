@@ -4,7 +4,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 
-@interface SEGPayload : NSObject
+@interface ByteGainPayload : NSObject
 
 @property (nonatomic, readonly) JSON_DICT context;
 @property (nonatomic, readonly) JSON_DICT integrations;
@@ -14,7 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 
 
-@interface SEGApplicationLifecyclePayload : SEGPayload
+@interface ByteGainApplicationLifecyclePayload : ByteGainPayload
 
 @property (nonatomic, strong) NSString *notificationName;
 
@@ -24,14 +24,14 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 
 
-@interface SEGContinueUserActivityPayload : SEGPayload
+@interface ByteGainContinueUserActivityPayload : ByteGainPayload
 
 @property (nonatomic, strong) NSUserActivity *activity;
 
 @end
 
 
-@interface SEGOpenURLPayload : SEGPayload
+@interface ByteGainOpenURLPayload : ByteGainPayload
 
 @property (nonatomic, strong) NSURL *url;
 @property (nonatomic, strong) NSDictionary *options;
@@ -41,19 +41,19 @@ NS_ASSUME_NONNULL_BEGIN
 NS_ASSUME_NONNULL_END
 
 
-@interface SEGRemoteNotificationPayload : SEGPayload
+@interface ByteGainRemoteNotificationPayload : ByteGainPayload
 
-// SEGEventTypeHandleActionWithForRemoteNotification
+// ByteGainEventTypeHandleActionWithForRemoteNotification
 @property (nonatomic, strong, nullable) NSString *actionIdentifier;
 
-// SEGEventTypeHandleActionWithForRemoteNotification
-// SEGEventTypeReceivedRemoteNotification
+// ByteGainEventTypeHandleActionWithForRemoteNotification
+// ByteGainEventTypeReceivedRemoteNotification
 @property (nonatomic, strong, nullable) NSDictionary *userInfo;
 
-// SEGEventTypeFailedToRegisterForRemoteNotifications
+// ByteGainEventTypeFailedToRegisterForRemoteNotifications
 @property (nonatomic, strong, nullable) NSError *error;
 
-// SEGEventTypeRegisteredForRemoteNotifications
+// ByteGainEventTypeRegisteredForRemoteNotifications
 @property (nonatomic, strong, nullable) NSData *deviceToken;
 
 @end

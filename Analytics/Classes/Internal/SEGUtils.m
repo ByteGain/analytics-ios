@@ -1,12 +1,12 @@
 //
-//  SEGUtils.m
+//  ByteGainUtils.m
 //
 //
 
 #import "SEGUtils.h"
 
 
-@implementation SEGUtils
+@implementation ByteGainUtils
 
 + (NSData *_Nullable)dataFromPlist:(nonnull id)plist
 {
@@ -16,7 +16,7 @@
                                                              options:0
                                                                error:&error];
     if (error) {
-        SEGLog(@"Unable to serialize data from plist object", error, plist);
+        ByteGainLog(@"Unable to serialize data from plist object", error, plist);
     }
     return data;
 }
@@ -29,7 +29,7 @@
                                                           format:nil
                                                            error:&error];
     if (error) {
-        SEGLog(@"Unable to parse plist from data %@", error);
+        ByteGainLog(@"Unable to parse plist from data %@", error);
     }
     return plist;
 }

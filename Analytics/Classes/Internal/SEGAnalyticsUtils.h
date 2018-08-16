@@ -22,15 +22,15 @@ void seg_dispatch_specific_sync(dispatch_queue_t queue, dispatch_block_t block);
 
 // Logging
 
-void SEGSetShowDebugLogs(BOOL showDebugLogs);
-void SEGLog(NSString *format, ...);
+void ByteGainSetShowDebugLogs(BOOL showDebugLogs);
+void ByteGainLog(NSString *format, ...);
 
 // JSON Utils
 
-JSON_DICT SEGCoerceDictionary(NSDictionary *_Nullable dict);
+JSON_DICT ByteGainCoerceDictionary(NSDictionary *_Nullable dict);
 
-NSString *_Nullable SEGIDFA(void);
+NSString *_Nullable ByteGainIDFA(void);
 
-NSString *SEGEventNameForScreenTitle(NSString *title);
+NSString *ByteGainEventNameForScreenTitle(NSString *title);
 
 NS_ASSUME_NONNULL_END

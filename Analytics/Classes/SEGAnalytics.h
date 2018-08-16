@@ -9,29 +9,29 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  * This object provides an API for recording analytics.
  */
-@class SEGAnalyticsConfiguration;
+@class ByteGainAnalyticsConfiguration;
 
 
-@interface SEGAnalytics : NSObject
+@interface ByteGainAnalytics : NSObject
 
 /**
  * Used by the analytics client to configure various options.
  */
-@property (nonatomic, strong, readonly) SEGAnalyticsConfiguration *configuration;
+@property (nonatomic, strong, readonly) ByteGainAnalyticsConfiguration *configuration;
 
 /**
  * Setup this analytics client instance.
  *
  * @param configuration The configuration used to setup the client.
  */
-- (instancetype)initWithConfiguration:(SEGAnalyticsConfiguration *)configuration;
+- (instancetype)initWithConfiguration:(ByteGainAnalyticsConfiguration *)configuration;
 
 /**
  * Setup the analytics client.
  *
  * @param configuration The configuration used to setup the client.
  */
-+ (void)setupWithConfiguration:(SEGAnalyticsConfiguration *)configuration;
++ (void)setupWithConfiguration:(ByteGainAnalyticsConfiguration *)configuration;
 
 /**
  * Enabled/disables debug logging to trace your data going through the SDK.
@@ -110,8 +110,8 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)screen:(NSString *)screenTitle properties:(SERIALIZABLE_DICT _Nullable)properties;
 - (void)screen:(NSString *)screenTitle;
 
-typedef void(^SEGGoalMakeAttemptCallback)(NSString * _Nullable variation);
-typedef void(^SEGGoalDontMakeAttemptCallback)(void);
+typedef void(^ByteGainGoalMakeAttemptCallback)(NSString * _Nullable variation);
+typedef void(^ByteGainGoalDontMakeAttemptCallback)(void);
 
 /*!
  * @method
@@ -130,11 +130,11 @@ typedef void(^SEGGoalDontMakeAttemptCallback)(void);
  * corresponding callback to be run.  For the 'success' case, a variation name can be supplied as the value for the key 'variation'.
  */
 - (void)    attemptGoal:(NSString *)goalName
-    makeAttemptCallback:(SEGGoalMakeAttemptCallback)yesCallback
-dontMakeAttemptCallback:(SEGGoalDontMakeAttemptCallback)noCallback
+    makeAttemptCallback:(ByteGainGoalMakeAttemptCallback)yesCallback
+dontMakeAttemptCallback:(ByteGainGoalDontMakeAttemptCallback)noCallback
                 options:(NSDictionary * _Nullable)options;
-- (void)attemptGoal:(NSString *)goalName makeAttemptCallback:(SEGGoalMakeAttemptCallback)makeAttemptCallback dontMakeAttemptCallback:(SEGGoalDontMakeAttemptCallback)dontMakeAttemptCallback;
-- (void)attemptGoal:(NSString *)goalName makeAttemptCallback:(SEGGoalMakeAttemptCallback)makeAttemptCallback;
+- (void)attemptGoal:(NSString *)goalName makeAttemptCallback:(ByteGainGoalMakeAttemptCallback)makeAttemptCallback dontMakeAttemptCallback:(ByteGainGoalDontMakeAttemptCallback)dontMakeAttemptCallback;
+- (void)attemptGoal:(NSString *)goalName makeAttemptCallback:(ByteGainGoalMakeAttemptCallback)makeAttemptCallback;
 
 /*!
  * @method
@@ -142,8 +142,8 @@ dontMakeAttemptCallback:(SEGGoalDontMakeAttemptCallback)noCallback
  * @abstract
  * Report whether an attempted goal was successful or not.
  */
-- (void)reportGoalResult:(NSString*)goalName result:(SEGGoalResult)result options:(SERIALIZABLE_DICT _Nullable)options;
-- (void)reportGoalResult:(NSString*)goalName result:(SEGGoalResult)result;
+- (void)reportGoalResult:(NSString*)goalName result:(ByteGainGoalResult)result options:(SERIALIZABLE_DICT _Nullable)options;
+- (void)reportGoalResult:(NSString*)goalName result:(ByteGainGoalResult)result;
 
 /*!
  @method
@@ -251,7 +251,7 @@ dontMakeAttemptCallback:(SEGGoalDontMakeAttemptCallback)noCallback
 - (NSString *)getAnonymousId;
 
 /** Returns the configuration used to create the analytics client. */
-- (SEGAnalyticsConfiguration *)configuration;
+- (ByteGainAnalyticsConfiguration *)configuration;
 
 
 @end

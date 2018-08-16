@@ -1,5 +1,5 @@
 //
-//  SEGContext.m
+//  ByteGainContext.m
 //  Analytics
 //
 //  Created by Tony Xiao on 9/19/16.
@@ -9,19 +9,19 @@
 #import "SEGContext.h"
 
 
-@interface SEGContext () <SEGMutableContext>
+@interface ByteGainContext () <ByteGainMutableContext>
 
-@property (nonatomic) SEGEventType eventType;
+@property (nonatomic) ByteGainEventType eventType;
 @property (nonatomic, nullable) NSString *userId;
 @property (nonatomic, nullable) NSString *anonymousId;
-@property (nonatomic, nullable) SEGPayload *payload;
+@property (nonatomic, nullable) ByteGainPayload *payload;
 @property (nonatomic, nullable) NSError *error;
 @property (nonatomic) BOOL debug;
 
 @end
 
 
-@implementation SEGContext
+@implementation ByteGainContext
 
 - (instancetype)init
 {
@@ -30,7 +30,7 @@
                                  userInfo:nil];
 }
 
-- (instancetype)initWithAnalytics:(SEGAnalytics *)analytics
+- (instancetype)initWithAnalytics:(ByteGainAnalytics *)analytics
 {
     if (self = [super init]) {
         __analytics = analytics;
@@ -46,15 +46,15 @@
     return self;
 }
 
-- (SEGContext *_Nonnull)modify:(void (^_Nonnull)(id<SEGMutableContext> _Nonnull ctx))modify
+- (ByteGainContext *_Nonnull)modify:(void (^_Nonnull)(id<ByteGainMutableContext> _Nonnull ctx))modify
 {
-    // We're also being a bit clever here by implementing SEGContext actually as a mutable
+    // We're also being a bit clever here by implementing ByteGainContext actually as a mutable
     // object but hiding that implementation detail from consumer of the API.
     // In production also instead of copying self we simply just return self
     // because the net effect is the same anyways. In the end we get a lot of the benefits
     // of immutable data structure without the cost of having to allocate and reallocate
     // objects over and over again.
-    SEGContext *context = self.debug ? [self copy] : self;
+    ByteGainContext *context = self.debug ? [self copy] : self;
     modify(context);
     // TODO: We could probably add some validation here that the newly modified context
     // is actualy valid. For example, `eventType` should match `paylaod` class.
@@ -66,7 +66,7 @@
 
 - (id)copyWithZone:(NSZone *)zone
 {
-    SEGContext *ctx = [[SEGContext allocWithZone:zone] initWithAnalytics:self._analytics];
+    ByteGainContext *ctx = [[ByteGainContext allocWithZone:zone] initWithAnalytics:self._analytics];
     ctx.eventType = self.eventType;
     ctx.userId = self.userId;
     ctx.anonymousId = self.anonymousId;

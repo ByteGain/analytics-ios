@@ -1,5 +1,5 @@
 //
-//  SEGFileStorage.h
+//  ByteGainFileStorage.h
 //  Analytics
 //
 //  Copyright © 2016 Segment. All rights reserved.
@@ -9,12 +9,12 @@
 #import "SEGStorage.h"
 
 
-@interface SEGFileStorage : NSObject <SEGStorage>
+@interface ByteGainFileStorage : NSObject <ByteGainStorage>
 
-@property (nonatomic, strong, nullable) id<SEGCrypto> crypto;
+@property (nonatomic, strong, nullable) id<ByteGainCrypto> crypto;
 
 - (instancetype _Nonnull)init;
-- (instancetype _Nonnull)initWithFolder:(NSURL *_Nonnull)folderURL crypto:(id<SEGCrypto> _Nullable)crypto;
+- (instancetype _Nonnull)initWithFolder:(NSURL *_Nonnull)folderURL crypto:(id<ByteGainCrypto> _Nullable)crypto;
 
 - (NSURL *_Nonnull)urlForKey:(NSString *_Nonnull)key;
 

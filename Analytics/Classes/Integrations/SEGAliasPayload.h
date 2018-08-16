@@ -4,7 +4,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 
-@interface SEGAliasPayload : SEGPayload
+@interface ByteGainAliasPayload : ByteGainPayload
 
 @property (nonatomic, readonly) NSString *theNewId;
 

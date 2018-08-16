@@ -1,7 +1,7 @@
 #import "SEGIdentifyPayload.h"
 
 
-@implementation SEGIdentifyPayload
+@implementation ByteGainIdentifyPayload
 
 - (instancetype)initWithUserId:(NSString *)userId
                    anonymousId:(NSString *)anonymousId

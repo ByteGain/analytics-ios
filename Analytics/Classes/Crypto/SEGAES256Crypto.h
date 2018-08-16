@@ -1,5 +1,5 @@
 //
-//  SEGAES256Crypto.h
+//  ByteGainAES256Crypto.h
 //  Analytics
 //
 //  Copyright © 2016 Segment. All rights reserved.
@@ -9,7 +9,7 @@
 #import "SEGCrypto.h"
 
 
-@interface SEGAES256Crypto : NSObject <SEGCrypto>
+@interface ByteGainAES256Crypto : NSObject <ByteGainCrypto>
 
 @property (nonatomic, readonly, nonnull) NSString *password;
 @property (nonatomic, readonly, nonnull) NSData *salt;

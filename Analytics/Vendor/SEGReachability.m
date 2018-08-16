@@ -30,10 +30,10 @@
 #import "SEGReachability.h"
 
 
-NSString *const kSEGReachabilityChangedNotification = @"kSEGReachabilityChangedNotification";
+NSString *const kByteGainReachabilityChangedNotification = @"kByteGainReachabilityChangedNotification";
 
 
-@interface SEGReachability ()
+@interface ByteGainReachability ()
 
 @property (nonatomic, assign) SCNetworkReachabilityRef reachabilityRef;
 
@@ -75,9 +75,9 @@ static void TMReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkRea
 {
 #pragma unused(target)
 #if __has_feature(objc_arc)
-    SEGReachability *reachability = ((__bridge SEGReachability *)info);
+    ByteGainReachability *reachability = ((__bridge ByteGainReachability *)info);
 #else
-    SEGReachability *reachability = ((SEGReachability *)info);
+    ByteGainReachability *reachability = ((ByteGainReachability *)info);
 #endif
 
     // We probably don't need an autoreleasepool here, as GCD docs state each queue has its own autorelease pool,
@@ -89,7 +89,7 @@ static void TMReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkRea
 }
 
 
-@implementation SEGReachability
+@implementation ByteGainReachability
 
 @synthesize reachabilityRef;
 @synthesize reachabilitySerialQueue;
@@ -103,12 +103,12 @@ static void TMReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkRea
 
 #pragma mark - Class Constructor Methods
 
-+ (SEGReachability *)reachabilityWithHostName:(NSString *)hostname
++ (ByteGainReachability *)reachabilityWithHostName:(NSString *)hostname
 {
-    return [SEGReachability reachabilityWithHostname:hostname];
+    return [ByteGainReachability reachabilityWithHostname:hostname];
 }
 
-+ (SEGReachability *)reachabilityWithHostname:(NSString *)hostname
++ (ByteGainReachability *)reachabilityWithHostname:(NSString *)hostname
 {
     SCNetworkReachabilityRef ref = SCNetworkReachabilityCreateWithName(NULL, [hostname UTF8String]);
     if (ref) {
@@ -125,7 +125,7 @@ static void TMReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkRea
     return nil;
 }
 
-+ (SEGReachability *)reachabilityWithAddress:(const struct sockaddr_in *)hostAddress
++ (ByteGainReachability *)reachabilityWithAddress:(const struct sockaddr_in *)hostAddress
 {
     SCNetworkReachabilityRef ref = SCNetworkReachabilityCreateWithAddress(kCFAllocatorDefault, (const struct sockaddr *)hostAddress);
     if (ref) {
@@ -142,7 +142,7 @@ static void TMReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkRea
     return nil;
 }
 
-+ (SEGReachability *)reachabilityForInternetConnection
++ (ByteGainReachability *)reachabilityForInternetConnection
 {
     struct sockaddr_in zeroAddress;
     bzero(&zeroAddress, sizeof(zeroAddress));
@@ -152,7 +152,7 @@ static void TMReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkRea
     return [self reachabilityWithAddress:&zeroAddress];
 }
 
-+ (SEGReachability *)reachabilityForLocalWiFi
++ (ByteGainReachability *)reachabilityForLocalWiFi
 {
     struct sockaddr_in localWifiAddress;
     bzero(&localWifiAddress, sizeof(localWifiAddress));
@@ -167,7 +167,7 @@ static void TMReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkRea
 
 // Initialization methods
 
-- (SEGReachability *)initWithReachabilityRef:(SCNetworkReachabilityRef)ref
+- (ByteGainReachability *)initWithReachabilityRef:(SCNetworkReachabilityRef)ref
 {
     self = [super init];
     if (self != nil) {
@@ -292,10 +292,10 @@ static void TMReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkRea
 
 // This is for the case where you flick the airplane mode;
 // you end up getting something like this:
-//SEGReachability: WR ct-----
-//SEGReachability: -- -------
-//SEGReachability: WR ct-----
-//SEGReachability: -- -------
+//ByteGainReachability: WR ct-----
+//ByteGainReachability: -- -------
+//ByteGainReachability: WR ct-----
+//ByteGainReachability: -- -------
 // We treat this as 4 UNREACHABLE triggers - really apple should do better than this
 
 #define testcase (kSCNetworkReachabilityFlagsConnectionRequired | kSCNetworkReachabilityFlagsTransientConnection)
@@ -421,18 +421,18 @@ static void TMReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkRea
 
 #pragma mark - reachability status stuff
 
-- (SEGNetworkStatus)currentReachabilityStatus
+- (ByteGainNetworkStatus)currentReachabilityStatus
 {
     if ([self isReachable]) {
         if ([self isReachableViaWiFi])
-            return SEGReachableViaWiFi;
+            return ByteGainReachableViaWiFi;
 
 #if TARGET_OS_IPHONE
-        return SEGReachableViaWWAN;
+        return ByteGainReachableViaWWAN;
 #endif
     }
 
-    return SEGNotReachable;
+    return ByteGainNotReachable;
 }
 
 - (SCNetworkReachabilityFlags)reachabilityFlags
@@ -448,13 +448,13 @@ static void TMReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkRea
 
 - (NSString *)currentReachabilityString
 {
-    SEGNetworkStatus temp = [self currentReachabilityStatus];
+    ByteGainNetworkStatus temp = [self currentReachabilityStatus];
 
     if (temp == reachableOnWWAN) {
         // Updated for the fact that we have CDMA phones now!
         return NSLocalizedString(@"Cellular", @"");
     }
-    if (temp == SEGReachableViaWiFi) {
+    if (temp == ByteGainReachableViaWiFi) {
         return NSLocalizedString(@"WiFi", @"");
     }
 
@@ -482,7 +482,7 @@ static void TMReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkRea
 
     // this makes sure the change notification happens on the MAIN THREAD
     dispatch_async(dispatch_get_main_queue(), ^{
-        [[NSNotificationCenter defaultCenter] postNotificationName:kSEGReachabilityChangedNotification
+        [[NSNotificationCenter defaultCenter] postNotificationName:kByteGainReachabilityChangedNotification
                                                             object:self];
     });
 }

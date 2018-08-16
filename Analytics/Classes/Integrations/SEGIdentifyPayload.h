@@ -4,7 +4,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 
-@interface SEGIdentifyPayload : SEGPayload
+@interface ByteGainIdentifyPayload : ByteGainPayload
 
 @property (nonatomic, readonly, nullable) NSString *userId;
 

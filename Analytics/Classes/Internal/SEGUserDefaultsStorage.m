@@ -1,5 +1,5 @@
 //
-//  SEGUserDefaultsStorage.m
+//  ByteGainUserDefaultsStorage.m
 //  Analytics
 //
 //  Created by Tony Xiao on 8/24/16.
@@ -11,9 +11,9 @@
 #import "SEGCrypto.h"
 
 
-@implementation SEGUserDefaultsStorage
+@implementation ByteGainUserDefaultsStorage
 
-- (instancetype)initWithDefaults:(NSUserDefaults *)defaults namespacePrefix:(NSString *)namespacePrefix crypto:(id<SEGCrypto>)crypto
+- (instancetype)initWithDefaults:(NSUserDefaults *)defaults namespacePrefix:(NSString *)namespacePrefix crypto:(id<ByteGainCrypto>)crypto
 {
     if (self = [super init]) {
         _defaults = defaults;
@@ -65,7 +65,7 @@
     }
     NSData *data = [self.defaults objectForKey:key];
     if (!data) {
-        SEGLog(@"WARNING: No data file for key %@", key);
+        ByteGainLog(@"WARNING: No data file for key %@", key);
         return nil;
     }
     return [self.crypto decrypt:data];
@@ -133,12 +133,12 @@
 - (id _Nullable)plistForKey:(NSString *)key
 {
     NSData *data = [self dataForKey:key];
-    return data ? [SEGUtils plistFromData:data] : nil;
+    return data ? [ByteGainUtils plistFromData:data] : nil;
 }
 
 - (void)setPlist:(id _Nonnull)plist forKey:(NSString *)key
 {
-    NSData *data = [SEGUtils dataFromPlist:plist];
+    NSData *data = [ByteGainUtils dataFromPlist:plist];
     if (data) {
         [self setData:data forKey:key];
     }

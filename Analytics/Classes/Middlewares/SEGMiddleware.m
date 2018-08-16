@@ -1,5 +1,5 @@
 //
-//  SEGMiddleware.m
+//  ByteGainMiddleware.m
 //  Analytics
 //
 //  Created by Tony Xiao on 9/19/16.
@@ -10,9 +10,9 @@
 #import "SEGMiddleware.h"
 
 
-@implementation SEGBlockMiddleware
+@implementation ByteGainBlockMiddleware
 
-- (instancetype)initWithBlock:(SEGMiddlewareBlock)block
+- (instancetype)initWithBlock:(ByteGainMiddlewareBlock)block
 {
     if (self = [super init]) {
         _block = block;
@@ -20,7 +20,7 @@
     return self;
 }
 
-- (void)context:(SEGContext *)context next:(SEGMiddlewareNext)next
+- (void)context:(ByteGainContext *)context next:(ByteGainMiddlewareNext)next
 {
     self.block(context, next);
 }
@@ -28,9 +28,9 @@
 @end
 
 
-@implementation SEGMiddlewareRunner
+@implementation ByteGainMiddlewareRunner
 
-- (instancetype)initWithMiddlewares:(NSArray<id<SEGMiddleware>> *_Nonnull)middlewares
+- (instancetype)initWithMiddlewares:(NSArray<id<ByteGainMiddleware>> *_Nonnull)middlewares
 {
     if (self = [super init]) {
         _middlewares = middlewares;
@@ -38,15 +38,15 @@
     return self;
 }
 
-- (void)run:(SEGContext *_Nonnull)context callback:(RunMiddlewaresCallback _Nullable)callback
+- (void)run:(ByteGainContext *_Nonnull)context callback:(RunMiddlewaresCallback _Nullable)callback
 {
     [self runMiddlewares:self.middlewares context:context callback:callback];
 }
 
-// TODO: Maybe rename SEGContext to SEGEvent to be a bit more clear?
+// TODO: Maybe rename ByteGainContext to ByteGainEvent to be a bit more clear?
 // We could also use some sanity check / other types of logging here.
-- (void)runMiddlewares:(NSArray<id<SEGMiddleware>> *_Nonnull)middlewares
-               context:(SEGContext *_Nonnull)context
+- (void)runMiddlewares:(NSArray<id<ByteGainMiddleware>> *_Nonnull)middlewares
+               context:(ByteGainContext *_Nonnull)context
               callback:(RunMiddlewaresCallback _Nullable)callback
 {
     BOOL earlyExit = context == nil;
@@ -57,7 +57,7 @@
         return;
     }
 
-    [middlewares[0] context:context next:^(SEGContext *_Nullable newContext) {
+    [middlewares[0] context:context next:^(ByteGainContext *_Nullable newContext) {
         NSArray *remainingMiddlewares = [middlewares subarrayWithRange:NSMakeRange(1, middlewares.count - 1)];
         [self runMiddlewares:remainingMiddlewares context:newContext callback:callback];
     }];

@@ -4,7 +4,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 
-@interface SEGScreenPayload : SEGPayload
+@interface ByteGainScreenPayload : ByteGainPayload
 
 @property (nonatomic, readonly) NSString *name;
 

@@ -1,23 +1,23 @@
 #import "SEGStoreKitTracker.h"
 
 
-@interface SEGStoreKitTracker ()
+@interface ByteGainStoreKitTracker ()
 
-@property (nonatomic, readonly) SEGAnalytics *analytics;
+@property (nonatomic, readonly) ByteGainAnalytics *analytics;
 @property (nonatomic, readonly) NSMutableDictionary *transactions;
 @property (nonatomic, readonly) NSMutableDictionary *productRequests;
 
 @end
 
 
-@implementation SEGStoreKitTracker
+@implementation ByteGainStoreKitTracker
 
-+ (instancetype)trackTransactionsForAnalytics:(SEGAnalytics *)analytics
++ (instancetype)trackTransactionsForAnalytics:(ByteGainAnalytics *)analytics
 {
-    return [[SEGStoreKitTracker alloc] initWithAnalytics:analytics];
+    return [[ByteGainStoreKitTracker alloc] initWithAnalytics:analytics];
 }
 
-- (instancetype)initWithAnalytics:(SEGAnalytics *)analytics
+- (instancetype)initWithAnalytics:(ByteGainAnalytics *)analytics
 {
     if (self = [self init]) {
         _analytics = analytics;

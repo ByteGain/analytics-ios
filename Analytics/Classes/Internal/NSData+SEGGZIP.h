@@ -36,7 +36,7 @@
 extern void *_Nullable seg_libzOpen(void);
 
 
-@interface NSData (SEG_GZIP)
+@interface NSData (ByteGain_GZIP)
 
 - (nullable NSData *)seg_gzippedData;
 - (BOOL)seg_isGzippedData;

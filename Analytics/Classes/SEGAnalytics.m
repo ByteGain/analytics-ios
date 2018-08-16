@@ -15,23 +15,23 @@
 #import "SEGContext.h"
 #import "SEGIntegrationsManager.h"
 
-static SEGAnalytics *__sharedInstance = nil;
+static ByteGainAnalytics *__sharedInstance = nil;
 
 
-@interface SEGAnalytics ()
+@interface ByteGainAnalytics ()
 
 @property (nonatomic, assign) BOOL enabled;
-@property (nonatomic, strong) SEGAnalyticsConfiguration *configuration;
-@property (nonatomic, strong) SEGStoreKitTracker *storeKitTracker;
-@property (nonatomic, strong) SEGIntegrationsManager *integrationsManager;
-@property (nonatomic, strong) SEGMiddlewareRunner *runner;
+@property (nonatomic, strong) ByteGainAnalyticsConfiguration *configuration;
+@property (nonatomic, strong) ByteGainStoreKitTracker *storeKitTracker;
+@property (nonatomic, strong) ByteGainIntegrationsManager *integrationsManager;
+@property (nonatomic, strong) ByteGainMiddlewareRunner *runner;
 
 @end
 
 
-@implementation SEGAnalytics
+@implementation ByteGainAnalytics
 
-+ (void)setupWithConfiguration:(SEGAnalyticsConfiguration *)configuration
++ (void)setupWithConfiguration:(ByteGainAnalyticsConfiguration *)configuration
 {
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
@@ -39,7 +39,7 @@ static SEGAnalytics *__sharedInstance = nil;
     });
 }
 
-- (instancetype)initWithConfiguration:(SEGAnalyticsConfiguration *)configuration
+- (instancetype)initWithConfiguration:(ByteGainAnalyticsConfiguration *)configuration
 {
     NSCParameterAssert(configuration != nil);
 
@@ -49,16 +49,16 @@ static SEGAnalytics *__sharedInstance = nil;
 
         // In swift this would not have been OK... But hey.. It's objc
         // TODO: Figure out if this is really the best way to do things here.
-        self.integrationsManager = [[SEGIntegrationsManager alloc] initWithAnalytics:self];
+        self.integrationsManager = [[ByteGainIntegrationsManager alloc] initWithAnalytics:self];
 
-        self.runner = [[SEGMiddlewareRunner alloc] initWithMiddlewares:
+        self.runner = [[ByteGainMiddlewareRunner alloc] initWithMiddlewares:
                                                        [configuration.middlewares ?: @[] arrayByAddingObject:self.integrationsManager]];
 
         // Attach to application state change hooks
         NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
 
         // Pass through for application state change events
-        id<SEGApplicationProtocol> application = configuration.application;
+        id<ByteGainApplicationProtocol> application = configuration.application;
         if (application) {
             for (NSString *name in @[ UIApplicationDidEnterBackgroundNotification,
                                       UIApplicationDidFinishLaunchingNotification,
@@ -74,7 +74,7 @@ static SEGAnalytics *__sharedInstance = nil;
             [UIViewController seg_swizzleViewDidAppear];
         }
         if (configuration.trackInAppPurchases) {
-            _storeKitTracker = [SEGStoreKitTracker trackTransactionsForAnalytics:self];
+            _storeKitTracker = [ByteGainStoreKitTracker trackTransactionsForAnalytics:self];
         }
 
 #if !TARGET_OS_TV
@@ -96,15 +96,15 @@ static SEGAnalytics *__sharedInstance = nil;
 
 #pragma mark -
 
-NSString *const SEGVersionKey = @"SEGVersionKey";
-NSString *const SEGBuildKeyV1 = @"SEGBuildKey";
-NSString *const SEGBuildKeyV2 = @"SEGBuildKeyV2";
+NSString *const ByteGainVersionKey = @"ByteGainVersionKey";
+NSString *const ByteGainBuildKeyV1 = @"ByteGainBuildKey";
+NSString *const ByteGainBuildKeyV2 = @"ByteGainBuildKeyV2";
 
 - (void)handleAppStateNotification:(NSNotification *)note
 {
-    SEGApplicationLifecyclePayload *payload = [[SEGApplicationLifecyclePayload alloc] init];
+    ByteGainApplicationLifecyclePayload *payload = [[ByteGainApplicationLifecyclePayload alloc] init];
     payload.notificationName = note.name;
-    [self run:SEGEventTypeApplicationLifecycle payload:payload];
+    [self run:ByteGainEventTypeApplicationLifecycle payload:payload];
 
     if ([note.name isEqualToString:UIApplicationDidFinishLaunchingNotification]) {
         [self _applicationDidFinishLaunchingWithOptions:note.userInfo];
@@ -118,16 +118,16 @@ NSString *const SEGBuildKeyV2 = @"SEGBuildKeyV2";
     if (!self.configuration.trackApplicationLifecycleEvents) {
         return;
     }
-    // Previously SEGBuildKey was stored an integer. This was incorrect because the CFBundleVersion
-    // can be a string. This migrates SEGBuildKey to be stored as a string.
-    NSInteger previousBuildV1 = [[NSUserDefaults standardUserDefaults] integerForKey:SEGBuildKeyV1];
+    // Previously ByteGainBuildKey was stored an integer. This was incorrect because the CFBundleVersion
+    // can be a string. This migrates ByteGainBuildKey to be stored as a string.
+    NSInteger previousBuildV1 = [[NSUserDefaults standardUserDefaults] integerForKey:ByteGainBuildKeyV1];
     if (previousBuildV1) {
-        [[NSUserDefaults standardUserDefaults] setObject:[@(previousBuildV1) stringValue] forKey:SEGBuildKeyV2];
-        [[NSUserDefaults standardUserDefaults] removeObjectForKey:SEGBuildKeyV1];
+        [[NSUserDefaults standardUserDefaults] setObject:[@(previousBuildV1) stringValue] forKey:ByteGainBuildKeyV2];
+        [[NSUserDefaults standardUserDefaults] removeObjectForKey:ByteGainBuildKeyV1];
     }
 
-    NSString *previousVersion = [[NSUserDefaults standardUserDefaults] stringForKey:SEGVersionKey];
-    NSString *previousBuildV2 = [[NSUserDefaults standardUserDefaults] stringForKey:SEGBuildKeyV2];
+    NSString *previousVersion = [[NSUserDefaults standardUserDefaults] stringForKey:ByteGainVersionKey];
+    NSString *previousBuildV2 = [[NSUserDefaults standardUserDefaults] stringForKey:ByteGainBuildKeyV2];
 
     NSString *currentVersion = [[NSBundle mainBundle] infoDictionary][@"CFBundleShortVersionString"];
     NSString *currentBuild = [[NSBundle mainBundle] infoDictionary][@"CFBundleVersion"];
@@ -155,8 +155,8 @@ NSString *const SEGBuildKeyV2 = @"SEGBuildKeyV2";
     }];
 
 
-    [[NSUserDefaults standardUserDefaults] setObject:currentVersion forKey:SEGVersionKey];
-    [[NSUserDefaults standardUserDefaults] setObject:currentBuild forKey:SEGBuildKeyV2];
+    [[NSUserDefaults standardUserDefaults] setObject:currentVersion forKey:ByteGainVersionKey];
+    [[NSUserDefaults standardUserDefaults] setObject:currentBuild forKey:ByteGainBuildKeyV2];
 
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
@@ -198,11 +198,11 @@ NSString *const SEGBuildKeyV2 = @"SEGBuildKeyV2";
 - (void)identify:(NSString *)userId traits:(NSDictionary *)traits options:(NSDictionary *)options
 {
     NSCAssert2(userId.length > 0 || traits.count > 0, @"either userId (%@) or traits (%@) must be provided.", userId, traits);
-    [self run:SEGEventTypeIdentify payload:
-                                       [[SEGIdentifyPayload alloc] initWithUserId:userId
+    [self run:ByteGainEventTypeIdentify payload:
+                                       [[ByteGainIdentifyPayload alloc] initWithUserId:userId
                                                                       anonymousId:nil
-                                                                           traits:SEGCoerceDictionary(traits)
-                                                                          context:SEGCoerceDictionary([options objectForKey:@"context"])
+                                                                           traits:ByteGainCoerceDictionary(traits)
+                                                                          context:ByteGainCoerceDictionary([options objectForKey:@"context"])
                                                                      integrations:[options objectForKey:@"integrations"]]];
 }
 
@@ -221,10 +221,10 @@ NSString *const SEGBuildKeyV2 = @"SEGBuildKeyV2";
 - (void)track:(NSString *)event properties:(NSDictionary *)properties options:(NSDictionary *)options
 {
     NSCAssert1(event.length > 0, @"event (%@) must not be empty.", event);
-    [self run:SEGEventTypeTrack payload:
-                                    [[SEGTrackPayload alloc] initWithEvent:event
-                                                                properties:SEGCoerceDictionary(properties)
-                                                                   context:SEGCoerceDictionary([options objectForKey:@"context"])
+    [self run:ByteGainEventTypeTrack payload:
+                                    [[ByteGainTrackPayload alloc] initWithEvent:event
+                                                                properties:ByteGainCoerceDictionary(properties)
+                                                                   context:ByteGainCoerceDictionary([options objectForKey:@"context"])
                                                               integrations:[options objectForKey:@"integrations"]]];
 }
 
@@ -244,52 +244,52 @@ NSString *const SEGBuildKeyV2 = @"SEGBuildKeyV2";
 {
     NSCAssert1(screenTitle.length > 0, @"screen name (%@) must not be empty.", screenTitle);
 
-    [self run:SEGEventTypeScreen payload:
-                                     [[SEGScreenPayload alloc] initWithName:screenTitle
-                                                                 properties:SEGCoerceDictionary(properties)
-                                                                    context:SEGCoerceDictionary([options objectForKey:@"context"])
+    [self run:ByteGainEventTypeScreen payload:
+                                     [[ByteGainScreenPayload alloc] initWithName:screenTitle
+                                                                 properties:ByteGainCoerceDictionary(properties)
+                                                                    context:ByteGainCoerceDictionary([options objectForKey:@"context"])
                                                                integrations:[options objectForKey:@"integrations"]]];
 }
 
 #pragma mark - AttemptGoal
 
 - (void)    attemptGoal:(NSString *)goalName
-    makeAttemptCallback:(nonnull SEGGoalMakeAttemptCallback)makeAttemptCallback
-dontMakeAttemptCallback:(nonnull SEGGoalDontMakeAttemptCallback)dontMakeAttemptCallback
+    makeAttemptCallback:(nonnull ByteGainGoalMakeAttemptCallback)makeAttemptCallback
+dontMakeAttemptCallback:(nonnull ByteGainGoalDontMakeAttemptCallback)dontMakeAttemptCallback
                 options:(NSDictionary * _Nullable)options
 {
-    [self run:SEGEventTypeAttemptGoal payload:
-                                      [[SEGAttemptGoalPayload alloc] initWithEvent:goalName
+    [self run:ByteGainEventTypeAttemptGoal payload:
+                                      [[ByteGainAttemptGoalPayload alloc] initWithEvent:goalName
                                                                         properties:@{}
-                                                                           context:SEGCoerceDictionary([options objectForKey:@"context"])
+                                                                           context:ByteGainCoerceDictionary([options objectForKey:@"context"])
                                                                       integrations:[options objectForKey:@"integrations"]
                                                                    yesCallback:[makeAttemptCallback copy]
                                                                    noCallback:[dontMakeAttemptCallback copy]]];
 }
 
 - (void)    attemptGoal:(NSString *)goalName
-    makeAttemptCallback:(SEGGoalMakeAttemptCallback)makeAttemptCallback
-dontMakeAttemptCallback:(SEGGoalDontMakeAttemptCallback)dontMakeAttemptCallback
+    makeAttemptCallback:(ByteGainGoalMakeAttemptCallback)makeAttemptCallback
+dontMakeAttemptCallback:(ByteGainGoalDontMakeAttemptCallback)dontMakeAttemptCallback
 {
     [self attemptGoal:goalName makeAttemptCallback:makeAttemptCallback dontMakeAttemptCallback:dontMakeAttemptCallback options:nil];
 }
 
-- (void)    attemptGoal:(NSString *)goalName makeAttemptCallback:(SEGGoalMakeAttemptCallback)makeAttemptCallback
+- (void)    attemptGoal:(NSString *)goalName makeAttemptCallback:(ByteGainGoalMakeAttemptCallback)makeAttemptCallback
 {
     [self attemptGoal:goalName makeAttemptCallback:makeAttemptCallback dontMakeAttemptCallback:^{} options:nil];
 }
 
 #pragma mark - ReportGoalResult
 
-- (void)reportGoalResult:(NSString*)goalName result:(SEGGoalResult)result options:(NSDictionary *)options
+- (void)reportGoalResult:(NSString*)goalName result:(ByteGainGoalResult)result options:(NSDictionary *)options
 {
-    [self run:SEGEventTypeReportGoalResult payload:[[SEGReportGoalResultPayload alloc] initWithEvent:goalName
+    [self run:ByteGainEventTypeReportGoalResult payload:[[ByteGainReportGoalResultPayload alloc] initWithEvent:goalName
                                                                                               result:result
-                                                                                             context:SEGCoerceDictionary(SEGCoerceDictionary([options objectForKey:@"context"]))
+                                                                                             context:ByteGainCoerceDictionary(ByteGainCoerceDictionary([options objectForKey:@"context"]))
                                                                                         integrations:[options objectForKey:@"integrations"]]];
 }
 
-- (void)reportGoalResult:(NSString*)goalName result:(SEGGoalResult)result
+- (void)reportGoalResult:(NSString*)goalName result:(ByteGainGoalResult)result
 {
     [self reportGoalResult:goalName result:result options:nil];
 }
@@ -308,10 +308,10 @@ dontMakeAttemptCallback:(SEGGoalDontMakeAttemptCallback)dontMakeAttemptCallback
 
 - (void)group:(NSString *)groupId traits:(NSDictionary *)traits options:(NSDictionary *)options
 {
-    [self run:SEGEventTypeGroup payload:
-                                    [[SEGGroupPayload alloc] initWithGroupId:groupId
-                                                                      traits:SEGCoerceDictionary(traits)
-                                                                     context:SEGCoerceDictionary([options objectForKey:@"context"])
+    [self run:ByteGainEventTypeGroup payload:
+                                    [[ByteGainGroupPayload alloc] initWithGroupId:groupId
+                                                                      traits:ByteGainCoerceDictionary(traits)
+                                                                     context:ByteGainCoerceDictionary([options objectForKey:@"context"])
                                                                 integrations:[options objectForKey:@"integrations"]]];
 }
 
@@ -324,9 +324,9 @@ dontMakeAttemptCallback:(SEGGoalDontMakeAttemptCallback)dontMakeAttemptCallback
 
 - (void)alias:(NSString *)newId options:(NSDictionary *)options
 {
-    [self run:SEGEventTypeAlias payload:
-                                    [[SEGAliasPayload alloc] initWithNewId:newId
-                                                                   context:SEGCoerceDictionary([options objectForKey:@"context"])
+    [self run:ByteGainEventTypeAlias payload:
+                                    [[ByteGainAliasPayload alloc] initWithNewId:newId
+                                                                   context:ByteGainCoerceDictionary([options objectForKey:@"context"])
                                                               integrations:[options objectForKey:@"integrations"]]];
 }
 
@@ -344,39 +344,39 @@ dontMakeAttemptCallback:(SEGGoalDontMakeAttemptCallback)dontMakeAttemptCallback
     if (self.configuration.trackPushNotifications) {
         [self trackPushNotification:userInfo fromLaunch:NO];
     }
-    SEGRemoteNotificationPayload *payload = [[SEGRemoteNotificationPayload alloc] init];
+    ByteGainRemoteNotificationPayload *payload = [[ByteGainRemoteNotificationPayload alloc] init];
     payload.userInfo = userInfo;
-    [self run:SEGEventTypeReceivedRemoteNotification payload:payload];
+    [self run:ByteGainEventTypeReceivedRemoteNotification payload:payload];
 }
 
 - (void)failedToRegisterForRemoteNotificationsWithError:(NSError *)error
 {
-    SEGRemoteNotificationPayload *payload = [[SEGRemoteNotificationPayload alloc] init];
+    ByteGainRemoteNotificationPayload *payload = [[ByteGainRemoteNotificationPayload alloc] init];
     payload.error = error;
-    [self run:SEGEventTypeFailedToRegisterForRemoteNotifications payload:payload];
+    [self run:ByteGainEventTypeFailedToRegisterForRemoteNotifications payload:payload];
 }
 
 - (void)registeredForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
 {
     NSParameterAssert(deviceToken != nil);
-    SEGRemoteNotificationPayload *payload = [[SEGRemoteNotificationPayload alloc] init];
+    ByteGainRemoteNotificationPayload *payload = [[ByteGainRemoteNotificationPayload alloc] init];
     payload.deviceToken = deviceToken;
-    [self run:SEGEventTypeRegisteredForRemoteNotifications payload:payload];
+    [self run:ByteGainEventTypeRegisteredForRemoteNotifications payload:payload];
 }
 
 - (void)handleActionWithIdentifier:(NSString *)identifier forRemoteNotification:(NSDictionary *)userInfo
 {
-    SEGRemoteNotificationPayload *payload = [[SEGRemoteNotificationPayload alloc] init];
+    ByteGainRemoteNotificationPayload *payload = [[ByteGainRemoteNotificationPayload alloc] init];
     payload.actionIdentifier = identifier;
     payload.userInfo = userInfo;
-    [self run:SEGEventTypeHandleActionWithForRemoteNotification payload:payload];
+    [self run:ByteGainEventTypeHandleActionWithForRemoteNotification payload:payload];
 }
 
 - (void)continueUserActivity:(NSUserActivity *)activity
 {
-    SEGContinueUserActivityPayload *payload = [[SEGContinueUserActivityPayload alloc] init];
+    ByteGainContinueUserActivityPayload *payload = [[ByteGainContinueUserActivityPayload alloc] init];
     payload.activity = activity;
-    [self run:SEGEventTypeContinueUserActivity payload:payload];
+    [self run:ByteGainEventTypeContinueUserActivity payload:payload];
 
     if (!self.configuration.trackDeepLinks) {
         return;
@@ -393,10 +393,10 @@ dontMakeAttemptCallback:(SEGGoalDontMakeAttemptCallback)dontMakeAttemptCallback
 
 - (void)openURL:(NSURL *)url options:(NSDictionary *)options
 {
-    SEGOpenURLPayload *payload = [[SEGOpenURLPayload alloc] init];
+    ByteGainOpenURLPayload *payload = [[ByteGainOpenURLPayload alloc] init];
     payload.url = url;
     payload.options = options;
-    [self run:SEGEventTypeOpenURL payload:payload];
+    [self run:ByteGainEventTypeOpenURL payload:payload];
 
     if (!self.configuration.trackDeepLinks) {
         return;
@@ -410,12 +410,12 @@ dontMakeAttemptCallback:(SEGGoalDontMakeAttemptCallback)dontMakeAttemptCallback
 
 - (void)reset
 {
-    [self run:SEGEventTypeReset payload:nil];
+    [self run:ByteGainEventTypeReset payload:nil];
 }
 
 - (void)flush
 {
-    [self run:SEGEventTypeFlush payload:nil];
+    [self run:ByteGainEventTypeFlush payload:nil];
 }
 
 - (void)enable
@@ -448,7 +448,7 @@ dontMakeAttemptCallback:(SEGGoalDontMakeAttemptCallback)dontMakeAttemptCallback
 
 + (void)debug:(BOOL)showDebugLogs
 {
-    SEGSetShowDebugLogs(showDebugLogs);
+    ByteGainSetShowDebugLogs(showDebugLogs);
 }
 
 + (NSString *)version
@@ -458,12 +458,12 @@ dontMakeAttemptCallback:(SEGGoalDontMakeAttemptCallback)dontMakeAttemptCallback
 
 #pragma mark - Helpers
 
-- (void)run:(SEGEventType)eventType payload:(SEGPayload *)payload
+- (void)run:(ByteGainEventType)eventType payload:(ByteGainPayload *)payload
 {
     if (!self.enabled) {
         return;
     }
-    SEGContext *context = [[[SEGContext alloc] initWithAnalytics:self] modify:^(id<SEGMutableContext> _Nonnull ctx) {
+    ByteGainContext *context = [[[ByteGainContext alloc] initWithAnalytics:self] modify:^(id<ByteGainMutableContext> _Nonnull ctx) {
         ctx.eventType = eventType;
         ctx.payload = payload;
     }];

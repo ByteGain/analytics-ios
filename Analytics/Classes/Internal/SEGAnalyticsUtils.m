@@ -87,12 +87,12 @@ void seg_dispatch_specific_sync(dispatch_queue_t queue,
 
 // Logging
 
-void SEGSetShowDebugLogs(BOOL showDebugLogs)
+void ByteGainSetShowDebugLogs(BOOL showDebugLogs)
 {
     kAnalyticsLoggerShowLogs = showDebugLogs;
 }
 
-void SEGLog(NSString *format, ...)
+void ByteGainLog(NSString *format, ...)
 {
     if (!kAnalyticsLoggerShowLogs)
         return;
@@ -105,7 +105,7 @@ void SEGLog(NSString *format, ...)
 
 // JSON Utils
 
-static id SEGCoerceJSONObject(id obj)
+static id ByteGainCoerceJSONObject(id obj)
 {
     // Hotfix: Storage format should support NSNull instead
     if ([obj isKindOfClass:[NSNull class]]) {
@@ -125,7 +125,7 @@ static id SEGCoerceJSONObject(id obj)
             if ([i isKindOfClass:[NSNull class]]) {
                 continue;
             }
-            [array addObject:SEGCoerceJSONObject(i)];
+            [array addObject:ByteGainCoerceJSONObject(i)];
         }
         return array;
     }
@@ -133,16 +133,16 @@ static id SEGCoerceJSONObject(id obj)
     if ([obj isKindOfClass:[NSDictionary class]]) {
         NSMutableDictionary *dict = [NSMutableDictionary dictionary];
         for (NSString *key in obj) {
-            // Hotfix for issue where SEGFileStorage uses plist which does NOT support NSNull
+            // Hotfix for issue where ByteGainFileStorage uses plist which does NOT support NSNull
             // So when `[NSNull null]` gets passed in as track property values the queue serialization fails
             if ([obj[key] isKindOfClass:[NSNull class]]) {
                 continue;
             }
             if (![key isKindOfClass:[NSString class]])
-                SEGLog(@"warning: dictionary keys should be strings. got: %@. coercing "
+                ByteGainLog(@"warning: dictionary keys should be strings. got: %@. coercing "
                        @"to: %@",
                        [key class], [key description]);
-            dict[key.description] = SEGCoerceJSONObject(obj[key]);
+            dict[key.description] = ByteGainCoerceJSONObject(obj[key]);
         }
         return dict;
     }
@@ -154,7 +154,7 @@ static id SEGCoerceJSONObject(id obj)
         return [obj absoluteString];
 
     // default to sending the object's description
-    SEGLog(@"warning: dictionary values should be valid json types. got: %@. "
+    ByteGainLog(@"warning: dictionary values should be valid json types. got: %@. "
            @"coercing to: %@",
            [obj class], [obj description]);
     return [obj description];
@@ -179,17 +179,17 @@ static void AssertDictionaryTypes(id dict)
 #endif
 }
 
-NSDictionary *SEGCoerceDictionary(NSDictionary *dict)
+NSDictionary *ByteGainCoerceDictionary(NSDictionary *dict)
 {
     // make sure that a new dictionary exists even if the input is null
     dict = dict ?: @{};
     // assert that the proper types are in the dictionary
     AssertDictionaryTypes(dict);
     // coerce urls, and dates to the proper format
-    return SEGCoerceJSONObject(dict);
+    return ByteGainCoerceJSONObject(dict);
 }
 
-NSString *SEGIDFA()
+NSString *ByteGainIDFA()
 {
     NSString *idForAdvertiser = nil;
     Class identifierManager = NSClassFromString(@"ASIdentifierManager");
@@ -210,7 +210,7 @@ NSString *SEGIDFA()
     return idForAdvertiser;
 }
 
-NSString *SEGEventNameForScreenTitle(NSString *title)
+NSString *ByteGainEventNameForScreenTitle(NSString *title)
 {
     return [[NSString alloc] initWithFormat:@"Viewed %@ Screen", title];
 }

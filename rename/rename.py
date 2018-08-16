@@ -37,11 +37,11 @@ def __valid_word(word, old_word, filetypes):
 
 
 # do
-# replace(".", "SEGMENT", "BYTEGAIN", [".h", ".m"], abspath("./changelog.txt"))
-# replace(".", "SEG", "ByteGain", [".h", ".m"], abspath("./changelog.txt"))
+replace(".", "SEGMENT", "BYTEGAIN", [".h", ".m"], abspath("./changelog.txt"))
+replace(".", "SEG", "ByteGain", [".h", ".m"], abspath("./changelog.txt"))
 # Undo
-replace(".", "BYTEGAIN", "SEGMENT", [".h", ".m"], abspath("./changelog.txt"))
-replace(".", "ByteGain", "SEG", [".h", ".m"], abspath("./changelog.txt"))
+# replace(".", "BYTEGAIN", "SEGMENT", [".h", ".m"], abspath("./changelog.txt"))
+# replace(".", "ByteGain", "SEG", [".h", ".m"], abspath("./changelog.txt"))
 # replace(dirname(abspath(".")), "BYTEGAIN", "SEGMENT", [".h", ".m"], abspath("./changelog.txt"))
 # replace(dirname(abspath(".")), "ByteGain", "SEG", [".h", ".m"], abspath("./changelog.txt"))
 

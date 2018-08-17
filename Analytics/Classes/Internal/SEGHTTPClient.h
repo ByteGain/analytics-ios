@@ -11,8 +11,9 @@
 #else
 #  define BYTEGAIN_API_BASE [NSURL URLWithString:@"https://js.bytegain.com/v1"]
 #endif
-#define BYTEGAIN_CDN_BASE [NSURL URLWithString:@"https://cdn-settings.segment.com/v1"]
-#define MOBILE_SERVICE_BASE [NSURL URLWithString:@"https://mobile-service.segment.com/v1"]
+// Unsupported
+//#define BYTEGAIN_CDN_BASE [NSURL URLWithString:@"https://cdn-settings.segment.com/v1"]
+//#define MOBILE_SERVICE_BASE [NSURL URLWithString:@"https://mobile-service.segment.com/v1"]
 
 NS_ASSUME_NONNULL_BEGIN
 

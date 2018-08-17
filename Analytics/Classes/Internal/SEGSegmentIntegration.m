@@ -748,6 +748,8 @@ NSString *const ByteGainTrackedAttributionKey = @"ByteGainTrackedAttributionKey"
 
 - (void)trackAttributionData:(BOOL)trackAttributionData
 {
+    // ByteGain does not support this
+    /*
 #if TARGET_OS_IPHONE
     if (!trackAttributionData) {
         return;
@@ -774,6 +776,7 @@ NSString *const ByteGainTrackedAttributionKey = @"ByteGainTrackedAttributionKey"
         }];
     }];
 #endif
+     */
 }
 
 @end

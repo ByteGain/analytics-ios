@@ -404,6 +404,15 @@ static NSString *const kByteGainAnonymousIdFilename = @"segment.anonymousId";
 - (void)refreshSettings
 {
     seg_dispatch_specific_async(_serialQueue, ^{
+        // ByteGain does not currently support server-controlled settings
+        [self setCachedSettings:@{
+                                  @"integrations" : @{
+                                          @"Segment.io" : @{@"apiKey" : self.configuration.writeKey},
+                                          },
+                                  @"plan" : @{@"track" : @{}}
+                                  }];
+        return;
+/*
         if (self.settingsRequest) {
             return;
         }
@@ -426,6 +435,7 @@ static NSString *const kByteGainAnonymousIdFilename = @"segment.anonymousId";
             });
         }];
     });
+ */
 }
 
 #pragma mark - Private

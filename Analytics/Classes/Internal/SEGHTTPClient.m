@@ -142,6 +142,8 @@
 
 - (NSURLSessionDataTask *)settingsForWriteKey:(NSString *)writeKey completionHandler:(void (^)(BOOL success, JSON_DICT _Nullable settings))completionHandler
 {
+    return nil;
+    /*
     NSURLSession *session = self.genericSession;
 
     NSURL *url = [BYTEGAIN_CDN_BASE URLByAppendingPathComponent:[NSString stringWithFormat:@"/projects/%@/settings", writeKey]];
@@ -174,11 +176,14 @@
     }];
     [task resume];
     return task;
+     */
 }
 
 - (NSURLSessionDataTask *)attributionWithWriteKey:(NSString *)writeKey forDevice:(JSON_DICT)context completionHandler:(void (^)(BOOL success, JSON_DICT _Nullable properties))completionHandler;
 
 {
+    return nil;
+    /*
     NSURLSession *session = [self sessionForWriteKey:writeKey];
 
     NSURL *url = [MOBILE_SERVICE_BASE URLByAppendingPathComponent:@"/attribution"];
@@ -227,6 +232,7 @@
     }];
     [task resume];
     return task;
+     */
 }
 
 @end

@@ -411,7 +411,6 @@ static NSString *const kByteGainAnonymousIdFilename = @"segment.anonymousId";
                                           },
                                   @"plan" : @{@"track" : @{}}
                                   }];
-        return;
 /*
         if (self.settingsRequest) {
             return;
@@ -434,8 +433,8 @@ static NSString *const kByteGainAnonymousIdFilename = @"segment.anonymousId";
                 self.settingsRequest = nil;
             });
         }];
-    });
  */
+    });
 }
 
 #pragma mark - Private

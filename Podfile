@@ -1,4 +1,4 @@
-target 'AnalyticsTests' do
+target 'BytegainAnalyticsTests' do
     platform :ios, '11'
     
     use_frameworks!
@@ -8,6 +8,6 @@ target 'AnalyticsTests' do
     pod 'Nocilla', '~> 0.11.0'
     pod 'Alamofire', '~> 4.5'
     pod 'Alamofire-Synchronous', '~> 4.0'
-    pod 'SwiftTryCatch',  :git => 'https://github.com/segmentio/SwiftTryCatch.git'
+    pod 'SwiftTryCatch',  :git => 'https://github.com/williamFalcon/SwiftTryCatch.git'
 end
 

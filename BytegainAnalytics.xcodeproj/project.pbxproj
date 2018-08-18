@@ -14,6 +14,7 @@
 		3AC1BDC520BF31070091B6DD /* SEGAttemptGoalPayload.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AC1BDC320BF31070091B6DD /* SEGAttemptGoalPayload.m */; };
 		6E265C791FB1178C0030E08E /* IntegrationsManagerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E265C781FB1178C0030E08E /* IntegrationsManagerTest.swift */; };
 		6EEC1C712017EA370089C478 /* EndToEndTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EEC1C702017EA370089C478 /* EndToEndTests.swift */; };
+		CEF1C3026EB97F4C96F15DE3 /* Pods_BytegainAnalyticsTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6CB4BE1FCD741475D8D8603E /* Pods_BytegainAnalyticsTests.framework */; };
 		EA88A5981DED7608009FB66A /* SEGSerializableValue.h in Headers */ = {isa = PBXBuildFile; fileRef = EA88A5971DED7608009FB66A /* SEGSerializableValue.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EA8F09741E24C5C600B8B93F /* MiddlewareTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8F09731E24C5C600B8B93F /* MiddlewareTests.swift */; };
 		EAA542771EB4035400945DA7 /* TrackingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAA542761EB4035400945DA7 /* TrackingTests.swift */; };
@@ -97,9 +98,13 @@
 		3A761E4E20DDBA5E002EF083 /* SEGReportGoalResultPayload.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SEGReportGoalResultPayload.m; sourceTree = "<group>"; };
 		3AC1BDC220BF31070091B6DD /* SEGAttemptGoalPayload.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SEGAttemptGoalPayload.h; sourceTree = "<group>"; };
 		3AC1BDC320BF31070091B6DD /* SEGAttemptGoalPayload.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SEGAttemptGoalPayload.m; sourceTree = "<group>"; };
+		3F53E37C45C276490B02B07F /* Pods-BytegainAnalyticsTests.bg debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BytegainAnalyticsTests.bg debug.xcconfig"; path = "Pods/Target Support Files/Pods-BytegainAnalyticsTests/Pods-BytegainAnalyticsTests.bg debug.xcconfig"; sourceTree = "<group>"; };
+		6CB4BE1FCD741475D8D8603E /* Pods_BytegainAnalyticsTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BytegainAnalyticsTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6E265C781FB1178C0030E08E /* IntegrationsManagerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntegrationsManagerTest.swift; sourceTree = "<group>"; };
 		6EEC1C702017EA370089C478 /* EndToEndTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndToEndTests.swift; sourceTree = "<group>"; };
+		6F043EC3833CE260FAF210FA /* Pods-BytegainAnalyticsTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BytegainAnalyticsTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BytegainAnalyticsTests/Pods-BytegainAnalyticsTests.debug.xcconfig"; sourceTree = "<group>"; };
 		89033CBF22319674E6CE7E61 /* Pods_AnalyticsTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AnalyticsTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		AC1255760A402AD9F1D9D06F /* Pods-BytegainAnalyticsTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BytegainAnalyticsTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-BytegainAnalyticsTests/Pods-BytegainAnalyticsTests.release.xcconfig"; sourceTree = "<group>"; };
 		D3A7EDFF55573069765A46D0 /* Pods-AnalyticsTests.bg debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AnalyticsTests.bg debug.xcconfig"; path = "Pods/Target Support Files/Pods-AnalyticsTests/Pods-AnalyticsTests.bg debug.xcconfig"; sourceTree = "<group>"; };
 		D3BF8AE673FE0FD91DF5B503 /* Pods-AnalyticsTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AnalyticsTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-AnalyticsTests/Pods-AnalyticsTests.release.xcconfig"; sourceTree = "<group>"; };
 		EA88A5971DED7608009FB66A /* SEGSerializableValue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SEGSerializableValue.h; sourceTree = "<group>"; };
@@ -108,10 +113,10 @@
 		EAA5427B1EB42B8C00945DA7 /* SEGReachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SEGReachability.h; sourceTree = "<group>"; };
 		EAA5427C1EB42B8C00945DA7 /* SEGReachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SEGReachability.m; sourceTree = "<group>"; };
 		EAA5427F1EB4382100945DA7 /* StoreKitTrackerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StoreKitTrackerTests.swift; path = AnalyticsTests/StoreKitTrackerTests.swift; sourceTree = SOURCE_ROOT; };
-		EADEB85B1DECD080005322DA /* Analytics.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Analytics.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		EADEB85B1DECD080005322DA /* Analytics.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Analytics.framework; path = BytegainAnalytics.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EADEB85E1DECD080005322DA /* Analytics.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Analytics.h; sourceTree = "<group>"; };
 		EADEB85F1DECD080005322DA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		EADEB86A1DECD0EF005322DA /* AnalyticsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AnalyticsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		EADEB86A1DECD0EF005322DA /* AnalyticsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = AnalyticsTests.xctest; path = BytegainAnalyticsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		EADEB8781DECD12B005322DA /* SEGAES256Crypto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SEGAES256Crypto.h; sourceTree = "<group>"; };
 		EADEB8791DECD12B005322DA /* SEGAES256Crypto.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SEGAES256Crypto.m; sourceTree = "<group>"; };
 		EADEB87A1DECD12B005322DA /* SEGCrypto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SEGCrypto.h; sourceTree = "<group>"; };
@@ -170,10 +175,10 @@
 		EADEB8E81DECD335005322DA /* ContextTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContextTest.swift; sourceTree = "<group>"; };
 		EADEB8E91DECD335005322DA /* CryptoTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CryptoTest.swift; sourceTree = "<group>"; };
 		EADEB8EA1DECD335005322DA /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		EADEB8EC1DECD335005322DA /* AnalyticsTests-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AnalyticsTests-Bridging-Header.h"; sourceTree = "<group>"; };
+		EADEB8EC1DECD335005322DA /* BytegainAnalyticsTests-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "BytegainAnalyticsTests-Bridging-Header.h"; sourceTree = "<group>"; };
 		EADEB8FB1DECD521005322DA /* LSMatcher.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = LSMatcher.h; path = Pods/Nocilla/Nocilla/Matchers/LSMatcher.h; sourceTree = SOURCE_ROOT; };
 		EADEB8FF1DED3711005322DA /* circle.yml */ = {isa = PBXFileReference; lastKnownFileType = text; path = circle.yml; sourceTree = "<group>"; };
-		EADEB9001DED3711005322DA /* Analytics.podspec */ = {isa = PBXFileReference; lastKnownFileType = text; path = Analytics.podspec; sourceTree = "<group>"; };
+		EADEB9001DED3711005322DA /* BytegainAnalytics.podspec */ = {isa = PBXFileReference; lastKnownFileType = text; path = BytegainAnalytics.podspec; sourceTree = "<group>"; };
 		EADEB9011DED3711005322DA /* Podfile.lock */ = {isa = PBXFileReference; lastKnownFileType = text; path = Podfile.lock; sourceTree = "<group>"; };
 		F61EB4AE1F996DEF0038C8C0 /* AnalyticsUtilTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnalyticsUtilTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -192,6 +197,7 @@
 			files = (
 				EADEB86F1DECD0EF005322DA /* Analytics.framework in Frameworks */,
 				3481C14AEC76E5A8DA64DA59 /* Pods_AnalyticsTests.framework in Frameworks */,
+				CEF1C3026EB97F4C96F15DE3 /* Pods_BytegainAnalyticsTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -202,6 +208,7 @@
 			isa = PBXGroup;
 			children = (
 				89033CBF22319674E6CE7E61 /* Pods_AnalyticsTests.framework */,
+				6CB4BE1FCD741475D8D8603E /* Pods_BytegainAnalyticsTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -212,6 +219,9 @@
 				1DF03A6929EEFE7158913224 /* Pods-AnalyticsTests.debug.xcconfig */,
 				D3BF8AE673FE0FD91DF5B503 /* Pods-AnalyticsTests.release.xcconfig */,
 				D3A7EDFF55573069765A46D0 /* Pods-AnalyticsTests.bg debug.xcconfig */,
+				6F043EC3833CE260FAF210FA /* Pods-BytegainAnalyticsTests.debug.xcconfig */,
+				3F53E37C45C276490B02B07F /* Pods-BytegainAnalyticsTests.bg debug.xcconfig */,
+				AC1255760A402AD9F1D9D06F /* Pods-BytegainAnalyticsTests.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -223,14 +233,14 @@
 				EAA5427C1EB42B8C00945DA7 /* SEGReachability.m */,
 			);
 			name = Vendor;
-			path = Analytics/Vendor;
+			path = BytegainAnalytics/Vendor;
 			sourceTree = SOURCE_ROOT;
 		};
 		EADEB8511DECD080005322DA = {
 			isa = PBXGroup;
 			children = (
-				EADEB85D1DECD080005322DA /* Analytics */,
-				EADEB86B1DECD0EF005322DA /* AnalyticsTests */,
+				EADEB85D1DECD080005322DA /* BytegainAnalytics */,
+				EADEB86B1DECD0EF005322DA /* BytegainAnalyticsTests */,
 				EADEB85C1DECD080005322DA /* Products */,
 				131288D363FD2289356A68FD /* Pods */,
 				057A31C6B74BD265DD06663B /* Frameworks */,
@@ -247,17 +257,17 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		EADEB85D1DECD080005322DA /* Analytics */ = {
+		EADEB85D1DECD080005322DA /* BytegainAnalytics */ = {
 			isa = PBXGroup;
 			children = (
 				EADEB8751DECD12B005322DA /* Classes */,
 				EADEB85E1DECD080005322DA /* Analytics.h */,
 				EADEB85F1DECD080005322DA /* Info.plist */,
 			);
-			path = Analytics;
+			path = BytegainAnalytics;
 			sourceTree = "<group>";
 		};
-		EADEB86B1DECD0EF005322DA /* AnalyticsTests */ = {
+		EADEB86B1DECD0EF005322DA /* BytegainAnalyticsTests */ = {
 			isa = PBXGroup;
 			children = (
 				EADEB8E11DECD335005322DA /* Utils */,
@@ -273,12 +283,12 @@
 				EADEB8E81DECD335005322DA /* ContextTest.swift */,
 				EADEB8E91DECD335005322DA /* CryptoTest.swift */,
 				EADEB8EA1DECD335005322DA /* Info.plist */,
-				EADEB8EC1DECD335005322DA /* AnalyticsTests-Bridging-Header.h */,
+				EADEB8EC1DECD335005322DA /* BytegainAnalyticsTests-Bridging-Header.h */,
 				6E265C781FB1178C0030E08E /* IntegrationsManagerTest.swift */,
 				6EEC1C702017EA370089C478 /* EndToEndTests.swift */,
 			);
 			indentWidth = 2;
-			path = AnalyticsTests;
+			path = BytegainAnalyticsTests;
 			sourceTree = "<group>";
 			tabWidth = 2;
 		};
@@ -389,7 +399,7 @@
 			isa = PBXGroup;
 			children = (
 				EADEB8FF1DED3711005322DA /* circle.yml */,
-				EADEB9001DED3711005322DA /* Analytics.podspec */,
+				EADEB9001DED3711005322DA /* BytegainAnalytics.podspec */,
 				EADEB9011DED3711005322DA /* Podfile.lock */,
 			);
 			name = "Supporting Files";
@@ -439,9 +449,9 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		EADEB85A1DECD080005322DA /* Analytics */ = {
+		EADEB85A1DECD080005322DA /* BytegainAnalytics */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = EADEB8631DECD080005322DA /* Build configuration list for PBXNativeTarget "Analytics" */;
+			buildConfigurationList = EADEB8631DECD080005322DA /* Build configuration list for PBXNativeTarget "BytegainAnalytics" */;
 			buildPhases = (
 				EADEB8561DECD080005322DA /* Sources */,
 				EADEB8571DECD080005322DA /* Frameworks */,
@@ -452,14 +462,14 @@
 			);
 			dependencies = (
 			);
-			name = Analytics;
+			name = BytegainAnalytics;
 			productName = Analytics;
 			productReference = EADEB85B1DECD080005322DA /* Analytics.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		EADEB8691DECD0EF005322DA /* AnalyticsTests */ = {
+		EADEB8691DECD0EF005322DA /* BytegainAnalyticsTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = EADEB8741DECD0EF005322DA /* Build configuration list for PBXNativeTarget "AnalyticsTests" */;
+			buildConfigurationList = EADEB8741DECD0EF005322DA /* Build configuration list for PBXNativeTarget "BytegainAnalyticsTests" */;
 			buildPhases = (
 				08FD7429B218A0696DEA7907 /* [CP] Check Pods Manifest.lock */,
 				EADEB8661DECD0EF005322DA /* Sources */,
@@ -472,7 +482,7 @@
 			dependencies = (
 				EADEB8711DECD0EF005322DA /* PBXTargetDependency */,
 			);
-			name = AnalyticsTests;
+			name = BytegainAnalyticsTests;
 			productName = AnalyticsTests;
 			productReference = EADEB86A1DECD0EF005322DA /* AnalyticsTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
@@ -485,7 +495,7 @@
 			attributes = {
 				LastSwiftUpdateCheck = 0810;
 				LastUpgradeCheck = 0900;
-				ORGANIZATIONNAME = Segment;
+				ORGANIZATIONNAME = ByteGain;
 				TargetAttributes = {
 					EADEB85A1DECD080005322DA = {
 						CreatedOnToolsVersion = 8.1;
@@ -497,7 +507,7 @@
 					};
 				};
 			};
-			buildConfigurationList = EADEB8551DECD080005322DA /* Build configuration list for PBXProject "Analytics" */;
+			buildConfigurationList = EADEB8551DECD080005322DA /* Build configuration list for PBXProject "BytegainAnalytics" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -509,8 +519,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				EADEB85A1DECD080005322DA /* Analytics */,
-				EADEB8691DECD0EF005322DA /* AnalyticsTests */,
+				EADEB85A1DECD080005322DA /* BytegainAnalytics */,
+				EADEB8691DECD0EF005322DA /* BytegainAnalyticsTests */,
 			);
 		};
 /* End PBXProject section */
@@ -544,7 +554,7 @@
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-AnalyticsTests-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-BytegainAnalyticsTests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -557,7 +567,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-AnalyticsTests/Pods-AnalyticsTests-frameworks.sh",
+				"${SRCROOT}/Pods/Target Support Files/Pods-BytegainAnalyticsTests/Pods-BytegainAnalyticsTests-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/Alamofire-Synchronous/Alamofire_Synchronous.framework",
 				"${BUILT_PRODUCTS_DIR}/Nimble/Nimble.framework",
@@ -576,7 +586,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-AnalyticsTests/Pods-AnalyticsTests-frameworks.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-BytegainAnalyticsTests/Pods-BytegainAnalyticsTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -640,7 +650,7 @@
 /* Begin PBXTargetDependency section */
 		EADEB8711DECD0EF005322DA /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = EADEB85A1DECD080005322DA /* Analytics */;
+			target = EADEB85A1DECD080005322DA /* BytegainAnalytics */;
 			targetProxy = EADEB8701DECD0EF005322DA /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -716,10 +726,10 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = Analytics/Info.plist;
+				INFOPLIST_FILE = BytegainAnalytics/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.segment.Analytics;
+				PRODUCT_BUNDLE_IDENTIFIER = com.bytegain.Analytics;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
@@ -731,14 +741,14 @@
 		};
 		3AC1BDAF20B39A700091B6DD /* BG Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D3A7EDFF55573069765A46D0 /* Pods-AnalyticsTests.bg debug.xcconfig */;
+			baseConfigurationReference = 3F53E37C45C276490B02B07F /* Pods-BytegainAnalyticsTests.bg debug.xcconfig */;
 			buildSettings = {
-				INFOPLIST_FILE = AnalyticsTests/Info.plist;
+				INFOPLIST_FILE = BytegainAnalyticsTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.segment.AnalyticsTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
-				SWIFT_OBJC_BRIDGING_HEADER = "AnalyticsTests/AnalyticsTests-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "BytegainAnalyticsTests/BytegainAnalyticsTests-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = "BG Debug";
@@ -866,10 +876,10 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = Analytics/Info.plist;
+				INFOPLIST_FILE = BytegainAnalytics/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.segment.Analytics;
+				PRODUCT_BUNDLE_IDENTIFIER = com.bytegain.Analytics;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
@@ -889,10 +899,10 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = Analytics/Info.plist;
+				INFOPLIST_FILE = BytegainAnalytics/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.segment.Analytics;
+				PRODUCT_BUNDLE_IDENTIFIER = com.bytegain.Analytics;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
@@ -904,27 +914,27 @@
 		};
 		EADEB8721DECD0EF005322DA /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1DF03A6929EEFE7158913224 /* Pods-AnalyticsTests.debug.xcconfig */;
+			baseConfigurationReference = 6F043EC3833CE260FAF210FA /* Pods-BytegainAnalyticsTests.debug.xcconfig */;
 			buildSettings = {
-				INFOPLIST_FILE = AnalyticsTests/Info.plist;
+				INFOPLIST_FILE = BytegainAnalyticsTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.segment.AnalyticsTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
-				SWIFT_OBJC_BRIDGING_HEADER = "AnalyticsTests/AnalyticsTests-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "BytegainAnalyticsTests/BytegainAnalyticsTests-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
 		EADEB8731DECD0EF005322DA /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D3BF8AE673FE0FD91DF5B503 /* Pods-AnalyticsTests.release.xcconfig */;
+			baseConfigurationReference = AC1255760A402AD9F1D9D06F /* Pods-BytegainAnalyticsTests.release.xcconfig */;
 			buildSettings = {
-				INFOPLIST_FILE = AnalyticsTests/Info.plist;
+				INFOPLIST_FILE = BytegainAnalyticsTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.segment.AnalyticsTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "AnalyticsTests/AnalyticsTests-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "BytegainAnalyticsTests/BytegainAnalyticsTests-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 			};
 			name = Release;
@@ -932,7 +942,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		EADEB8551DECD080005322DA /* Build configuration list for PBXProject "Analytics" */ = {
+		EADEB8551DECD080005322DA /* Build configuration list for PBXProject "BytegainAnalytics" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				EADEB8611DECD080005322DA /* Debug */,
@@ -942,7 +952,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		EADEB8631DECD080005322DA /* Build configuration list for PBXNativeTarget "Analytics" */ = {
+		EADEB8631DECD080005322DA /* Build configuration list for PBXNativeTarget "BytegainAnalytics" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				EADEB8641DECD080005322DA /* Debug */,
@@ -952,7 +962,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		EADEB8741DECD0EF005322DA /* Build configuration list for PBXNativeTarget "AnalyticsTests" */ = {
+		EADEB8741DECD0EF005322DA /* Build configuration list for PBXNativeTarget "BytegainAnalyticsTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				EADEB8721DECD0EF005322DA /* Debug */,

@@ -20,8 +20,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [[SEGAnalytics sharedAnalytics] track:@"Manual Example Main View Loaded"];
-    [[SEGAnalytics sharedAnalytics] flush];
+    [[ByteGainAnalytics sharedAnalytics] track:@"Manual Example Main View Loaded"];
+    [[ByteGainAnalytics sharedAnalytics] flush];
 }
 
 - (void)didReceiveMemoryWarning
@@ -32,12 +32,12 @@
 
 - (IBAction)fireEvent:(id)sender
 {
-    [[SEGAnalytics sharedAnalytics] track:@"Manual Example Fire Event"];
-//    [[SEGAnalytics sharedAnalytics] track:@"Manual Example Fire Event dup"];
-//    [[SEGAnalytics sharedAnalytics] flush];
-    [[SEGAnalytics sharedAnalytics] attemptGoal:@"multi" makeAttemptCallback:^(NSString * _Nullable variant){
+    [[ByteGainAnalytics sharedAnalytics] track:@"Manual Example Fire Event"];
+//    [[ByteGainAnalytics sharedAnalytics] track:@"Manual Example Fire Event dup"];
+//    [[ByteGainAnalytics sharedAnalytics] flush];
+    [[ByteGainAnalytics sharedAnalytics] attemptGoal:@"multi" makeAttemptCallback:^(NSString * _Nullable variant){
         NSLog(@"multi success callback variant %@", variant);
-        [[SEGAnalytics sharedAnalytics] reportGoalResult:@"multi" result:SEGGoalResultSuccess options:nil];
+        [[ByteGainAnalytics sharedAnalytics] reportGoalResult:@"multi" result:ByteGainGoalResultSuccess options:nil];
     } dontMakeAttemptCallback:^{
         NSLog(@"multi failure callback");
     }];

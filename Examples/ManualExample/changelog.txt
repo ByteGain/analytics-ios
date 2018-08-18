@@ -1,0 +1,32 @@
+./ManualExample/AppDelegate.h
+./ManualExample/ViewController.m
+./ManualExample/main.m
+./ManualExample/AppDelegate.m
+./ManualExample/ViewController.h
+./ManualExample/AppDelegate.h
+./ManualExample/ViewController.m
+	Replaced:     [[SEGAnalytics sharedAnalytics] track:@"Manual Example Main View Loaded"];
+	With:     [[ByteGainAnalytics sharedAnalytics] track:@"Manual Example Main View Loaded"];
+	Replaced:     [[SEGAnalytics sharedAnalytics] flush];
+	With:     [[ByteGainAnalytics sharedAnalytics] flush];
+	Replaced:     [[SEGAnalytics sharedAnalytics] track:@"Manual Example Fire Event"];
+	With:     [[ByteGainAnalytics sharedAnalytics] track:@"Manual Example Fire Event"];
+	Replaced: //    [[SEGAnalytics sharedAnalytics] track:@"Manual Example Fire Event dup"];
+	With: //    [[ByteGainAnalytics sharedAnalytics] track:@"Manual Example Fire Event dup"];
+	Replaced: //    [[SEGAnalytics sharedAnalytics] flush];
+	With: //    [[ByteGainAnalytics sharedAnalytics] flush];
+	Replaced:     [[SEGAnalytics sharedAnalytics] attemptGoal:@"multi" makeAttemptCallback:^(NSString * _Nullable variant){
+	With:     [[ByteGainAnalytics sharedAnalytics] attemptGoal:@"multi" makeAttemptCallback:^(NSString * _Nullable variant){
+	Replaced:         [[SEGAnalytics sharedAnalytics] reportGoalResult:@"multi" result:SEGGoalResultSuccess options:nil];
+	With:         [[ByteGainAnalytics sharedAnalytics] reportGoalResult:@"multi" result:ByteGainGoalResultSuccess options:nil];
+./ManualExample/main.m
+./ManualExample/AppDelegate.m
+	Replaced:     [SEGAnalytics setupWithConfiguration:[SEGAnalyticsConfiguration configurationWithWriteKey:@"x7sPb4mmoHBesEwwJIa2XPOAGuSuALwk"]]; // bgjstest apiKey
+	With:     [ByteGainAnalytics setupWithConfiguration:[ByteGainAnalyticsConfiguration configurationWithWriteKey:@"x7sPb4mmoHBesEwwJIa2XPOAGuSuALwk"]]; // bgjstest apiKey
+	Replaced:     [SEGAnalytics setupWithConfiguration:[SEGAnalyticsConfiguration configurationWithWriteKey:@"YOUR API_KEY GOES HERE"]];
+	With:     [ByteGainAnalytics setupWithConfiguration:[ByteGainAnalyticsConfiguration configurationWithWriteKey:@"YOUR API_KEY GOES HERE"]];
+	Replaced:     [[SEGAnalytics sharedAnalytics] track:@"Manual Example Launched"];
+	With:     [[ByteGainAnalytics sharedAnalytics] track:@"Manual Example Launched"];
+	Replaced:     [[SEGAnalytics sharedAnalytics] flush];
+	With:     [[ByteGainAnalytics sharedAnalytics] flush];
+./ManualExample/ViewController.h

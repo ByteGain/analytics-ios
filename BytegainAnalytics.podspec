@@ -6,7 +6,7 @@ Pod::Spec.new do |s|
   s.description      = <<-DESC
                        BytegainAnalytics for iOS uses AI to predict what
                        each user needs in real-time to help you serve
-                       them in the best possibnle way.
+                       them in the best possible way.
                        DESC
 
   s.homepage         = "http://bytegain.com/"

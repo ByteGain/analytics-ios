@@ -453,7 +453,7 @@ dontMakeAttemptCallback:(ByteGainGoalDontMakeAttemptCallback)dontMakeAttemptCall
 
 + (NSString *)version
 {
-    return @"3.6.9";
+    return @"4.0.0";
 }
 
 #pragma mark - Helpers

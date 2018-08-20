@@ -1,6 +1,10 @@
 Change Log
 ==========
 
+Version 4.0.0 *(20th August, 2018)*
+------------------------------------
+* Add support for ByteGain API extensions attemptGoal and reportGoalResult
+
 Version 3.6.9 *(3rd December, 2017)*
 -------------------------------------
 

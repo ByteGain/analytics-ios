@@ -6,7 +6,7 @@
 //  Copyright © 2016 Segment. All rights reserved.
 //
 
-#import <Analytics/SEGAnalytics.h>
+#import <BytegainAnalytics/SEGAnalytics.h>
 #import "AppDelegate.h"
 
 
@@ -14,23 +14,26 @@
 
 @end
 
-// https://segment.com/segment-mobile/sources/ios_cocoapods_example/overview
-NSString *const SEGMENT_WRITE_KEY = @"zr5x22gUVBDM3hO3uHkbMkVe6Pd6sCna";
-
+#if BG_DEBUG || 1
+NSString *const BYTEGAIN_WRITE_KEY = @"x7sPb4mmoHBesEwwJIa2XPOAGuSuALwk"; // bgjstest apiKey
+#else
+#error "Insert your API_KEY below and delete this line"
+NSString *const BYTEGAIN_WRITE_KEY = @"YOUR API_KEY GOES HERE";
+#endif
 
 @implementation AppDelegate
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    [SEGAnalytics debug:YES];
-    SEGAnalyticsConfiguration *configuration = [SEGAnalyticsConfiguration configurationWithWriteKey:SEGMENT_WRITE_KEY];
+    [ByteGainAnalytics debug:YES];
+    ByteGainAnalyticsConfiguration *configuration = [ByteGainAnalyticsConfiguration configurationWithWriteKey:BYTEGAIN_WRITE_KEY];
     configuration.trackApplicationLifecycleEvents = YES;
     configuration.trackAttributionData = YES;
-    configuration.flushAt = 1;
-    [SEGAnalytics setupWithConfiguration:configuration];
-    [[SEGAnalytics sharedAnalytics] track:@"Cocoapods Example Launched"];
-    [[SEGAnalytics sharedAnalytics] flush];
+    configuration.flushAt = 10;
+    [ByteGainAnalytics setupWithConfiguration:configuration];
+    [[ByteGainAnalytics sharedAnalytics] track:@"Cocoapods Example Launched"];
+    [[ByteGainAnalytics sharedAnalytics] flush];
     NSLog(@"application:didFinishLaunchingWithOptions: %@", launchOptions);
     return YES;
 }

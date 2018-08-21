@@ -6,7 +6,7 @@
 //  Copyright © 2016 Segment. All rights reserved.
 //
 
-#import <Analytics/SEGAnalytics.h>
+#import <BytegainAnalytics/SEGAnalytics.h>
 // TODO: Test and see if this works
 // @import Analytics;
 #import "ViewController.h"
@@ -24,16 +24,22 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     NSUserActivity *userActivity = [[NSUserActivity alloc] initWithActivityType:NSUserActivityTypeBrowsingWeb];
-    userActivity.webpageURL = [NSURL URLWithString:@"http://www.segment.com"];
-    [[SEGAnalytics sharedAnalytics] continueUserActivity:userActivity];
-    [[SEGAnalytics sharedAnalytics] track:@"test"];
-    [[SEGAnalytics sharedAnalytics] flush];
+    userActivity.webpageURL = [NSURL URLWithString:@"http://bytegain.com"];
+    [[ByteGainAnalytics sharedAnalytics] continueUserActivity:userActivity];
+    [[ByteGainAnalytics sharedAnalytics] track:@"test"];
+    [[ByteGainAnalytics sharedAnalytics] flush];
 }
 
 - (IBAction)fireEvent:(id)sender
 {
-    [[SEGAnalytics sharedAnalytics] track:@"Cocoapods Example Button"];
-    [[SEGAnalytics sharedAnalytics] flush];
+    [[ByteGainAnalytics sharedAnalytics] track:@"Cocoapods Example Button"];
+    [[ByteGainAnalytics sharedAnalytics] attemptGoal:@"multi" makeAttemptCallback:^(NSString * _Nullable variant){
+        NSLog(@"multi success callback variant %@", variant);
+        [[ByteGainAnalytics sharedAnalytics] reportGoalResult:@"multi" result:ByteGainGoalResultSuccess options:nil];
+    } dontMakeAttemptCallback:^{
+        NSLog(@"multi failure callback");
+    }];
+    //[[ByteGainAnalytics sharedAnalytics] flush];
 }
 
 

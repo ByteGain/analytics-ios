@@ -1,0 +1,42 @@
+./CocoapodsExample/AppDelegate.h
+./CocoapodsExample/ViewController.m
+./CocoapodsExample/main.m
+./CocoapodsExample/AppDelegate.m
+	Replaced: NSString *const SEGMENT_WRITE_KEY = @"zr5x22gUVBDM3hO3uHkbMkVe6Pd6sCna";
+	With: NSString *const BYTEGAIN_WRITE_KEY = @"zr5x22gUVBDM3hO3uHkbMkVe6Pd6sCna";
+	Replaced:     SEGAnalyticsConfiguration *configuration = [SEGAnalyticsConfiguration configurationWithWriteKey:SEGMENT_WRITE_KEY];
+	With:     SEGAnalyticsConfiguration *configuration = [SEGAnalyticsConfiguration configurationWithWriteKey:BYTEGAIN_WRITE_KEY];
+./CocoapodsExample/ViewController.h
+./Pods/Target Support Files/Pods-CocoapodsExample/Pods-CocoapodsExample-umbrella.h
+./Pods/Target Support Files/Pods-CocoapodsExample/Pods-CocoapodsExample-dummy.m
+./Pods/Target Support Files/BytegainAnalytics/BytegainAnalytics-umbrella.h
+./Pods/Target Support Files/BytegainAnalytics/BytegainAnalytics-dummy.m
+./CocoapodsExample/AppDelegate.h
+./CocoapodsExample/ViewController.m
+	Replaced:     [[SEGAnalytics sharedAnalytics] continueUserActivity:userActivity];
+	With:     [[ByteGainAnalytics sharedAnalytics] continueUserActivity:userActivity];
+	Replaced:     [[SEGAnalytics sharedAnalytics] track:@"test"];
+	With:     [[ByteGainAnalytics sharedAnalytics] track:@"test"];
+	Replaced:     [[SEGAnalytics sharedAnalytics] flush];
+	With:     [[ByteGainAnalytics sharedAnalytics] flush];
+	Replaced:     [[SEGAnalytics sharedAnalytics] track:@"Cocoapods Example Button"];
+	With:     [[ByteGainAnalytics sharedAnalytics] track:@"Cocoapods Example Button"];
+	Replaced:     [[SEGAnalytics sharedAnalytics] flush];
+	With:     [[ByteGainAnalytics sharedAnalytics] flush];
+./CocoapodsExample/main.m
+./CocoapodsExample/AppDelegate.m
+	Replaced:     [SEGAnalytics debug:YES];
+	With:     [ByteGainAnalytics debug:YES];
+	Replaced:     SEGAnalyticsConfiguration *configuration = [SEGAnalyticsConfiguration configurationWithWriteKey:BYTEGAIN_WRITE_KEY];
+	With:     ByteGainAnalyticsConfiguration *configuration = [ByteGainAnalyticsConfiguration configurationWithWriteKey:BYTEGAIN_WRITE_KEY];
+	Replaced:     [SEGAnalytics setupWithConfiguration:configuration];
+	With:     [ByteGainAnalytics setupWithConfiguration:configuration];
+	Replaced:     [[SEGAnalytics sharedAnalytics] track:@"Cocoapods Example Launched"];
+	With:     [[ByteGainAnalytics sharedAnalytics] track:@"Cocoapods Example Launched"];
+	Replaced:     [[SEGAnalytics sharedAnalytics] flush];
+	With:     [[ByteGainAnalytics sharedAnalytics] flush];
+./CocoapodsExample/ViewController.h
+./Pods/Target Support Files/Pods-CocoapodsExample/Pods-CocoapodsExample-umbrella.h
+./Pods/Target Support Files/Pods-CocoapodsExample/Pods-CocoapodsExample-dummy.m
+./Pods/Target Support Files/BytegainAnalytics/BytegainAnalytics-umbrella.h
+./Pods/Target Support Files/BytegainAnalytics/BytegainAnalytics-dummy.m

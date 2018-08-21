@@ -1,16 +1,16 @@
 PODS:
-  - Analytics (3.6.9)
+  - BytegainAnalytics (4.0.0)
 
 DEPENDENCIES:
-  - Analytics (from `../../`)
+  - BytegainAnalytics (from `../../`)
 
 EXTERNAL SOURCES:
-  Analytics:
-    :path: ../../
+  BytegainAnalytics:
+    :path: "../../"
 
 SPEC CHECKSUMS:
-  Analytics: a4812262f46dde43a218c5663ca07d177f30372c
+  BytegainAnalytics: 7eb456d443a62efde4bf1c8c558687277bcb8cfb
 
-PODFILE CHECKSUM: 20b258e875ed60a69591787e49bdc3ca9f7c4ad3
+PODFILE CHECKSUM: 2dd145b28b8d3b2d9e22a3ef82d443a7a9764387
 
-COCOAPODS: 1.4.0.rc.1
+COCOAPODS: 1.5.3

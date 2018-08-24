@@ -656,7 +656,7 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		3AC1BDAD20B39A700091B6DD /* BG Debug */ = {
+		3AC1BDAD20B39A700091B6DD /* BG_Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -714,9 +714,9 @@
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
-			name = "BG Debug";
+			name = BG_Debug;
 		};
-		3AC1BDAE20B39A700091B6DD /* BG Debug */ = {
+		3AC1BDAE20B39A700091B6DD /* BG_Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = YES;
@@ -737,9 +737,9 @@
 				TARGETED_DEVICE_FAMILY = "1,2,3";
 				TVOS_DEPLOYMENT_TARGET = 9.0;
 			};
-			name = "BG Debug";
+			name = BG_Debug;
 		};
-		3AC1BDAF20B39A700091B6DD /* BG Debug */ = {
+		3AC1BDAF20B39A700091B6DD /* BG_Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 3F53E37C45C276490B02B07F /* Pods-BytegainAnalyticsTests.bg debug.xcconfig */;
 			buildSettings = {
@@ -751,7 +751,7 @@
 				SWIFT_OBJC_BRIDGING_HEADER = "BytegainAnalyticsTests/BytegainAnalyticsTests-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
-			name = "BG Debug";
+			name = BG_Debug;
 		};
 		EADEB8611DECD080005322DA /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -946,7 +946,7 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				EADEB8611DECD080005322DA /* Debug */,
-				3AC1BDAD20B39A700091B6DD /* BG Debug */,
+				3AC1BDAD20B39A700091B6DD /* BG_Debug */,
 				EADEB8621DECD080005322DA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
@@ -956,7 +956,7 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				EADEB8641DECD080005322DA /* Debug */,
-				3AC1BDAE20B39A700091B6DD /* BG Debug */,
+				3AC1BDAE20B39A700091B6DD /* BG_Debug */,
 				EADEB8651DECD080005322DA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
@@ -966,7 +966,7 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				EADEB8721DECD0EF005322DA /* Debug */,
-				3AC1BDAF20B39A700091B6DD /* BG Debug */,
+				3AC1BDAF20B39A700091B6DD /* BG_Debug */,
 				EADEB8731DECD0EF005322DA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;

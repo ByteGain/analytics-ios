@@ -20,6 +20,7 @@
 		013162A9EB31F4335B8BDC51 /* Pods_CocoapodsExample.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CocoapodsExample.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A7E1FAABB1A8D6E1490DF66 /* Pods-CocoapodsExample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CocoapodsExample.release.xcconfig"; path = "Pods/Target Support Files/Pods-CocoapodsExample/Pods-CocoapodsExample.release.xcconfig"; sourceTree = "<group>"; };
 		47C2E5ED764668C7B1DDFF73 /* Pods-CocoapodsExample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CocoapodsExample.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CocoapodsExample/Pods-CocoapodsExample.debug.xcconfig"; sourceTree = "<group>"; };
+		D62A91191807960DEE3C137B /* Pods-CocoapodsExample.bg_debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CocoapodsExample.bg_debug.xcconfig"; path = "Pods/Target Support Files/Pods-CocoapodsExample/Pods-CocoapodsExample.bg_debug.xcconfig"; sourceTree = "<group>"; };
 		EADEB9191DED460A005322DA /* CocoapodsExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CocoapodsExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EADEB91D1DED460A005322DA /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		EADEB91F1DED460A005322DA /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -30,6 +31,7 @@
 		EADEB9281DED460A005322DA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		EADEB92B1DED460A005322DA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		EADEB92D1DED460A005322DA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FB6FB833C446E77D84D2EAC0 /* Pods-CocoapodsExample.bg debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CocoapodsExample.bg debug.xcconfig"; path = "Pods/Target Support Files/Pods-CocoapodsExample/Pods-CocoapodsExample.bg debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -49,6 +51,8 @@
 			children = (
 				47C2E5ED764668C7B1DDFF73 /* Pods-CocoapodsExample.debug.xcconfig */,
 				3A7E1FAABB1A8D6E1490DF66 /* Pods-CocoapodsExample.release.xcconfig */,
+				FB6FB833C446E77D84D2EAC0 /* Pods-CocoapodsExample.bg debug.xcconfig */,
+				D62A91191807960DEE3C137B /* Pods-CocoapodsExample.bg_debug.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -243,6 +247,74 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		3AEFBCEE212CB29400C69265 /* BG_Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"BG_DEBUG=1",
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = BG_Debug;
+		};
+		3AEFBCEF212CB29400C69265 /* BG_Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = D62A91191807960DEE3C137B /* Pods-CocoapodsExample.bg_debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = CocoapodsExample/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.segment.CocoapodsExample;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = BG_Debug;
+		};
 		EADEB92E1DED460A005322DA /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -294,6 +366,7 @@
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -341,6 +414,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -376,6 +450,7 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				EADEB92E1DED460A005322DA /* Debug */,
+				3AEFBCEE212CB29400C69265 /* BG_Debug */,
 				EADEB92F1DED460A005322DA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
@@ -385,6 +460,7 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				EADEB9311DED460A005322DA /* Debug */,
+				3AEFBCEF212CB29400C69265 /* BG_Debug */,
 				EADEB9321DED460A005322DA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;

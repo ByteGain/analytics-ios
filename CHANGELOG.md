@@ -1,6 +1,10 @@
 Change Log
 ==========
 
+Version 4.0.1 *(24th August, 2018)*
+------------------------------------
+* Get CocoapodsExample working
+
 Version 4.0.0 *(20th August, 2018)*
 ------------------------------------
 * Add support for ByteGain API extensions attemptGoal and reportGoalResult

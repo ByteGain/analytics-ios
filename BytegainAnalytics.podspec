@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = "BytegainAnalytics"
-  s.version          = "4.0.0"
+  s.version          = "4.0.1"
   s.summary          = "Win the heart of every user."
 
   s.description      = <<-DESC

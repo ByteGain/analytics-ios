@@ -1,6 +1,10 @@
 Change Log
 ==========
 
+Version 4.0.2 *(24th August, 2018)*
+------------------------------------
+* Update landing page; add rudimentary doc/comments.
+
 Version 4.0.1 *(24th August, 2018)*
 ------------------------------------
 * Get CocoapodsExample working

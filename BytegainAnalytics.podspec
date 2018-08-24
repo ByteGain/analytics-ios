@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = "BytegainAnalytics"
-  s.version          = "4.0.1"
+  s.version          = "4.0.2"
   s.summary          = "Win the heart of every user."
 
   s.description      = <<-DESC
@@ -9,7 +9,7 @@ Pod::Spec.new do |s|
                        them in the best possible way.
                        DESC
 
-  s.homepage         = "http://bytegain.com/"
+  s.homepage         = "https://github.com/ByteGain/bg-analytics-ios"
   s.license          =  { :type => 'MIT' }
   s.author           = { "Bytegain" => "cocoapods@bytegain.com" }
   s.source           = { :git => "https://github.com/ByteGain/bg-analytics-ios.git", :tag => s.version.to_s }

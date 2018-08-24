@@ -14,7 +14,7 @@
 
 @end
 
-#if BG_DEBUG || 1
+#if defined(BG_DEBUG) || defined(POD_CONFIGURATION_BG_DEBUG)
 NSString *const BYTEGAIN_WRITE_KEY = @"x7sPb4mmoHBesEwwJIa2XPOAGuSuALwk"; // bgjstest apiKey
 #else
 #error "Insert your API_KEY below and delete this line"

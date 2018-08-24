@@ -1,7 +1,7 @@
 use_frameworks!
 
 target 'CocoapodsExample' do
-  pod 'BytegainAnalytics', :path => '../../'
+  pod 'BytegainAnalytics', :path => '../../' do
+    config[:bg_debug].settings['GCC_PREPROCESSOR_DEFINITIONS'] += "BG_DEBUG=1"
+  end
 end
-
-

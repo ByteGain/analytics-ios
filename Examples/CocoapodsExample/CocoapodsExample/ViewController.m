@@ -33,10 +33,14 @@
 - (IBAction)fireEvent:(id)sender
 {
     [[ByteGainAnalytics sharedAnalytics] track:@"Cocoapods Example Button"];
+    // New call added by ByteGain to attempt a goal
     [[ByteGainAnalytics sharedAnalytics] attemptGoal:@"multi" makeAttemptCallback:^(NSString * _Nullable variant){
+        // This block runs when ByteGain says to attempt the goal "multi"
         NSLog(@"multi success callback variant %@", variant);
+        // Tell the ByteGain server whether the goal succeeded.
         [[ByteGainAnalytics sharedAnalytics] reportGoalResult:@"multi" result:ByteGainGoalResultSuccess options:nil];
     } dontMakeAttemptCallback:^{
+        // This block runs when ByteGain says not to attempt the goal "multi"
         NSLog(@"multi failure callback");
     }];
     //[[ByteGainAnalytics sharedAnalytics] flush];

@@ -12,7 +12,7 @@ BytegainAnalytics is available through [CocoaPods](http://cocoapods.org)
 ### CocoaPods
 
 ```ruby
-pod "BytegainAnalytics", "4.0.1"
+pod "BytegainAnalytics", "4.0.2"
 ```
 
 ## Quickstart
@@ -22,3 +22,8 @@ Refer to the Quickstart documentation at [https://segment.com/docs/libraries/ios
 ## Documentation
 
 Segment's documentation is available at [https://segment.com/docs/libraries/ios](https://segment.com/docs/libraries/ios/).
+To avoid name conflicts with Segment, classes in this library are prefixed with "ByteGain" rather than "SEG".
+
+The functioning example is in https://github.com/ByteGain/bg-analytics-ios/blob/master/Examples/CocoapodsExample
+
+The key API extension is shown in https://github.com/ByteGain/bg-analytics-ios/blob/master/Examples/CocoapodsExample/CocoapodsExample/ViewController.m

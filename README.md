@@ -15,10 +15,6 @@ BytegainAnalytics is available through [CocoaPods](http://cocoapods.org)
 pod "BytegainAnalytics", "4.0.2"
 ```
 
-## Quickstart
-
-Refer to the Quickstart documentation at [https://segment.com/docs/libraries/ios/quickstart](https://segment.com/docs/libraries/ios/quickstart/).
-
 ## Documentation
 
 Segment's documentation is available at [https://segment.com/docs/libraries/ios](https://segment.com/docs/libraries/ios/).

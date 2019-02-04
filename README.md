@@ -21,7 +21,7 @@ to your `Podfile`.
 
 The functioning example is in [Examples/CocoapodsExample](./Examples/CocoapodsExample).
 
-Initialization is done in the [AppDelegate.m](./Examples/CocoapodsExample/AppDelegate.m):
+Initialization is done in the [Examples/CocoapodsExample/CocoapodsExample/AppDelegate.m](./Examples/CocoapodsExample/CocoapodsExample/AppDelegate.m):
 ```
     [ByteGainAnalytics debug:YES];
     ByteGainAnalyticsConfiguration *configuration = [ByteGainAnalyticsConfiguration configurationWithWriteKey:BYTEGAIN_API_KEY];

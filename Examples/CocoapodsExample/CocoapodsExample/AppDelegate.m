@@ -15,10 +15,10 @@
 @end
 
 #if defined(BG_DEBUG) || defined(POD_CONFIGURATION_BG_DEBUG)
-NSString *const BYTEGAIN_WRITE_KEY = @"x7sPb4mmoHBesEwwJIa2XPOAGuSuALwk"; // bgjstest apiKey
+NSString *const BYTEGAIN_API_KEY = @"x7sPb4mmoHBesEwwJIa2XPOAGuSuALwk"; // bgjstest apiKey
 #else
 #error "Insert your API_KEY below and delete this line"
-NSString *const BYTEGAIN_WRITE_KEY = @"YOUR API_KEY GOES HERE";
+NSString *const BYTEGAIN_API_KEY = @"YOUR API_KEY GOES HERE";
 #endif
 
 @implementation AppDelegate
@@ -27,7 +27,7 @@ NSString *const BYTEGAIN_WRITE_KEY = @"YOUR API_KEY GOES HERE";
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     [ByteGainAnalytics debug:YES];
-    ByteGainAnalyticsConfiguration *configuration = [ByteGainAnalyticsConfiguration configurationWithWriteKey:BYTEGAIN_WRITE_KEY];
+    ByteGainAnalyticsConfiguration *configuration = [ByteGainAnalyticsConfiguration configurationWithWriteKey:BYTEGAIN_API_KEY];
     configuration.trackApplicationLifecycleEvents = YES;
     configuration.trackAttributionData = YES;
     configuration.flushAt = 10;

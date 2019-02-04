@@ -23,6 +23,10 @@ The functioning example is in [Examples/CocoapodsExample](./Examples/CocoapodsEx
 
 Initialization is done in the [Examples/CocoapodsExample/CocoapodsExample/AppDelegate.m](./Examples/CocoapodsExample/CocoapodsExample/AppDelegate.m):
 ```
+NSString *const BYTEGAIN_API_KEY = @"YOUR API_KEY GOES HERE";
+
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
+{
     [ByteGainAnalytics debug:YES];
     ByteGainAnalyticsConfiguration *configuration = [ByteGainAnalyticsConfiguration configurationWithWriteKey:BYTEGAIN_API_KEY];
     configuration.trackApplicationLifecycleEvents = YES;

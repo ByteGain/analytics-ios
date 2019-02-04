@@ -42,4 +42,4 @@ To send additional event data to ByteGain servers, e.g., button clicks, add call
 
 For more examples, see [Examples/CocoapodsExample/CocoapodsExample/ViewController.m](./Examples/CocoapodsExample/CocoapodsExample/ViewController.m).
 
-The code has been tested for Objective-C apps using XCode v 10.1.
+The code has been tested for Objective-C apps using XCode version 10.1.

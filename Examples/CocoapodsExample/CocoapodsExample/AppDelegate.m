@@ -30,6 +30,7 @@ NSString *const BYTEGAIN_API_KEY = @"YOUR API_KEY GOES HERE";
     ByteGainAnalyticsConfiguration *configuration = [ByteGainAnalyticsConfiguration configurationWithWriteKey:BYTEGAIN_API_KEY];
     configuration.trackApplicationLifecycleEvents = YES;
     configuration.trackAttributionData = YES;
+    configuration.recordScreenViews = YES;
     configuration.flushAt = 10;
     [ByteGainAnalytics setupWithConfiguration:configuration];
     [[ByteGainAnalytics sharedAnalytics] track:@"Cocoapods Example Launched"];

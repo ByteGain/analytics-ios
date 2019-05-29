@@ -128,4 +128,18 @@ typedef NSMutableURLRequest *_Nonnull (^ByteGainRequestFactory)(NSURL *_Nonnull)
  */
 @property (nonatomic, strong, nullable) id<ByteGainApplicationProtocol> application;
 
+/**
+ * Whether the analytics client should add the header "X-ByteGainTestMode: true"
+ * to all traffic to server causing it to discard data for model training purposes.
+ * Defaults to NO.
+ */
+@property (nonatomic, assign) BOOL testMode;
+
+/**
+ * Reserved for ByteGain.
+ * If nonzero, traffic is directed to said port on localhost rather than
+ * the standard server.  Defaults to 0.
+ */
+@property (nonatomic, assign) int localServerPort;
+
 @end

@@ -21,6 +21,8 @@
 
 
 - (instancetype)initWithRequestFactory:(ByteGainRequestFactory)requestFactory
+                           withApiBase:(NSURL *) apiBase
+                          withTestMode:(Boolean) testMode
 {
     if (self = [self init]) {
         if (requestFactory == nil) {
@@ -32,6 +34,8 @@
         NSURLSessionConfiguration *config = [NSURLSessionConfiguration defaultSessionConfiguration];
         config.HTTPAdditionalHeaders = @{ @"Accept-Encoding" : @"gzip" };
         _genericSession = [NSURLSession sessionWithConfiguration:config];
+        _apiBase = apiBase;
+        _testMode = testMode;
     }
     return self;
 }
@@ -41,12 +45,16 @@
     NSURLSession *session = self.sessionsByWriteKey[writeKey];
     if (!session) {
         NSURLSessionConfiguration *config = [NSURLSessionConfiguration defaultSessionConfiguration];
-        config.HTTPAdditionalHeaders = @{
-            @"Accept-Encoding" : @"gzip",
-            @"Content-Encoding" : @"gzip",
-            @"Content-Type" : @"application/json",
-            @"Authorization" : [@"Basic " stringByAppendingString:[[self class] authorizationHeader:writeKey]],
-        };
+        NSMutableDictionary *headers = [@{
+                                          @"Accept-Encoding" : @"gzip",
+                                          @"Content-Encoding" : @"gzip",
+                                          @"Content-Type" : @"application/json",
+                                          @"Authorization" : [@"Basic " stringByAppendingString:[[self class] authorizationHeader:writeKey]],
+                                        } mutableCopy];
+        if (_testMode) {
+            headers[@"X-ByteGainTestMode"] = @"true";
+        }
+        config.HTTPAdditionalHeaders = headers;
         session = [NSURLSession sessionWithConfiguration:config];
         self.sessionsByWriteKey[writeKey] = session;
     }
@@ -67,7 +75,7 @@
     //    batch = ByteGainCoerceDictionary(batch);
     NSURLSession *session = [self sessionForWriteKey:writeKey];
 
-    NSURL *url = [BYTEGAIN_API_BASE URLByAppendingPathComponent:@"batch"];
+    NSURL *url = [_apiBase URLByAppendingPathComponent:@"batch"];
     NSMutableURLRequest *request = self.requestFactory(url);
 
     // This is a workaround for an IOS 8.3 bug that causes Content-Type to be incorrectly set

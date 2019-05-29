@@ -71,7 +71,16 @@ static NSString *const kByteGainAnonymousIdFilename = @"segment.anonymousId";
         self.configuration = configuration;
         self.serialQueue = seg_dispatch_queue_create_specific("io.segment.analytics", DISPATCH_QUEUE_SERIAL);
         self.messageQueue = [[NSMutableArray alloc] init];
-        self.httpClient = [[ByteGainHTTPClient alloc] initWithRequestFactory:configuration.requestFactory];
+        NSURL *apiBase = nil;
+        if (configuration.localServerPort == 0) {
+            apiBase = [NSURL URLWithString:@"https://js.bytegain.com/v1"];
+        } else {
+            apiBase = [NSURL URLWithString:[NSString stringWithFormat:@"http://localhost:%u/v1",
+                                            configuration.localServerPort]];
+        }
+        self.httpClient = [[ByteGainHTTPClient alloc] initWithRequestFactory:configuration.requestFactory
+                                                                 withApiBase: apiBase
+                                                                withTestMode: configuration.localServerPort != 0];
 #if TARGET_OS_TV
         self.storage = [[ByteGainUserDefaultsStorage alloc] initWithDefaults:[NSUserDefaults standardUserDefaults] namespacePrefix:nil crypto:configuration.crypto];
 #else

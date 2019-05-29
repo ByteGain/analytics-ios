@@ -32,6 +32,17 @@ NSString *const BYTEGAIN_API_KEY = @"YOUR API_KEY GOES HERE";
     configuration.trackAttributionData = YES;
     configuration.recordScreenViews = YES;
     configuration.flushAt = 10;
+#if defined(BG_DEBUG) || defined(POD_CONFIGURATION_BG_DEBUG)
+    // For internal bytegain use only: non-zero means replace
+    //   https://js.bytegain.com
+    // with
+    //   http://localhost:<localServerPort>
+    configuration.localServerPort = 5001;
+#endif
+#if defined(DEBUG)
+    // YES means uploaded data will not be used for training.
+    configuration.testMode = YES;
+#endif
     [ByteGainAnalytics setupWithConfiguration:configuration];
     [[ByteGainAnalytics sharedAnalytics] track:@"Cocoapods Example Launched"];
     [[ByteGainAnalytics sharedAnalytics] flush];

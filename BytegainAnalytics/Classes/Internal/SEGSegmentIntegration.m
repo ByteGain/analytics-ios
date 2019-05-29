@@ -67,7 +67,7 @@ static BOOL GetAdTrackingEnabled()
 @property (nonatomic, assign) ByteGainAnalyticsConfiguration *configuration;
 @property (atomic, copy) NSDictionary *referrer;
 @property (nonatomic, copy) NSString *userId;
-@property (nonatomic, strong) NSURL *apiURL;
+//@property (nonatomic, strong) NSURL *apiURL;
 @property (nonatomic, strong) ByteGainHTTPClient *httpClient;
 @property (nonatomic, strong) id<ByteGainStorage> storage;
 @property (nonatomic, strong) NSURLSessionDataTask *attributionRequest;
@@ -86,7 +86,7 @@ static BOOL GetAdTrackingEnabled()
         self.configuration = analytics.configuration;
         self.httpClient = httpClient;
         self.storage = storage;
-        self.apiURL = [BYTEGAIN_API_BASE URLByAppendingPathComponent:@"import"];
+//        self.apiURL = [BYTEGAIN_API_BASE URLByAppendingPathComponent:@"import"];
         self.userId = [self getUserId];
         self.reachability = [ByteGainReachability reachabilityWithHostname:@"google.com"];
         [self.reachability startNotifier];

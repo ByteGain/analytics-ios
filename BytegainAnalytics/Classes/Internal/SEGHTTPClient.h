@@ -7,11 +7,6 @@
 //#define BYTEGAIN_CDN_BASE [NSURL URLWithString:@"https://cdn-segment-com-5fsaj1xnikhp.runscope.net/v1"]
 //#define MOBILE_SERVICE_BASE [NSURL URLWithString:@"https://mobile--service-segment-com-5fsaj1xnikhp.runscope.net/v1"]
 
-#if defined(POD_CONFIGURATION_BG_DEBUG) || defined(BG_DEBUG)
-#  define BYTEGAIN_API_BASE [NSURL URLWithString:@"http://localhost:5001/v1"]
-#else
-#  define BYTEGAIN_API_BASE [NSURL URLWithString:@"https://js.bytegain.com/v1"]
-#endif
 // Unsupported
 //#define BYTEGAIN_CDN_BASE [NSURL URLWithString:@"https://cdn-settings.segment.com/v1"]
 //#define MOBILE_SERVICE_BASE [NSURL URLWithString:@"https://mobile-service.segment.com/v1"]
@@ -24,11 +19,15 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) ByteGainRequestFactory requestFactory;
 @property (nonatomic, readonly) NSMutableDictionary<NSString *, NSURLSession *> *sessionsByWriteKey;
 @property (nonatomic, readonly) NSURLSession *genericSession;
+@property (nonatomic, readonly) NSURL *apiBase;
+@property (nonatomic, readonly) Boolean testMode;
 
 + (ByteGainRequestFactory)defaultRequestFactory;
 + (NSString *)authorizationHeader:(NSString *)writeKey;
 
-- (instancetype)initWithRequestFactory:(ByteGainRequestFactory _Nullable)requestFactory;
+- (instancetype)initWithRequestFactory:(ByteGainRequestFactory _Nullable)requestFactory
+                           withApiBase:(NSURL *) apiBase
+                          withTestMode:(Boolean) testMode;
 
 /**
  * Upload dictionary formatted as per https://segment.com/docs/sources/server/http/#batch.

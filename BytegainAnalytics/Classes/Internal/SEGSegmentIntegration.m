@@ -624,22 +624,31 @@ static CTTelephonyNetworkInfo *_telephonyNetworkInfo;
         }
         ByteGainAttemptGoalPayload *attemptPayload = [ByteGainAttemptGoalPayload cast:[self.responsePayloads objectForKey:key]];
         if (attemptPayload == nil) {
-            NSLog(@"no attempt payload");
+            ByteGainLog(@"no attempt payload");
             continue;
         }
         if (attemptPayload.event == nil) {
-            NSLog(@"attemptPayload.event is nil");
+            ByteGainLog(@"attemptPayload.event is nil");
             continue;
         }
         NSDictionary *responseData = [jsonResponse objectForKey:key];
         if (responseData != nil && [[responseData objectForKey:@"intervene"] boolValue]) {
             dispatch_block_t finish = ^{
+                NSString *attempt_id = [responseData valueForKey:@"attemptId"];
+                NSObject *delay_secs = [responseData valueForKey:@"delaySecs"];
                 NSString *variant = [responseData objectForKey:@"variant"];
-                NSDictionary *trackProperties = @{@"intervention": @"attempt",
-                                                  @"attemptId": [responseData valueForKey:@"attemptId"],
-                                                  @"delaySecs": [responseData valueForKey:@"delaySecs"],
-                                                  @"variant": variant,
-                                                  };
+                NSMutableDictionary *trackProperties =
+                    [[NSMutableDictionary alloc] init];
+                [trackProperties setObject:@"attempt" forKey:@"intervention"];
+                if (attempt_id != nil) {
+                    [trackProperties setObject:attempt_id forKey:@"attemptId"];
+                }
+                if (delay_secs != nil) {
+                    [trackProperties setObject:delay_secs forKey:@"delaySecs"];
+                }
+                if (variant != nil) {
+                    [trackProperties setObject:variant forKey:@"variant"];
+                }
                 // Must be run on serialQueue's thread.  Store attemptId shortly before invoking yesCallback().
                 [self.goalNameToTrackProperties setValue:trackProperties forKey:attemptPayload.event];  // used by reportGoalResult
                 dispatch_async(dispatch_get_main_queue(), ^{

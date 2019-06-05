@@ -1,6 +1,11 @@
 Change Log
 ==========
 
+Version 4.1.0 *(5th June, 2019)*
+------------------------------------
+* Add BytegainAnalyticsConfiguration.{testMode,localServerPort}
+* Tolerate malformed Bytegain-js server response.
+
 Version 4.0.2 *(24th August, 2018)*
 ------------------------------------
 * Update landing page; add rudimentary doc/comments.

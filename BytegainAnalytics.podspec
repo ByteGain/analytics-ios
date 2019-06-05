@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
   s.name             = "BytegainAnalytics"
-  s.version          = "4.0.2"
-  s.summary          = "Win the heart of every user."
+  s.version          = "4.1.0"
+  s.summary          = "Deepen Customer Engagement with AI."
 
   s.description      = <<-DESC
                        BytegainAnalytics for iOS uses AI to predict what

@@ -178,7 +178,7 @@
 		EADEB8EC1DECD335005322DA /* BytegainAnalyticsTests-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "BytegainAnalyticsTests-Bridging-Header.h"; sourceTree = "<group>"; };
 		EADEB8FB1DECD521005322DA /* LSMatcher.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = LSMatcher.h; path = Pods/Nocilla/Nocilla/Matchers/LSMatcher.h; sourceTree = SOURCE_ROOT; };
 		EADEB8FF1DED3711005322DA /* circle.yml */ = {isa = PBXFileReference; lastKnownFileType = text; path = circle.yml; sourceTree = "<group>"; };
-		EADEB9001DED3711005322DA /* BytegainAnalytics.podspec */ = {isa = PBXFileReference; lastKnownFileType = text; path = BytegainAnalytics.podspec; sourceTree = "<group>"; };
+		EADEB9001DED3711005322DA /* BytegainAnalytics.podspec */ = {isa = PBXFileReference; lastKnownFileType = text; path = BytegainAnalytics.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		EADEB9011DED3711005322DA /* Podfile.lock */ = {isa = PBXFileReference; lastKnownFileType = text; path = Podfile.lock; sourceTree = "<group>"; };
 		F61EB4AE1F996DEF0038C8C0 /* AnalyticsUtilTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnalyticsUtilTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -512,6 +512,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 			);
 			mainGroup = EADEB8511DECD080005322DA;

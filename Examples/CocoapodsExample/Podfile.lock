@@ -1,16 +1,16 @@
 PODS:
-  - BytegainAnalytics (4.0.0)
+  - BytegainAnalytics (4.1.0)
 
 DEPENDENCIES:
-  - BytegainAnalytics (from `../../`)
+  - BytegainAnalytics (~> 4.1.0)
 
-EXTERNAL SOURCES:
-  BytegainAnalytics:
-    :path: "../../"
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - BytegainAnalytics
 
 SPEC CHECKSUMS:
-  BytegainAnalytics: 7eb456d443a62efde4bf1c8c558687277bcb8cfb
+  BytegainAnalytics: 337ffe237aabdd0e195e61ce5a1501791b1e800d
 
-PODFILE CHECKSUM: fc4e7fc74f1bfe50b2e19535714168728dc488b2
+PODFILE CHECKSUM: 59dec3256745a412fc2fe03d02c9ae1c1cf00eef
 
-COCOAPODS: 1.5.3
+COCOAPODS: 1.7.0
